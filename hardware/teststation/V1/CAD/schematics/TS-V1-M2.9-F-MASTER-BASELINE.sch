@@ -6,15 +6,15 @@ $Descr A4 11693 8268
 Sheet 1 1
 Title "VAZAO EVSE TestStation V1"
 Date "2026-09-26"
-Rev "M2.9-H"
+Rev "M2.9-I"
 Comp "VAZAO EVSE"
-Comment1 "Connected-net and power baseline"
+Comment1 "Power, decoupling and protection baseline"
 Comment2 "NO MAINS ENERGIZATION"
 Comment3 "ERC/DRC pending"
-Comment4 "M2.9-H"
+Comment4 "M2.9-I"
 $EndDescr
 Text Notes 700 700 0 110 ~ 22
-VAZAO EVSE TESTSTATION V1 — M2.9-H CONNECTIVITY BASELINE
+VAZAO EVSE TESTSTATION V1 — M2.9-I POWER / DECOUPLING BASELINE
 Text Notes 700 1050 0 60 ~ 12
 ZONE A/B measurement, isolated supplies, ADC SPI, MCU control, CAN isolation, CP/PP and safety nets.
 Text Notes 900 1500 0 55 ~ 11
@@ -44,5 +44,15 @@ POWER: 24V input protection -> 24V distribution -> 3.3V measurement/control rail
 Text Notes 900 4700 0 55 ~ 11
 DECOUPLING: local ceramic bypass at every IC supply; final values follow exact manufacturer recommendations.
 Text Notes 900 5200 0 65 ~ 13
-M2.9-H STATUS: CONNECTIVITY CONTRACT — NOT ERC CLEAN — NOT DRC CLEAN — NOT FOR FABRICATION
+M2.9-I CORRECTION: SIX TMCS1123 CURRENT CHANNELS = A1/A2/A3 + B1/B2/B3
+Text Notes 900 5450 0 55 ~ 11
+POWER: 24V -> protection -> distribution; six independent 24V->5V isolated MEE1S2405SC domains.
+Text Notes 900 5650 0 55 ~ 11
+ADC: AVDD/DVDD 3V3_MEAS, local 100nF + 1uF baseline, dedicated REFIN, SPI/DRDY/SYNC.
+Text Notes 900 5850 0 55 ~ 11
+CURRENT: six TMCS1123 channels; local 100nF + 1uF baseline; VREF/ALERT/OC controlled.
+Text Notes 900 6050 0 55 ~ 11
+PROTECTION: CP/PP protected before MCU; CAN protection shall not bridge isolation; E-STOP remains hardware-independent.
+Text Notes 900 6250 0 65 ~ 13
+M2.9-I STATUS: ENGINEERING BASELINE — NOT ERC CLEAN — NOT DRC CLEAN — NOT FOR FABRICATION
 $EndSCHEMATC
