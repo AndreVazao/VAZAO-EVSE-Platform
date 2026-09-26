@@ -35,6 +35,22 @@ jobs:
           test -s "$NATIVE"
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
 
+      - name: Persist KiCad upgrade diagnostics on failure
+        if: failure()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "VAZAO EVSE Engineering Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
+          if test -s "$LOG"; then
+            git add "$LOG"
+            git commit -m "ci(teststation): persist M2.9-K KiCad upgrade diagnostics" || true
+            git push || true
+          else
+            echo "No KiCad CLI diagnostic log was produced."
+          fi
+
       - name: Run native schematic ERC
         shell: bash
         run: |
