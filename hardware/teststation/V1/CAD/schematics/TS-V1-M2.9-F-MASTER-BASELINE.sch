@@ -11,7 +11,7 @@ Comp "VAZAO EVSE"
 Comment1 "Power, decoupling and protection baseline"
 Comment2 "NO MAINS ENERGIZATION"
 Comment3 "ERC/DRC pending"
-Comment4 "M2.9-K — native conversion source"
+Comment4 "M2.9-K.1 — native conversion CI runner fix"
 $EndDescr
 Text Notes 700 700 0 110 ~ 22
 VAZAO EVSE TESTSTATION V1 — M2.9-I POWER / DECOUPLING BASELINE
