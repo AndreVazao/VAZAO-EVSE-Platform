@@ -6,6 +6,7 @@ on:
       - feat/charger-hardware-v1
     paths:
       - 'hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch'
+      - '.github/workflows/teststation-m2.9-k-kicad-native.yml'
   workflow_dispatch:
 
 permissions:
@@ -34,7 +35,7 @@ jobs:
           set +e
           docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
             -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
-            kicad-cli sch upgrade --force "$LEGACY" 2>&1 | tee "$LOG"
+            kicad-cli sch upgrade "$LEGACY" 2>&1 | tee "$LOG"
           rc=${PIPESTATUS[0]}
           set -e
           if [ "$rc" -ne 0 ]; then exit "$rc"; fi
@@ -44,19 +45,11 @@ jobs:
 
       - name: Persist KiCad upgrade diagnostics on failure
         if: failure()
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "VAZAO EVSE Engineering Bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
-          if test -s "$LOG"; then
-            git add "$LOG"
-            git commit -m "ci(teststation): persist M2.9-K KiCad upgrade diagnostics" || true
-            git push || true
-          else
-            echo "No KiCad CLI diagnostic log was produced."
-          fi
+        uses: actions/upload-artifact@v4
+        with:
+          name: m2.9-k-kicad-upgrade-diagnostics
+          path: hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log
+          if-no-files-found: warn
 
       - name: Run native schematic ERC
         shell: bash
