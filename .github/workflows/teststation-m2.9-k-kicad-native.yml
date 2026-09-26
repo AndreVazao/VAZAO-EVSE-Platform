@@ -22,24 +22,34 @@ jobs:
           fetch-depth: 0
 
       - name: Check KiCad version
-        run: docker run --rm kicad/kicad:10.0.6 kicad-cli version --format plain
+        run: docker run --rm ghcr.io/inti-cmnb/kicad6_auto:1.9.0 kicad-cli version --format plain
 
-      - name: Upgrade legacy schematic to native KiCad format
+      - name: Convert legacy schematic through KiCad editor
         shell: bash
         run: |
           set -euo pipefail
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
+          NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
           mkdir -p "$(dirname "$LOG")"
           chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
-          set +e
-          docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
-            -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
-            kicad-cli sch upgrade "$LEGACY" 2>&1 | tee "$LOG"
-          rc=${PIPESTATUS[0]}
-          set -e
-          if [ "$rc" -ne 0 ]; then exit "$rc"; fi
-          NATIVE="${LEGACY%.sch}.kicad_sch"
+          docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp             -v "$GITHUB_WORKSPACE:/work" -w /work ghcr.io/inti-cmnb/kicad6_auto:1.9.0             bash -lc '
+              set -euo pipefail
+              export DISPLAY=:99
+              Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
+              XVFB_PID=$!
+              trap "kill $XVFB_PID 2>/dev/null || true" EXIT
+              sleep 2
+              eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
+              EES_PID=$!
+              sleep 12
+              xdotool search --onlyvisible --name "Schematic Editor" windowactivate --sync key ctrl+s || true
+              sleep 5
+              xdotool search --onlyvisible --name "Schematic Editor" windowactivate --sync key ctrl+q || true
+              sleep 5
+              kill "$EES_PID" 2>/dev/null || true
+              cat /tmp/eeschema.log
+            ' 2>&1 | tee "$LOG"
           test -s "$NATIVE"
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
 
