@@ -6,12 +6,12 @@ $Descr A4 11693 8268
 Sheet 1 1
 Title "VAZAO EVSE TestStation V1"
 Date "2026-09-26"
-Rev "M2.9-I"
+Rev "M2.9-K"
 Comp "VAZAO EVSE"
 Comment1 "Power, decoupling and protection baseline"
 Comment2 "NO MAINS ENERGIZATION"
 Comment3 "ERC/DRC pending"
-Comment4 "M2.9-I"
+Comment4 "M2.9-K — native conversion source"
 $EndDescr
 Text Notes 700 700 0 110 ~ 22
 VAZAO EVSE TESTSTATION V1 — M2.9-I POWER / DECOUPLING BASELINE
