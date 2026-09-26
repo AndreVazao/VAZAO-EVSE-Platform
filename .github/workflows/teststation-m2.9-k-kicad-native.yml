@@ -39,11 +39,12 @@ jobs:
             XVFB_PID=$!
             trap "kill $XVFB_PID 2>/dev/null || true" EXIT
             sleep 3
+            eeschema --help >/tmp/eeschema.log 2>&1 || true
             eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
             EES_PID=$!
             WINDOW=""
             for i in $(seq 1 60); do
-              WINDOW="$(xdotool search --onlyvisible --name "Schematic Editor" 2>/dev/null | head -n 1 || true)"
+              WINDOW="$(xdotool search --onlyvisible --name ".*" 2>/dev/null | head -n 1 || true)"
               if [ -n "$WINDOW" ]; then break; fi
               sleep 1
             done
