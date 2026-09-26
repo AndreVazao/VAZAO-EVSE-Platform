@@ -28,7 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:9.0.9 kicad-cli sch upgrade "$LEGACY"
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:9.0.9 kicad-cli sch upgrade --force "$LEGACY"
           NATIVE="${LEGACY%.sch}.kicad_sch"
           test -s "$NATIVE"
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
