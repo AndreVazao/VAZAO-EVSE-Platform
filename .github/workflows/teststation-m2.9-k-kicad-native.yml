@@ -35,9 +35,9 @@ jobs:
           docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
             -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
             kicad-cli sch upgrade --force "$LEGACY" 2>&1 | tee "$LOG"
-          rc=\${PIPESTATUS[0]}
+          rc=${PIPESTATUS[0]}
           set -e
-          exit "$rc"
+          if [ "$rc" -ne 0 ]; then exit "$rc"; fi
           NATIVE="${LEGACY%.sch}.kicad_sch"
           test -s "$NATIVE"
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
