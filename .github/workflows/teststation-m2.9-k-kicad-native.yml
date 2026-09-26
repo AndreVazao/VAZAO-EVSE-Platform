@@ -21,16 +21,23 @@ jobs:
           fetch-depth: 0
 
       - name: Check KiCad version
-        run: docker run --rm kicad/kicad:9.0.9 kicad-cli version --format plain
+        run: docker run --rm kicad/kicad:10.0.6 kicad-cli version --format plain
 
       - name: Upgrade legacy schematic to native KiCad format
         shell: bash
         run: |
           set -euo pipefail
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:9.0.9 bash -lc \
-            'kicad-cli sch upgrade --force "$1" 2>&1 | tee /work/hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log; exit ${PIPESTATUS[0]}' \
-            -- "$LEGACY"
+          LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
+          mkdir -p "$(dirname "$LOG")"
+          chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
+          set +e
+          docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
+            kicad-cli sch upgrade --force "$LEGACY" 2>&1 | tee "$LOG"
+          rc=\${PIPESTATUS[0]}
+          set -e
+          exit "$rc"
           NATIVE="${LEGACY%.sch}.kicad_sch"
           test -s "$NATIVE"
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
@@ -56,7 +63,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p hardware/teststation/V1/CAD/verification/erc
-          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:9.0.9 kicad-cli sch erc             --format report             --severity-all             --output hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt             hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch || true
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 kicad-cli sch erc             --format report             --severity-all             --output hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt             hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch || true
 
       - name: Write conversion status
         shell: bash
@@ -67,7 +74,7 @@ jobs:
           {
             echo "# M2.9-K Native KiCad Conversion — CI Result"
             echo
-            echo "**KiCad image:** `kicad/kicad:9.0.9`"
+            echo "**KiCad image:** `kicad/kicad:10.0.6`"
             echo
             echo "**Native schematic:** `$NATIVE`"
             echo
