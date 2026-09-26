@@ -29,43 +29,111 @@ jobs:
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
           NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
+
           mkdir -p "$(dirname "$LOG")"
           rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
           chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
-          timeout 180s docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp -e DISPLAY=:99 -v "$GITHUB_WORKSPACE:/work" -w /work ghcr.io/inti-cmnb/kicad6_auto:1.9.0 bash -lc '
-            set -euo pipefail
-            export DISPLAY=:99
-            Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
-            XVFB_PID=$!
-            trap "kill $XVFB_PID 2>/dev/null || true" EXIT
-            sleep 3
-            eeschema --help >/tmp/eeschema.log 2>&1 || true
-            eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
-            EES_PID=$!
-            WINDOW=""
-            for i in $(seq 1 60); do
-              WINDOW="$(xdotool search --onlyvisible --name ".*" 2>/dev/null | head -n 1 || true)"
-              if [ -n "$WINDOW" ]; then break; fi
-              sleep 1
-            done
-            test -n "$WINDOW"
-            echo "Eeschema window: $WINDOW"
-            xdotool windowactivate --sync "$WINDOW"
-            sleep 2
-            xdotool key ctrl+s
-            sleep 10
-            xdotool key ctrl+q || true
-            sleep 5
-            kill "$EES_PID" 2>/dev/null || true
-            wait "$EES_PID" 2>/dev/null || true
-            echo "--- EESCHEMA LOG ---"
-            cat /tmp/eeschema.log || true
-            echo "--- XVFB LOG ---"
-            cat /tmp/xvfb.log || true
-          ' 2>&1 | tee "$LOG"
-          test -s "$NATIVE"
+
+          echo "Starting KiCad legacy conversion with a 300s container timeout..."
+          timeout 300s docker run --rm --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -e DISPLAY=:99 \
+            -v "$GITHUB_WORKSPACE:/work" \
+            -w /work \
+            ghcr.io/inti-cmnb/kicad6_auto:1.9.0 bash -lc '
+              set -euo pipefail
+
+              export DISPLAY=:99
+              export XDG_RUNTIME_DIR=/tmp/runtime
+              mkdir -p "$XDG_RUNTIME_DIR"
+              chmod 700 "$XDG_RUNTIME_DIR"
+
+              Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
+              XVFB_PID=$!
+              trap "kill $XVFB_PID 2>/dev/null || true" EXIT
+
+              sleep 3
+
+              echo "--- DISPLAY CHECK ---"
+              xdpyinfo >/tmp/xdpyinfo.log 2>&1 || true
+              cat /tmp/xdpyinfo.log || true
+
+              echo "--- EESCHEMA VERSION/HELP ---"
+              eeschema --help >/tmp/eeschema-help.log 2>&1 || true
+              head -n 40 /tmp/eeschema-help.log || true
+
+              echo "--- STARTING EESCHEMA ---"
+              eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
+              EES_PID=$!
+              echo "Eeschema PID: $EES_PID"
+
+              WINDOW=""
+              for i in $(seq 1 120); do
+                if ! kill -0 "$EES_PID" 2>/dev/null; then
+                  echo "ERROR: Eeschema exited before a visible window was detected."
+                  break
+                fi
+
+                WINDOW="$(xdotool search --onlyvisible --name ".*" 2>/dev/null | head -n 1 || true)"
+
+                if [ -n "$WINDOW" ]; then
+                  echo "Window found on attempt $i/120: $WINDOW"
+                  break
+                fi
+
+                if [ $((i % 10)) -eq 0 ]; then
+                  echo "Waiting for Eeschema window... attempt $i/120"
+                  echo "--- EESCHEMA PROCESS ---"
+                  ps -fp "$EES_PID" || true
+                  echo "--- WINDOWS ---"
+                  xdotool search --onlyvisible --name ".*" 2>/dev/null || true
+                fi
+
+                sleep 1
+              done
+
+              if [ -z "$WINDOW" ]; then
+                echo "ERROR: Eeschema window never appeared."
+                echo "--- EESCHEMA LOG ---"
+                cat /tmp/eeschema.log || true
+                echo "--- XVFB LOG ---"
+                cat /tmp/xvfb.log || true
+                echo "--- DISPLAY WINDOWS ---"
+                xdotool search --onlyvisible --name ".*" 2>/dev/null || true
+                exit 1
+              fi
+
+              echo "Eeschema window: $WINDOW"
+              xdotool windowactivate --sync "$WINDOW"
+              sleep 2
+
+              echo "Saving legacy schematic through KiCad..."
+              xdotool key --clearmodifiers ctrl+s
+              sleep 15
+
+              echo "Closing Eeschema..."
+              xdotool key --clearmodifiers ctrl+q || true
+              sleep 8
+
+              kill "$EES_PID" 2>/dev/null || true
+              wait "$EES_PID" 2>/dev/null || true
+
+              echo "--- EESCHEMA LOG ---"
+              cat /tmp/eeschema.log || true
+              echo "--- XVFB LOG ---"
+              cat /tmp/xvfb.log || true
+            ' 2>&1 | tee "$LOG"
+
+          if [ ! -s "$NATIVE" ]; then
+            echo "ERROR: KiCad did not produce the expected native schematic: $NATIVE"
+            echo "--- CONVERSION LOG ---"
+            cat "$LOG" || true
+            exit 1
+          fi
+
           head -n 2 "$NATIVE"
           grep -q "^(kicad_sch" "$NATIVE"
+
           cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
 
       - name: Persist KiCad upgrade diagnostics on failure
