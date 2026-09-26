@@ -23,7 +23,10 @@ jobs:
           fetch-depth: 0
 
       - name: Check KiCad editor version
-        run: docker run --rm ghcr.io/inti-cmnb/kicad6_auto:1.9.0 eeschema --version
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm -e DISPLAY=:99 ghcr.io/inti-cmnb/kicad6_auto:1.9.0             bash -lc 'Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb-version.log 2>&1 & p=$!; trap "kill $p 2>/dev/null || true" EXIT; sleep 2; eeschema --version'
 
       - name: Convert legacy schematic through KiCad editor
         shell: bash
@@ -45,16 +48,19 @@ jobs:
               eeschema --version
               eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
               EES_PID=$!
-              for i in $(seq 1 30); do
-                if xdotool search --onlyvisible --name "Schematic Editor" >/tmp/eeschema.windows 2>/dev/null; then
-                  break
-                fi
+              WINDOW=""
+              for i in $(seq 1 60); do
+                WINDOW="$(xdotool search --onlyvisible --name "Schematic Editor" 2>/dev/null | head -n 1 || true)"
+                if [ -n "$WINDOW" ]; then break; fi
                 sleep 1
               done
-              cat /tmp/eeschema.windows || true
-              xdotool search --onlyvisible --name "Schematic Editor" windowactivate --sync key ctrl+s
-              sleep 8
-              xdotool search --onlyvisible --name "Schematic Editor" windowactivate --sync key ctrl+q || true
+              test -n "$WINDOW"
+              echo "Eeschema window: $WINDOW"
+              xdotool windowactivate --sync "$WINDOW"
+              sleep 2
+              xdotool key ctrl+s
+              sleep 10
+              xdotool key ctrl+q || true
               sleep 5
               kill "$EES_PID" 2>/dev/null || true
               wait "$EES_PID" 2>/dev/null || true
