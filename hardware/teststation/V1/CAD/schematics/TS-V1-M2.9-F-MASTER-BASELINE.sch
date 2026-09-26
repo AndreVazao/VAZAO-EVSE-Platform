@@ -1,64 +1,255 @@
 EESchema Schematic File Version 4
-LIBS:power
-LIBS:device
-LIBS:Connector_Generic
-LIBS:MCU_ST_STM32G4
-LIBS:Interface_CAN_LIN
+LIBS:TS-V1-M2.9-F-MASTER-BASELINE-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
-Sheet 1 8
+Sheet 1 1
 Title "VAZAO EVSE TestStation V1"
 Date "2026-09-26"
-Rev "M2.9-F"
+Rev "M2.9-G"
 Comp "VAZAO EVSE"
-Comment1 "Engineering prototype schematic baseline"
+Comment1 "Prototype symbol-instantiated schematic baseline"
 Comment2 "NO MAINS ENERGIZATION"
-Comment3 "Derived netlist must be reviewed before PCB update"
-Comment4 "M2.9-F"
+Comment3 "Cache symbols are engineering placeholders pending manufacturer symbol verification"
+Comment4 "M2.9-G"
 $EndDescr
-Text Notes 800 900 0 120 ~ 24
-VAZAO EVSE TESTSTATION V1 — MASTER SCHEMATIC BASELINE
-Text Notes 800 1200 0 70 ~ 12
-M2.9-F: functional electrical hierarchy; exact manufacturer symbols/pin assignments remain under controlled verification.
-Text Notes 800 1600 0 70 ~ 12
-ZONE A: L1/L2/L3 voltage + current measurement
-Text Notes 800 1850 0 70 ~ 12
-ZONE B: L1/L2/L3 voltage + current measurement
-Text Notes 800 2100 0 70 ~ 12
-MEASUREMENT: 6 isolated voltage channels + 6 current channels + synchronized ADCs
-Text Notes 800 2350 0 70 ~ 12
-CONTROL: STM32G474 + safety STM32G031 + CAN isolation
-Text Notes 800 2600 0 70 ~ 12
-EV INTERFACE: IEC 61851 CP/PP, contactor control, safety feedback
-Text Notes 800 2850 0 70 ~ 12
-POWER: 24 V SELV distribution; independent isolated 5 V supplies for AMC1311 channels
-Text Notes 800 3400 0 70 ~ 12
-NET HIERARCHY
-Text Notes 1000 3700 0 60 ~ 12
-A_L1_VP / A_L1_VN -> AMC1311B-A1 -> ADC_A_CH0
-Text Notes 1000 3900 0 60 ~ 12
-A_L2_VP / A_L2_VN -> AMC1311B-A2 -> ADC_A_CH1
-Text Notes 1000 4100 0 60 ~ 12
-A_L3_VP / A_L3_VN -> AMC1311B-A3 -> ADC_A_CH2
-Text Notes 1000 4300 0 60 ~ 12
-A_L1_I / A_L2_I / A_L3_I -> TMCS1123 x3 -> ADC_A_CH3..CH5
-Text Notes 1000 4600 0 60 ~ 12
-B_L1_VP / B_L1_VN -> AMC1311B-B1 -> ADC_B_CH0
-Text Notes 1000 4800 0 60 ~ 12
-B_L2_VP / B_L2_VN -> AMC1311B-B2 -> ADC_B_CH1
-Text Notes 1000 5000 0 60 ~ 12
-B_L3_VP / B_L3_VN -> AMC1311B-B3 -> ADC_B_CH2
-Text Notes 1000 5200 0 60 ~ 12
-B_L1_I / B_L2_I / B_L3_I -> TMCS1123 x3 -> ADC_B_CH3..CH5
-Text Notes 1000 5550 0 60 ~ 12
-ADC_A / ADC_B -> SPI -> STM32G474
-Text Notes 1000 5750 0 60 ~ 12
-STM32G474 -> ISO1044 -> CAN SERVICE
-Text Notes 1000 5950 0 60 ~ 12
-STM32G031 -> CP PWM / CP feedback / PP sense / safety
-Text Notes 1000 6150 0 60 ~ 12
-Safety -> E-STOP / K_MAIN_FB / K_LOAD_FB / watchdog
-Text Notes 800 6700 0 80 ~ 16
-STATUS: FUNCTIONAL BASELINE ONLY — NOT ERC/DRC — NOT FOR FABRICATION
+Text Notes 800 800 0 120 ~ 24
+VAZAO EVSE TESTSTATION V1 — M2.9-G SYMBOL BASELINE
+Text Notes 800 1100 0 65 ~ 12
+Measurement / control architecture instantiated with project-local cache symbols.
+$Comp
+L ADS131M06IPBSR U1
+U 1 1 1
+P 3500 3300
+F 0 "U1" H 3600 3400 50  0000 C CNN
+F 1 "ADS131M06IPBSR" H 3700 3200 50  0000 C CNN
+	1    3500 3300
+	1 0 0 -1
+$EndComp
+$Comp
+L ADS131M06IPBSR U2
+U 1 1 1
+P 3500 4700
+F 0 "U2" H 3600 4800 50  0000 C CNN
+F 1 "ADS131M06IPBSR" H 3700 4600 50  0000 C CNN
+	1    3500 4700
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U3
+U 1 1 1
+P 2000 3300
+F 0 "U3" H 2100 3400 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 3200 50  0000 C CNN
+	1    2000 3300
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U4
+U 1 1 1
+P 2000 3800
+F 0 "U4" H 2100 3900 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 3700 50  0000 C CNN
+	1    2000 3800
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U5
+U 1 1 1
+P 2000 4300
+F 0 "U5" H 2100 4400 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 4200 50  0000 C CNN
+	1    2000 4300
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U6
+U 1 1 1
+P 2000 4400
+F 0 "U6" H 2100 4500 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 4300 50  0000 C CNN
+	1    2000 4400
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U7
+U 1 1 1
+P 2000 4900
+F 0 "U7" H 2100 5000 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 4800 50  0000 C CNN
+	1    2000 4900
+	1 0 0 -1
+$EndComp
+$Comp
+L AMC1311BDWVR U8
+U 1 1 1
+P 2000 5400
+F 0 "U8" H 2100 5500 50  0000 C CNN
+F 1 "AMC1311BDWVR" H 2200 5300 50  0000 C CNN
+	1    2000 5400
+	1 0 0 -1
+$EndComp
+$Comp
+L TMCS1123A3AQDVGR U9
+U 1 1 1
+P 5000 3300
+F 0 "U9" H 5100 3400 50  0000 C CNN
+F 1 "TMCS1123A3AQDVGR" H 5200 3200 50  0000 C CNN
+	1    5000 3300
+	1 0 0 -1
+$EndComp
+$Comp
+L TMCS1123A3AQDVGR U10
+U 1 1 1
+P 5000 3900
+F 0 "U10" H 5100 4000 50  0000 C CNN
+F 1 "TMCS1123A3AQDVGR" H 5200 3800 50  0000 C CNN
+	1    5000 3900
+	1 0 0 -1
+$EndComp
+$Comp
+L TMCS1123A3AQDVGR U11
+U 1 1 1
+P 5000 4500
+F 0 "U11" H 5100 4600 50  0000 C CNN
+F 1 "TMCS1123A3AQDVGR" H 5200 4400 50  0000 C CNN
+	1    5000 4500
+	1 0 0 -1
+$EndComp
+$Comp
+L TMCS1123A3AQDVGR U12
+U 1 1 1
+P 5000 5100
+F 0 "U12" H 5100 5200 50  0000 C CNN
+F 1 "TMCS1123A3AQDVGR" H 5200 5000 50  0000 C CNN
+	1    5000 5100
+	1 0 0 -1
+$EndComp
+$Comp
+L STM32G474RET6 U13
+U 1 1 1
+P 7600 3300
+F 0 "U13" H 7700 3400 50  0000 C CNN
+F 1 "STM32G474RET6" H 7800 3200 50  0000 C CNN
+	1    7600 3300
+	1 0 0 -1
+$EndComp
+$Comp
+L STM32G031K8T6 U14
+U 1 1 1
+P 7600 5000
+F 0 "U14" H 7700 5100 50  0000 C CNN
+F 1 "STM32G031K8T6" H 7800 4900 50  0000 C CNN
+	1    7600 5000
+	1 0 0 -1
+$EndComp
+$Comp
+L ISO1044BDWR U15
+U 1 1 1
+P 9300 3300
+F 0 "U15" H 9400 3400 50  0000 C CNN
+F 1 "ISO1044BDWR" H 9500 3200 50  0000 C CNN
+	1    9300 3300
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U16
+U 1 1 1
+P 3000 6200
+F 0 "U16" H 3100 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 3200 6100 50  0000 C CNN
+	1    3000 6200
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U17
+U 1 1 1
+P 3900 6200
+F 0 "U17" H 4000 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 4100 6100 50  0000 C CNN
+	1    3900 6200
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U18
+U 1 1 1
+P 4800 6200
+F 0 "U18" H 4900 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 5000 6100 50  0000 C CNN
+	1    4800 6200
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U19
+U 1 1 1
+P 5700 6200
+F 0 "U19" H 5800 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 5900 6100 50  0000 C CNN
+	1    5700 6200
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U20
+U 1 1 1
+P 6600 6200
+F 0 "U20" H 6700 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 6800 6100 50  0000 C CNN
+	1    6600 6200
+	1 0 0 -1
+$EndComp
+$Comp
+L MEE1S2405SC U21
+U 1 1 1
+P 7500 6200
+F 0 "U21" H 7600 6300 50  0000 C CNN
+F 1 "MEE1S2405SC" H 7700 6100 50  0000 C CNN
+	1    7500 6200
+	1 0 0 -1
+$EndComp
+Text Label 1800 3400 0    50   ~ 0
+ZONE_A_L1_VP
+Text Label 1800 3500 0    50   ~ 0
+ZONE_A_L2_VP
+Text Label 1800 3600 0    50   ~ 0
+ZONE_A_L3_VP
+Text Label 1800 3900 0    50   ~ 0
+ZONE_A_L1_IP
+Text Label 1800 4000 0    50   ~ 0
+ZONE_A_L2_IP
+Text Label 1800 4100 0    50   ~ 0
+ZONE_A_L3_IP
+Text Label 1800 4500 0    50   ~ 0
+ZONE_B_L1_VP
+Text Label 1800 4600 0    50   ~ 0
+ZONE_B_L2_VP
+Text Label 1800 4700 0    50   ~ 0
+ZONE_B_L3_VP
+Text Label 1800 5000 0    50   ~ 0
+ZONE_B_L1_IP
+Text Label 1800 5100 0    50   ~ 0
+ZONE_B_L2_IP
+Text Label 1800 5200 0    50   ~ 0
+ZONE_B_L3_IP
+Text Label 6000 3500 0    50   ~ 0
+ADC_A_SPI
+Text Label 6000 3900 0    50   ~ 0
+ADC_B_SPI
+Text Label 6000 4500 0    50   ~ 0
+CP_PWM
+Text Label 6000 4600 0    50   ~ 0
+CP_FB
+Text Label 6000 4700 0    50   ~ 0
+PP_SENSE
+Text Label 6000 5000 0    50   ~ 0
+ESTOP_OK
+Text Label 6000 5100 0    50   ~ 0
+K_MAIN_FB
+Text Label 6000 5200 0    50   ~ 0
+K_LOAD_FB
+Text Label 8000 3500 0    50   ~ 0
+CANH
+Text Label 8000 3600 0    50   ~ 0
+CANL
+Text Notes 900 7000 0 70 ~ 12
+M2.9-G STATUS: symbol-instantiated engineering baseline; exact manufacturer symbols, full wiring, ERC/DRC and fabrication remain OPEN.
 $EndSCHEMATC
