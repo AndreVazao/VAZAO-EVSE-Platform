@@ -104,11 +104,12 @@ jobs:
               fi
 
               echo "Eeschema window for PID $EES_PID: $WINDOW"
-              xdotool windowactivate --sync "$WINDOW"
-              sleep 2
-
               echo "Saving legacy schematic through KiCad..."
-              xdotool key --clearmodifiers ctrl+s
+              xdotool key --window "$WINDOW" --clearmodifiers ctrl+s || true
+              sleep 4
+              xdotool key --window "$WINDOW" --clearmodifiers Return || true
+              sleep 4
+              xdotool key --window "$WINDOW" --clearmodifiers ctrl+s || true
               sleep 15
 
               echo "Closing Eeschema..."
