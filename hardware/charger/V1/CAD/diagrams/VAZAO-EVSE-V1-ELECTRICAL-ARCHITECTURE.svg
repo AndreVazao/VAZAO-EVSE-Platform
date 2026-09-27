@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#fff"/>
+<text x="60" y="55" font-family="Arial" font-size="30" font-weight="700">VAZÃO EVSE Charger V1 — Functional Electrical Architecture</text>
+<text x="60" y="88" font-family="Arial" font-size="16">AC Mode 3 • single Type 2 output • engineering baseline • NOT a construction/energisation drawing</text>
+<g font-family="Arial" font-size="18">
+<rect x="60" y="150" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="85" y="185">INSTALLATION</text><text x="85" y="215">L1 L2 L3 N PE</text><text x="85" y="245">400 V AC reference</text>
+<rect x="340" y="150" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="395" y="185">QF1</text><text x="370" y="215">Main protection</text><text x="375" y="245">/ isolation</text>
+<rect x="620" y="150" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="680" y="185">RCD1</text><text x="650" y="215">EV residual</text><text x="660" y="245">protection</text>
+<rect x="900" y="150" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="955" y="185">TB1</text><text x="925" y="215">Power distribution</text><text x="945" y="245">/ PE bar</text>
+<rect x="1190" y="150" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="1245" y="185">KM1</text><text x="1210" y="215">EV power contactor</text><text x="1240" y="245">+ feedback</text>
+<line x1="270" y1="210" x2="340" y2="210" stroke="#111" stroke-width="4"/><polygon points="340,210 325,202 325,218" fill="#111"/>
+<line x1="550" y1="210" x2="620" y2="210" stroke="#111" stroke-width="4"/><polygon points="620,210 605,202 605,218" fill="#111"/>
+<line x1="830" y1="210" x2="900" y2="210" stroke="#111" stroke-width="4"/><polygon points="900,210 885,202 885,218" fill="#111"/>
+<line x1="1110" y1="210" x2="1190" y2="210" stroke="#111" stroke-width="4"/><polygon points="1190,210 1175,202 1175,218" fill="#111"/>
+<rect x="1190" y="380" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="1240" y="415">EM1</text><text x="1205" y="445">Energy / current</text><text x="1235" y="475">metering</text>
+<line x1="1295" y1="270" x2="1295" y2="380" stroke="#111" stroke-width="4"/><polygon points="1295,380 1287,365 1303,365" fill="#111"/>
+<rect x="1190" y="610" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="1245" y="645">X1</text><text x="1215" y="675">TYPE 2</text><text x="1210" y="705">L1/L2/L3/N/PE</text>
+<line x1="1295" y1="500" x2="1295" y2="610" stroke="#111" stroke-width="4"/><polygon points="1295,610 1287,595 1303,595" fill="#111"/>
+<rect x="650" y="390" width="260" height="150" rx="12" fill="#eef6ff" stroke="#225" stroke-width="2"/><text x="710" y="425">MCU1 EVSE</text><text x="675" y="455">State machine</text><text x="675" y="485">local control</text><text x="675" y="515">offline logging</text>
+<rect x="330" y="390" width="220" height="120" rx="12" fill="#eef6ff" stroke="#225" stroke-width="2"/><text x="380" y="425">EVSE1</text><text x="355" y="455">CP / PP interface</text><text x="360" y="485">protected I/O</text>
+<line x1="550" y1="450" x2="650" y2="450" stroke="#225" stroke-width="3"/><polygon points="650,450 635,442 635,458" fill="#225"/>
+<line x1="780" y1="540" x2="780" y2="650" stroke="#225" stroke-width="3"/><polygon points="780,650 772,635 788,635" fill="#225"/><text x="805" y="600" fill="#225">KM1 command</text>
+<line x1="910" y1="450" x2="1190" y2="440" stroke="#225" stroke-width="3"/><polygon points="1190,440 1175,432 1175,448" fill="#225"/><text x="955" y="425" fill="#225">meter data</text>
+<rect x="60" y="390" width="210" height="120" rx="12" fill="#f5f5f5" stroke="#222" stroke-width="2"/><text x="115" y="425">PS1</text><text x="90" y="455">Auxiliary AC/DC</text><text x="100" y="485">24 V DC target</text>
+<line x1="900" y1="270" x2="165" y2="390" stroke="#666" stroke-width="2" stroke-dasharray="8 8"/><text x="70" y="350" fill="#555">auxiliary supply branch</text>
+<rect x="960" y="610" width="210" height="120" rx="12" fill="#eef6ff" stroke="#225" stroke-width="2"/><text x="1015" y="645">COM1</text><text x="990" y="675">Ethernet / LTE / Wi-Fi</text><text x="1015" y="705">to CPMS</text>
+<line x1="910" y1="465" x2="960" y2="665" stroke="#225" stroke-width="3" stroke-dasharray="8 8"/><text x="925" y="590" fill="#225">data only</text>
+<text x="60" y="830" font-family="Arial" font-size="15">PE remains protective bonding; CPMS communications are outside the local safety chain. Final topology, protection and ratings require engineering validation.</text>
+</g></svg>

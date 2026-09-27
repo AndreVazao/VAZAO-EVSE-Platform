@@ -1,0 +1,195 @@
+name: TestStation M2.9-K KiCad Native Upgrade
+
+on:
+  push:
+    branches:
+      - feat/charger-hardware-v1
+    paths:
+      - 'hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch'
+      - 'hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE-cache.lib'
+      - '.github/workflows/teststation-m2.9-k-kicad-native.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  kicad-native-upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Convert legacy schematic through KiCad editor
+        shell: bash
+        run: |
+          set -euo pipefail
+          LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
+          NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
+          LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
+
+          mkdir -p "$(dirname "$LOG")"
+          rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
+          chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
+
+          echo "Starting KiCad legacy conversion with a 300s container timeout..."
+          timeout 300s docker run --rm --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -e DISPLAY=:99 \
+            -v "$GITHUB_WORKSPACE:/work" \
+            -w /work \
+            ghcr.io/inti-cmnb/kicad6_auto:1.9.0 bash -lc '
+              set -euo pipefail
+
+              export DISPLAY=:99
+              export XDG_RUNTIME_DIR=/tmp/runtime
+              mkdir -p "$XDG_RUNTIME_DIR"
+              chmod 700 "$XDG_RUNTIME_DIR"
+
+              Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
+              XVFB_PID=$!
+              trap "kill $XVFB_PID 2>/dev/null || true" EXIT
+
+              sleep 3
+
+              echo "--- DISPLAY CHECK ---"
+              xdpyinfo >/tmp/xdpyinfo.log 2>&1 || true
+              cat /tmp/xdpyinfo.log || true
+
+              echo "--- EESCHEMA VERSION/HELP ---"
+              eeschema --help >/tmp/eeschema-help.log 2>&1 || true
+              head -n 40 /tmp/eeschema-help.log || true
+
+              echo "--- STARTING EESCHEMA ---"
+              eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
+              EES_PID=$!
+              echo "Eeschema PID: $EES_PID"
+
+              WINDOW=""
+              for i in $(seq 1 120); do
+                if ! kill -0 "$EES_PID" 2>/dev/null; then
+                  echo "ERROR: Eeschema exited before a visible window was detected."
+                  break
+                fi
+
+                WINDOW="$(xdotool search --pid "$EES_PID" 2>/dev/null | tail -n 1 || true)"
+
+                if [ -n "$WINDOW" ]; then
+                  echo "Window found for Eeschema PID on attempt $i/120: $WINDOW"
+                  break
+                fi
+
+                if [ $((i % 10)) -eq 0 ]; then
+                  echo "Waiting for Eeschema window... attempt $i/120"
+                  echo "--- EESCHEMA PROCESS ---"
+                  ps -fp "$EES_PID" || true
+                  echo "--- WINDOWS ---"
+                  xdotool search --pid "$EES_PID" 2>/dev/null || true
+                fi
+
+                sleep 1
+              done
+
+              if [ -z "$WINDOW" ]; then
+                echo "ERROR: Eeschema window never appeared."
+                echo "--- EESCHEMA LOG ---"
+                cat /tmp/eeschema.log || true
+                echo "--- XVFB LOG ---"
+                cat /tmp/xvfb.log || true
+                echo "--- DISPLAY WINDOWS ---"
+                xdotool search --onlyvisible --name ".*" 2>/dev/null || true
+                exit 1
+              fi
+
+              echo "Eeschema window for PID $EES_PID: $WINDOW"
+              echo "Saving legacy schematic through KiCad..."
+              xdotool key --window "$WINDOW" --clearmodifiers ctrl+s || true
+              sleep 4
+              xdotool key --window "$WINDOW" --clearmodifiers Return || true
+              sleep 4
+              xdotool key --window "$WINDOW" --clearmodifiers ctrl+s || true
+              sleep 15
+
+              echo "Closing Eeschema..."
+              xdotool key --clearmodifiers ctrl+q || true
+              sleep 8
+
+              kill "$EES_PID" 2>/dev/null || true
+              wait "$EES_PID" 2>/dev/null || true
+
+              echo "--- EESCHEMA LOG ---"
+              cat /tmp/eeschema.log || true
+              echo "--- XVFB LOG ---"
+              cat /tmp/xvfb.log || true
+            ' 2>&1 | tee "$LOG"
+
+          if [ ! -s "$NATIVE" ]; then
+            echo "ERROR: KiCad did not produce the expected native schematic: $NATIVE"
+            echo "--- CONVERSION LOG ---"
+            cat "$LOG" || true
+            exit 1
+          fi
+
+          head -n 2 "$NATIVE"
+          grep -q "^(kicad_sch" "$NATIVE"
+
+          cp "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
+
+      - name: Persist KiCad upgrade diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m2.9-k-kicad-upgrade-diagnostics
+          path: hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log
+          if-no-files-found: warn
+
+      - name: Run native schematic ERC
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p hardware/teststation/V1/CAD/verification/erc
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 kicad-cli sch erc --format report --severity-all --output hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch || true
+
+      - name: Write conversion status
+        shell: bash
+        run: |
+          set -euo pipefail
+          NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
+          ERC="hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt"
+          {
+            echo "# M2.9-K Native KiCad Conversion — CI Result"
+            echo
+            echo "**Conversion engine:** KiCad 6 Eeschema GUI via Xvfb/xdotool"
+            echo
+            echo "**Native schematic:** `$NATIVE`"
+            echo
+            echo "**ERC report:** `$ERC`"
+            echo
+            echo "The native file must be produced by KiCad's own editor save path; hand-written S-expression fabrication is prohibited."
+            echo
+            echo "Native conversion does **not** imply complete electrical connectivity. Connectivity, pin mapping, ERC and DRC remain engineering gates."
+            echo
+            echo "## Gates"
+            echo "- Native file generated by KiCad: YES"
+            echo "- Native schematic electrically complete: NO — pending connected schematic implementation"
+            echo "- ERC executed: YES"
+            echo "- DRC: PENDING"
+            echo "- Fabrication: NOT AUTHORIZED"
+            echo "- Mains energization: NOT AUTHORIZED"
+          } > hardware/teststation/V1/CAD/verification/M2.9-K-NATIVE-CI-RESULT.md
+
+      - name: Commit generated native schematic and ERC
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "VAZAO EVSE Engineering Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt hardware/teststation/V1/CAD/verification/M2.9-K-NATIVE-CI-RESULT.md
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "feat(teststation): generate M2.9-K native KiCad schematic"
+          git push
