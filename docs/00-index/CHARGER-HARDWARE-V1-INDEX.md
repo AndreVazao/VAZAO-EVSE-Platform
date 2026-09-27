@@ -41,3 +41,13 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 ## Safety status
 
 This is an engineering/documentation baseline, **not a construction certificate or installation drawing**. Any mains-connected prototype must be reviewed and tested by a suitably qualified electrical engineer, and the production design must be validated against the applicable EU/Portuguese requirements and EVSE standards before deployment.
+
+
+## Engineering drawings
+
+- [Functional electrical architecture](../../hardware/charger/V1/CAD/diagrams/VAZAO-EVSE-V1-ELECTRICAL-ARCHITECTURE.svg)
+- [Internal panel layout](../../hardware/charger/V1/CAD/diagrams/VAZAO-EVSE-V1-INTERNAL-PANEL-LAYOUT.svg)
+
+## Current engineering baseline
+
+The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, and records the preliminary BOM. The drawings are conceptual engineering artefacts and are not authorisation for mains energisation.
