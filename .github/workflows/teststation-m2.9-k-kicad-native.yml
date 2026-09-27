@@ -74,10 +74,10 @@ jobs:
                   break
                 fi
 
-                WINDOW="$(xdotool search --onlyvisible --name ".*" 2>/dev/null | head -n 1 || true)"
+                WINDOW="$(xdotool search --pid "$EES_PID" 2>/dev/null | tail -n 1 || true)"
 
                 if [ -n "$WINDOW" ]; then
-                  echo "Window found on attempt $i/120: $WINDOW"
+                  echo "Window found for Eeschema PID on attempt $i/120: $WINDOW"
                   break
                 fi
 
@@ -86,7 +86,7 @@ jobs:
                   echo "--- EESCHEMA PROCESS ---"
                   ps -fp "$EES_PID" || true
                   echo "--- WINDOWS ---"
-                  xdotool search --onlyvisible --name ".*" 2>/dev/null || true
+                  xdotool search --pid "$EES_PID" 2>/dev/null || true
                 fi
 
                 sleep 1
@@ -103,7 +103,7 @@ jobs:
                 exit 1
               fi
 
-              echo "Eeschema window: $WINDOW"
+              echo "Eeschema window for PID $EES_PID: $WINDOW"
               xdotool windowactivate --sync "$WINDOW"
               sleep 2
 
