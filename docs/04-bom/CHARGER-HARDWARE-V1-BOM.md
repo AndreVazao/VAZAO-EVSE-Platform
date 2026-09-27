@@ -1,75 +1,77 @@
 # VAZÃO EVSE Charger Hardware V1 — Engineering BOM
 
+**Status:** preliminary sourcing baseline. Prices are indicative only and must be refreshed before purchasing.
+
 ## 1. BOM policy
 
-The first BOM is an **engineering candidate list**, not a purchasing release. Manufacturer part numbers are selected only after the electrical schematic, protection study, enclosure dimensions, connector rating and certification strategy are frozen.
+This BOM is an engineering candidate list, not a purchasing release. Manufacturer part numbers are frozen only after the schematic, protection study, enclosure, connector interfaces and compliance strategy are frozen.
 
-## 2. Functional BOM
+## 2. Mechanical
 
-| Ref | Component | Minimum requirement | Qty V1 | Status |
-|---|---|---|---:|---|
-| QF1 | Main isolation/protection | 3P/4P as required by final topology and installation | 1 | candidate |
-| FI1 | Residual-current / EV protection | compliant with final EVSE protection concept | 1 | candidate |
-| SPD1 | Surge protection | selected according to installation/system study | 1 | optional/required by design |
-| PS1 | AC/DC supply | industrial, certified, SELV, sized for complete control load | 1 | candidate |
-| KM1 | AC power contactor | rated for EVSE duty and selected current | 1 | candidate |
-| M1 | Energy meter | suitable accuracy/compliance and digital interface | 1 | candidate |
-| MCU1 | EVSE safety controller | deterministic control, watchdog, protected I/O | 1 | custom architecture |
-| CPU1 | Application/comms processor | Ethernet/Wi-Fi/LTE support as configured | 1 | modular |
-| RFID1 | RFID/NFC reader | supported credential technology and secure interface | 1 | candidate |
-| COM1 | Ethernet | industrial interface | 1 | optional |
-| COM2 | Wi-Fi | industrial module | 1 | optional |
-| COM3 | LTE/4G | industrial modem + SIM/eSIM support | 1 | optional |
-| T1.. | Temperature sensors | appropriate range and mounting | as required | candidate |
-| J1 | Type 2 interface | certified socket or tethered assembly | 1 | candidate |
-| X1.. | Terminal blocks | appropriate voltage/current/category | as required | candidate |
-| DIN | DIN rails | enclosure compatible | as required | candidate |
-| PE | PE terminals/bonding | protective bonding hardware | as required | mandatory |
-| ENC1 | Enclosure | appropriate IP/IK, thermal and service requirements | 1 | candidate |
-| GL1.. | Cable glands | suitable IP and cable ranges | as required | candidate |
-| HARNESS | Internal wiring | conductor sizing from final calculation | 1 set | engineering |
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| ENC1 | Outdoor-rated enclosure, target IP54/IP55 or higher according to installation | 1 | Select |
+| MP1 | Metal mounting plate | 1 | Select |
+| DIN1 | DIN rail system | 1 set | Select |
+| DUCT1 | Wiring ducts / separators | 1 set | Select |
+| GL1 | Cable glands / sealing system | 1 set | Select |
+| PE1 | Protective-earth bonding bar | 1 | Select |
 
-## 3. Prototype electronics
+## 3. Protection and switching
 
-The early bench prototype may use development hardware to validate the architecture. The production controller shall move to a controlled PCB design with:
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| QF1 | Main protective/isolation device | 1 | Engineering selection |
+| RCD1 | Residual-current protection appropriate to final EVSE architecture | 1 | Engineering selection |
+| SPD1 | Surge protection, selected from installation/system study | 1 | Engineering selection |
+| F1.. | Branch protection where required | 1 set | Engineering selection |
+| KM1 | EV power contactor with suitable AC rating and auxiliary feedback | 1 | Engineering selection |
+| KMD1 | Contactor driver / interface | 1 | Custom/selected |
+| TB1 | Power terminal/distribution system | 1 set | Select |
 
-- galvanic isolation where required;
-- protected digital inputs/outputs;
-- watchdog;
-- secure boot/update strategy where applicable;
-- documented connectors;
-- EMC-conscious layout;
-- test points for the VAZÃO EVSE TestStation.
+## 4. EVSE electronics
 
-## 4. Metering
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| MCU1 | Industrial MCU controller board | 1 | Architecture selection |
+| EVSE1 | Dedicated CP/PP EVSE interface | 1 | Select/custom |
+| WDT1 | Independent watchdog / supervision | 1 | Architecture selection |
+| I/O1 | Isolated digital I/O subsystem | 1 | Select/custom |
+| EM1 | EVSE-compatible energy metering subsystem | 1 | Select |
+| TEMP1 | Temperature sensing | 1+ | Select |
 
-Do not use hobby-grade current sensors as the sole billing measurement path. The billing architecture should use a suitable certified meter where required by the commercial/regulatory model. Diagnostic sensors can remain separate.
+## 5. Communications
 
-## 5. Costing
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| COM1 | Modular communications carrier | 1 | Architecture selection |
+| ETH1 | Ethernet interface | 0/1 | Optional |
+| LTE1 | LTE modem | 0/1 | Optional |
+| WIFI1 | Wi-Fi interface | 0/1 | Optional |
+| ANT1 | Antenna system | 0/1 | Depends on COM1 |
 
-A procurement spreadsheet shall be created after the schematic is frozen. It will contain:
+## 6. User interface
 
-- manufacturer;
-- exact part number;
-- supplier;
-- quantity breaks;
-- prototype price;
-- estimated production price;
-- lead time;
-- alternative component;
-- certification evidence;
-- lifecycle/availability status.
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| RFID1 | Secure RFID/NFC reader | 1 | Select |
+| HMI1 | Status LED / display assembly | 1 | Select |
+| ESTOP1 | Emergency/service isolation interface if required by final installation | 0/1 | Engineering selection |
 
-## 6. Variant reuse
+## 7. Charging interface
 
-The target is to reuse the following across single/dual/quad/wallbox products:
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| X1 | Type 2 socket or tethered Type 2 assembly | 1 | Select |
+| CP/PP | CP/PP interface components | 1 set | EVSE1 |
+| CABLE1 | EV-rated internal cabling | 1 set | Final sizing pending |
 
-- controller architecture;
-- communications module;
-- RFID module;
-- energy measurement architecture;
-- control PSU family;
-- service connectors;
-- software/firmware.
+## 8. Engineering rules
 
-Only the power/channel assemblies and mechanical arrangement should scale significantly.
+1. No hobby-grade sensor is accepted as the commercial billing meter.
+2. Safety-critical components require documented ratings and datasheets.
+3. Metering must have a defined accuracy and verification strategy before commercial billing.
+4. Manufacturer part numbers are frozen only after schematic and enclosure interfaces are frozen.
+5. Every production BOM item receives lifecycle status and approved alternatives.
+6. Prototype cost and production cost are maintained separately.
+7. All mains-connected components require final review for voltage/current rating, short-circuit withstand, temperature, creepage/clearance and applicable certification.
