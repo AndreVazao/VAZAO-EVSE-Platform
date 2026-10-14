@@ -64,7 +64,7 @@ jobs:
               # Do not run "eeschema --help" here: in this image it starts GUI
               # initialization and hangs until the outer job timeout.
               echo "--- STARTING EESCHEMA ---"
-              eeschema "$LEGACY" >/tmp/eeschema.log 2>&1 &
+              eeschema "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch" >/tmp/eeschema.log 2>&1 &
               EES_PID=$!
               echo "Eeschema PID: $EES_PID"
 
