@@ -94,14 +94,21 @@ jobs:
           xdotool windowactivate --sync "$WINDOW" 2>/dev/null || true
           sleep 2
           # Handle a possible legacy-project rescue prompt, then save through KiCad.
+          # Save As is required: Ctrl+S keeps the legacy .sch extension and fails
+          # because modern KiCad writes the native S-expression format.
           xdotool key --clearmodifiers Return || true
           sleep 2
-          xdotool key --clearmodifiers ctrl+s
-          sleep 4
+          xdotool key --clearmodifiers ctrl+shift+s
+          sleep 3
+          xdotool key --clearmodifiers ctrl+a
+          xdotool type --clearmodifiers --delay 1 "/work/$EXPECTED"
+          xdotool key --clearmodifiers Return
+          sleep 5
+          # Confirm any format/overwrite prompt, then wait for the native save.
           xdotool key --clearmodifiers Return || true
-          sleep 2
+          sleep 3
           xdotool key --clearmodifiers ctrl+s || true
-          sleep 6
+          sleep 5
 
           echo "--- Files after KiCad save ---"
           ls -la hardware/teststation/V1/CAD/schematics/*M2.9-F-MASTER-BASELINE* || true
