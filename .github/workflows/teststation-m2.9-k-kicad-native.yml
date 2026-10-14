@@ -39,7 +39,7 @@ jobs:
             timeout 180s docker run --rm --user "$(id -u):$(id -g)" \
               -e HOME=/tmp -e DISPLAY=:99 \
               -v "$GITHUB_WORKSPACE:/work" -w /work \
-              ghcr.io/inti-cmnb/kicad6_auto:1.9.0 bash -s <<'CONTAINER_SCRIPT'
+              --entrypoint /bin/bash ghcr.io/inti-cmnb/kicad6_auto:1.9.0 -s <<'CONTAINER_SCRIPT'
           set -euo pipefail
           export DISPLAY=:99
           export HOME=/tmp
