@@ -43,9 +43,10 @@ jobs:
           set -euo pipefail
           export DISPLAY=:99
           export HOME=/tmp
-          export XDG_RUNTIME_DIR=/tmp/runtime
-          mkdir -p "$XDG_RUNTIME_DIR"
+          set -x
+          export XDG_RUNTIME_DIR="$(mktemp -d /tmp/runtime.XXXXXX)"
           chmod 700 "$XDG_RUNTIME_DIR"
+          trap 'rc=$?; echo "CONTAINER_SCRIPT failed at line ${LINENO} (exit ${rc})"; cat /tmp/xvfb.log 2>/dev/null || true; cat /tmp/eeschema.log 2>/dev/null || true; exit "$rc"' ERR
           Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
           XVFB_PID=$!
           trap 'kill "$XVFB_PID" 2>/dev/null || true' EXIT
