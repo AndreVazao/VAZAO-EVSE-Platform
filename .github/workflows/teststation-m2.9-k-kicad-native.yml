@@ -3,6 +3,7 @@ name: TestStation M2.9-K KiCad Native Upgrade
 on:
   push:
     branches:
+      - main
       - feat/charger-hardware-v1
     paths:
       - 'hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch'
