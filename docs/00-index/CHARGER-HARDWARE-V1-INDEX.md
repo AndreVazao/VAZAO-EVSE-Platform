@@ -1,7 +1,8 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Branch:** `feat/charger-hardware-v1`  
+**Baseline branch:** `main`  
+**Active engineering branch:** `feat/charger-hardware-v1-component-selection`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
 ## Purpose
@@ -35,6 +36,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/02-architecture/CHARGER-HARDWARE-V1-CONTROL-COMMUNICATIONS.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-WIRING-SCHEDULE.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-INTERNAL-ASSEMBLY.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
