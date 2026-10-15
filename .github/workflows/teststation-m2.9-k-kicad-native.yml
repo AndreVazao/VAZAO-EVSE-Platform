@@ -34,6 +34,9 @@ jobs:
           rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
 
+          echo "Checking official KiCad container entrypoint and required tools..."
+          docker run --rm --entrypoint /bin/bash kicad/kicad:10.0.6 -lc 'set -euxo pipefail; echo CONTAINER_SMOKE_OK; id; command -v bash; command -v eeschema; command -v Xvfb; command -v xdotool'
+
           echo "Launching KiCad legacy conversion (bounded to 180 seconds)..."
           {
             timeout 180s docker run --rm --user "$(id -u):$(id -g)" \
