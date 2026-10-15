@@ -34,12 +34,11 @@ jobs:
           rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
 
-          echo "Checking official KiCad container entrypoint and required tools..."
-          docker run --rm --entrypoint /bin/bash kicad/kicad:10.0.6 -lc 'set -euxo pipefail; echo CONTAINER_SMOKE_OK; id; command -v bash; command -v eeschema; command -v Xvfb; command -v xdotool'
-
-          echo "Launching KiCad legacy conversion (bounded to 180 seconds)..."
+          echo "Checking official KiCad container and installing missing GUI automation tools..."
+          echo "The official image includes Eeschema but does not include Xvfb/xdotool; install them in the disposable CI container."
+          echo "Launching KiCad legacy conversion (bounded to 240 seconds)..."
           {
-            timeout 180s docker run --rm --user "$(id -u):$(id -g)" \
+            timeout 240s docker run --rm --user 0:0 \
               -e HOME=/tmp -e DISPLAY=:99 \
               -v "$GITHUB_WORKSPACE:/work" -w /work \
               --entrypoint /bin/bash kicad/kicad:10.0.6 -s <<'CONTAINER_SCRIPT'
@@ -47,6 +46,11 @@ jobs:
           export DISPLAY=:99
           export HOME=/tmp
           set -x
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb xdotool
+          command -v eeschema
+          command -v Xvfb
+          command -v xdotool
           export XDG_RUNTIME_DIR="$(mktemp -d /tmp/runtime.XXXXXX)"
           chmod 700 "$XDG_RUNTIME_DIR"
           trap 'rc=$?; echo "CONTAINER_SCRIPT failed at line ${LINENO} (exit ${rc})"; cat /tmp/xvfb.log 2>/dev/null || true; cat /tmp/eeschema.log 2>/dev/null || true; exit "$rc"' ERR
