@@ -103,9 +103,9 @@ def read_pins(block: str) -> dict[int, str]:
             for look in lines[i:i + 5]:
                 nm = re.search(r'\(name "([^"]*)"', look)
                 nu = re.search(r'\(number "([^"]*)"', look)
-                if nm:
+                if nm and name is None:
                     name = nm.group(1)
-                if nu:
+                if nu and number is None:
                     number = nu.group(1)
             if name is None or number is None:
                 raise ValueError(f"pin missing name/number near: {line.strip()}")
