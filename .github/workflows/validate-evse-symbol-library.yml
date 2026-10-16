@@ -1,0 +1,36 @@
+name: Validate EVSE verified symbol library
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-symbol-library:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run static pin-map regression checks
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
+
+      - name: Install KiCad CLI for native parser validation
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y kicad
+
+      - name: Confirm KiCad CLI is available
+        run: |
+          kicad-cli version
+
+      - name: Load and export symbols through KiCad
+        run: |
+          mkdir -p "$RUNNER_TEMP/evse-symbol-svg"
+          kicad-cli sym export svg \
+            --output "$RUNNER_TEMP/evse-symbol-svg" \
+            hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym
+          test -n "$(find "$RUNNER_TEMP/evse-symbol-svg" -type f -name '*.svg' -print -quit)"
