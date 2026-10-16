@@ -71,28 +71,28 @@
 				(number "8" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-0000000003f0")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at -12.7 -1.2699999999999996 0)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
 				(number "9" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-0000000003f1")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at -12.7 -3.8099999999999987 0)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
 				(number "10" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-0000000003f2")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at -12.7 -6.349999999999998 0)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
 				(number "11" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-0000000003f3")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at -12.7 -8.89 0)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
@@ -197,7 +197,7 @@
 				(number "26" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-000000000456")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at 12.7 -6.349999999999998 180)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
@@ -396,7 +396,7 @@
 				(number "9" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-000000000c20")
 			)
-			(pin no_connect line
+			(pin passive line
 				(at 12.7 -5.08 180)
 				(length 5.08)
 				(name "NC" (effects (font (size 1.0 1.0))))
