@@ -31,12 +31,14 @@ jobs:
           NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
           LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
           mkdir -p "$(dirname "$LOG")"
+          test -s "$LEGACY"
+          test -s "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE-cache.lib"
           rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
 
           {
-            echo "Conversion method: Eeschema GUI legacy importer under Xvfb."
-            echo "This input is the pre-S-expression legacy .sch format; kicad-cli sch upgrade cannot import it directly."
+            echo "Conversion method: KiCad Eeschema legacy importer under Xvfb."
+            echo "The legacy source and cache library are preserved; generated native output is accepted only after KiCad writes it."
             timeout 300s docker run --rm -i --user 0:0 \
               -e HOME=/tmp -e DISPLAY=:99 \
               -v "$GITHUB_WORKSPACE:/work" -w /work \
@@ -60,16 +62,59 @@ jobs:
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
           EXPECTED="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           rm -f "$EXPECTED"
-          echo "--- KiCad binary present; skip --version because Eeschema is a GUI application ---"
-          echo "--- Launch Eeschema with legacy source ---"
-          eeschema "$LEGACY" >/tmp/eeschema.log 2>&1 &
+
+          # First-run KiCad setup is a modal wizard. Complete it explicitly before
+          # treating any editor window as evidence that the legacy file was loaded.
+          echo "--- Initialize KiCad user configuration ---"
+          eeschema >/tmp/eeschema-setup.log 2>&1 &
+          SETUP_PID=$!
+          for i in $(seq 1 30); do
+            SETUP_WINDOW=""
+            for candidate in $(xdotool search --name "KiCad Setup" 2>/dev/null || true); do
+              SETUP_WINDOW="$candidate"
+              break
+            done
+            [ -n "$SETUP_WINDOW" ] && break
+            if ! kill -0 "$SETUP_PID" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          if [ -n "$SETUP_WINDOW" ]; then
+            echo "Detected first-run setup dialog $SETUP_WINDOW; advancing the wizard only while that dialog exists."
+            for i in $(seq 1 12); do
+              STILL_SETUP=""
+              for candidate in $(xdotool search --name "KiCad Setup" 2>/dev/null || true); do
+                STILL_SETUP="$candidate"
+                break
+              done
+              [ -z "$STILL_SETUP" ] && break
+              xdotool windowfocus "$STILL_SETUP" 2>/dev/null || true
+              xdotool key --clearmodifiers Return
+              sleep 1
+            done
+            if xdotool search --name "KiCad Setup" 2>/dev/null | grep -q .; then
+              echo "ERROR: KiCad first-run setup did not close after 12 wizard advances."
+              cat /tmp/eeschema-setup.log || true
+              exit 1
+            fi
+          else
+            echo "No first-run setup dialog detected."
+          fi
+          kill "$SETUP_PID" 2>/dev/null || true
+          wait "$SETUP_PID" 2>/dev/null || true
+          sleep 2
+
+          echo "--- Open the actual legacy schematic ---"
+          eeschema "$LEGACY" >/tmp/eeschema-import.log 2>&1 &
           EES_PID=$!
           WINDOW=""
           for i in $(seq 1 90); do
-            for candidate in $(xdotool search --name ".*" 2>/dev/null || true); do
+            for candidate in $(xdotool search --name ".*M2.9-F-MASTER-BASELINE.*" 2>/dev/null || true); do
               title="$(xdotool getwindowname "$candidate" 2>/dev/null || true)"
               case "$title" in
-                *M2.9-F-MASTER-BASELINE*|*Eeschema*|*Schematic*)
+                *M2.9-F-MASTER-BASELINE*)
                   WINDOW="$candidate"
                   break
                   ;;
@@ -77,15 +122,19 @@ jobs:
             done
             [ -n "$WINDOW" ] && break
             if ! kill -0 "$EES_PID" 2>/dev/null; then
-              echo "Eeschema launcher exited before its window appeared."
+              echo "Eeschema exited before a window titled for the legacy source appeared."
               break
             fi
             sleep 1
           done
 
           if [ -z "$WINDOW" ]; then
-            echo "ERROR: No Eeschema window detected within 90 seconds."
-            cat /tmp/eeschema.log || true
+            echo "ERROR: No editor window naming the legacy source appeared within 90 seconds."
+            echo "--- Setup log ---"
+            cat /tmp/eeschema-setup.log || true
+            echo "--- Import log ---"
+            cat /tmp/eeschema-import.log || true
+            echo "--- Xvfb log ---"
             cat /tmp/xvfb.log || true
             xdotool search --name ".*" 2>/dev/null | while read -r wid; do
               printf 'WINDOW %s: ' "$wid"
@@ -94,32 +143,30 @@ jobs:
             exit 1
           fi
 
-          echo "Found Eeschema window $WINDOW: $(xdotool getwindowname "$WINDOW" 2>/dev/null || true)"
-          xdotool windowactivate --sync "$WINDOW" 2>/dev/null || true
+          echo "Confirmed legacy-source editor window $WINDOW: $(xdotool getwindowname "$WINDOW")"
+          xdotool windowfocus "$WINDOW" 2>/dev/null || true
           sleep 3
-          # Save As ensures KiCad writes a native .kicad_sch file and leaves the source .sch untouched.
+
+          # Save As is allowed only after the actual source filename appears in the
+          # editor title. The original .sch is never overwritten.
           xdotool key --clearmodifiers ctrl+shift+s
           sleep 3
           xdotool key --clearmodifiers ctrl+a
           xdotool type --clearmodifiers --delay 1 "/work/$EXPECTED"
           xdotool key --clearmodifiers Return
-          sleep 6
-          # Confirm any save-format or overwrite prompt if present.
-          xdotool key --clearmodifiers Return || true
-          sleep 3
-          xdotool key --clearmodifiers ctrl+s || true
           sleep 5
-
-          echo "--- Expected native output ---"
-          ls -la "$EXPECTED" || true
-          echo "--- Eeschema log ---"
-          cat /tmp/eeschema.log || true
-          echo "--- Visible windows ---"
+          # Log any prompt/window state rather than blindly assuming the save worked.
           xdotool search --name ".*" 2>/dev/null | while read -r wid; do
             printf 'WINDOW %s: ' "$wid"
             xdotool getwindowname "$wid" 2>/dev/null || true
           done
+          sleep 2
+          xdotool key --clearmodifiers ctrl+s || true
+          sleep 4
 
+          echo "--- Verify native output created by KiCad ---"
+          ls -la "$EXPECTED" || true
+          cat /tmp/eeschema-import.log || true
           test -s "$EXPECTED" || {
             echo "ERROR: KiCad did not save the native schematic at $EXPECTED"
             exit 1
@@ -127,15 +174,14 @@ jobs:
           head -n 3 "$EXPECTED"
           grep -q "^(kicad_sch" "$EXPECTED"
           cp "$EXPECTED" hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch
+          test -s hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch
+          grep -q "^(kicad_sch" hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch
           xdotool key --clearmodifiers ctrl+q || true
           sleep 2
           kill "$EES_PID" 2>/dev/null || true
           wait "$EES_PID" 2>/dev/null || true
           CONTAINER_SCRIPT
           } 2>&1 | tee "$LOG"
-
-          test -s "$NATIVE"
-          grep -q "^(kicad_sch" "$NATIVE"
 
       - name: Persist KiCad upgrade diagnostics on failure
         if: failure()
@@ -164,7 +210,7 @@ jobs:
           {
             echo "# M2.9-K Native KiCad Conversion — CI Result"
             echo
-            echo "**Conversion engine:** KiCad Eeschema GUI via Xvfb/xdotool"
+            echo "**Conversion engine:** KiCad Eeschema legacy importer via Xvfb"
             echo
             echo "**Native schematic:** `$NATIVE`"
             echo
@@ -175,7 +221,7 @@ jobs:
             echo "Native conversion does **not** imply complete electrical connectivity. Connectivity, pin mapping, ERC and DRC remain engineering gates."
             echo
             echo "## Gates"
-            echo "- Native file generated by KiCad: YES"
+            echo "- Native file generated by KiCad: YES (file presence and S-expression header checked)"
             echo "- Native schematic electrically complete: NO — pending connected schematic implementation"
             echo "- ERC executed: YES"
             echo "- DRC: PENDING"
