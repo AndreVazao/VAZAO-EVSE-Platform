@@ -35,6 +35,7 @@ EXPECTED = {
 # the manufacturers' pin-function tables. This is not a substitute for full review.
 EXPECTED_TYPES = {
     "ADS131M06IPBSR": {
+        1:"input", 2:"input", 3:"input", 4:"input", 5:"input", 6:"input", 7:"input", 8:"input",
         9:"passive", 10:"passive", 11:"passive", 12:"passive", 13:"power_in",
         14:"input", 15:"power_in", 16:"input", 17:"input", 18:"output",
         19:"input", 20:"output", 21:"input", 22:"output", 23:"input",
