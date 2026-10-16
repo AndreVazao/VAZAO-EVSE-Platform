@@ -10,6 +10,8 @@ Status: **Draft passed static regression and KiCad 10.0.7 parser/export; footpri
 - `ADS131M06IPBSR` — 32 physical pins represented, using the manufacturer PBS/TQFP pin table.
 - `AMC1311BDWVR` — 8 physical pins represented, using the manufacturer DWV/SOIC pin table.
 - `TMCS1123A3AQDVGR` — 10 physical pins represented using the TMCS1123 10-pin package function table.
+- `MEE1S2405SC` — 4-pin SIP converter, using Murata's SIP pin table (1 −VIN, 2 +VIN, 3 −VOUT, 4 +VOUT).
+- `ISO1044BDWR` — 8 physical pins represented using TI's official ISO1044 pin table.
 
 The legacy cache library and native master schematic have **not** been changed by this work. The new library is deliberately not yet assigned to schematic instances.
 
@@ -22,6 +24,32 @@ Manufacturer pin-number/function references:
 - TMCS1123: [TI datasheet](https://www.ti.com/lit/ds/symlink/tmcs1123.pdf) and [TMCS1123 product page](https://www.ti.com/product/TMCS1123).
 
 The TMCS1123 function table does not, by itself, prove that the exact source order code `TMCS1123A3AQDVGR` is currently an orderable variant. That exact suffix remains **unverified, not invalid**. Confirm it against TI/purchasing evidence before freezing the BOM.
+
+### MEE1S2405SC
+
+| Pin | Function | KiCad type |
+|---:|---|---|
+| 1 | −VIN | power input |
+| 2 | +VIN | power input |
+| 3 | −VOUT | power output |
+| 4 | +VOUT | power output |
+
+Source: [Murata MEE1 series datasheet](https://www.murata.com/products/productdata/8807029669918/kdc-mee1.pdf). The exact SIP-4 pin function table is represented; land pattern and the six supply-domain allocations remain unverified.
+
+### ISO1044BDWR
+
+| Pin | Function | KiCad type |
+|---:|---|---|
+| 1 | VCC1 | power input |
+| 2 | TXD | input |
+| 3 | RXD | output |
+| 4 | GND1 | power input |
+| 5 | CANL | passive |
+| 6 | CANH | passive |
+| 7 | GND2 | power input |
+| 8 | VCC2 | power input |
+
+Source: [TI ISO1044 datasheet](https://www.ti.com/lit/ds/symlink/iso1044.pdf). TI specifies basic isolation; this symbol does not certify system-level isolation suitability.
 
 ## Important limitations — do not treat as fabrication-ready
 
@@ -81,7 +109,7 @@ For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet 
 - Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
 - Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7 and requires successful SVG export of all three symbols.
 
-The static check and KiCad CLI parser/export are now passing for the isolated draft. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
+The static check and KiCad 10.0.7 parser/export are passing for the five-symbol isolated draft (run [38922904571](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38922904571)); the workflow is being tightened to assert all five SVG outputs. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
 
 ## Controlled next steps
 
