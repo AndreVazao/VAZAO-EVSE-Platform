@@ -79,7 +79,7 @@ For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet 
 ## Automated checks
 
 - Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
-- Manual-only KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml) (run from GitHub Actions when ready; it installs KiCad and exports SVGs to verify the native library parser).
+- Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7 and requires successful SVG export of all three symbols.
 
 The static check is not a substitute for the KiCad CLI parser/export step; do not mark the library approved until the manual workflow passes.
 
