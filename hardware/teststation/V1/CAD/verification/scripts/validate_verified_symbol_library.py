@@ -203,6 +203,9 @@ def main() -> int:
     if re.search(r'\(pin no_connect line', text):
         print("ERROR: unsupported/incorrect no_connect electrical pin type; use passive and document NC status", file=sys.stderr)
         return 2
+    if re.search(r'\(uuid\s', text):
+        print("ERROR: UUID fields do not belong in symbol-library pin definitions; keep instance pin UUIDs in schematic instances", file=sys.stderr)
+        return 2
 
     blocks = top_symbol_blocks(text)
     failures = list(audit_failures)
