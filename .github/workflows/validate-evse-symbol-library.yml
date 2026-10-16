@@ -2,6 +2,14 @@ name: Validate EVSE verified symbol library
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/validate-evse-symbol-library.yml'
+      - 'hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv'
 
 permissions:
   contents: read
