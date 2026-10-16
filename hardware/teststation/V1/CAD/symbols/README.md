@@ -76,6 +76,13 @@ The TMCS1123 function table does not, by itself, prove that the exact source ord
 
 For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet before finalizing nets. The datasheet's unused-pin guidance is not a substitute for an approved circuit-level decision.
 
+## Automated checks
+
+- Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
+- Manual-only KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml) (run from GitHub Actions when ready; it installs KiCad and exports SVGs to verify the native library parser).
+
+The static check is not a substitute for the KiCad CLI parser/export step; do not mark the library approved until the manual workflow passes.
+
 ## Controlled next steps
 
 1. Validate the library syntax using the target KiCad CLI; repair syntax only in this isolated library.
