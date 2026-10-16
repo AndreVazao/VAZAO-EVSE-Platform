@@ -121,7 +121,7 @@ Fonte: [TI LM358 — página do fabricante e datasheet](https://www.ti.com/produ
 | 7 | DISCH |
 | 8 | VCC |
 
-Usar como referência inicial, não como substituto do datasheet do fabricante e variante escolhidos. Verificar limites de alimentação, corrente de saída, desacoplamento e uso do pino CTRL.
+Fonte: [TI NE555 datasheet](https://www.ti.com/lit/ds/symlink/ne555.pdf) e [página do produto](https://www.ti.com/product/NE555). Usar como referência inicial, não como substituto do datasheet do fabricante e variante escolhidos. Verificar limites de alimentação, corrente de saída, desacoplamento e uso do pino CTRL.
 
 ### 2.3 MCP2515 — controlador CAN, pacote PDIP/SOIC de 18 pinos
 
