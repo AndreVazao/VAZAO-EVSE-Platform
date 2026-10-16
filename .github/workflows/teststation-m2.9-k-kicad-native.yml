@@ -125,13 +125,23 @@ jobs:
           else
             echo "No first-run setup dialog detected."
           fi
-          kill "$SETUP_PID" 2>/dev/null || true
-          wait "$SETUP_PID" 2>/dev/null || true
+          # Keep the initialized Eeschema process alive. Starting a second
+          # eeschema instance can forward the request to the first instance and
+          # leave automation looking at the wrong/untitled window.
           sleep 2
+          echo "--- Open the legacy schematic in the initialized Eeschema instance ---"
+          ACTIVE_WINDOW="$(xdotool getactivewindow 2>/dev/null || true)"
+          echo "Active window after setup: ${ACTIVE_WINDOW:-none}"
+          if [ -n "$ACTIVE_WINDOW" ]; then
+            xdotool getwindowname "$ACTIVE_WINDOW" 2>/dev/null || true
+          fi
+          xdotool key --clearmodifiers ctrl+o
+          sleep 2
+          xdotool key --clearmodifiers ctrl+a
+          xdotool type --clearmodifiers --delay 2 "/work/$LEGACY"
+          xdotool key --clearmodifiers Return
+          sleep 8
 
-          echo "--- Open the actual legacy schematic ---"
-          eeschema "$LEGACY" >/tmp/eeschema-import.log 2>&1 &
-          EES_PID=$!
           WINDOW=""
           for i in $(seq 1 90); do
             for candidate in $(xdotool search --name ".*M2.9-F-MASTER-BASELINE.*" 2>/dev/null || true); do
@@ -144,41 +154,33 @@ jobs:
               esac
             done
             [ -n "$WINDOW" ] && break
-            if ! kill -0 "$EES_PID" 2>/dev/null; then
-              echo "Eeschema exited before a window titled for the legacy source appeared."
-              break
-            fi
             sleep 1
           done
 
           if [ -z "$WINDOW" ]; then
-            echo "ERROR: No editor window naming the legacy source appeared within 90 seconds."
-            echo "--- Setup log ---"
+            echo "ERROR: Eeschema did not expose a window naming the legacy source after Ctrl+O."
+            echo "--- Eeschema setup log ---"
             cat /tmp/eeschema-setup.log || true
-            echo "--- Import log ---"
-            cat /tmp/eeschema-import.log || true
-            echo "--- Xvfb log ---"
-            cat /tmp/xvfb.log || true
+            echo "--- All X windows after Open ---"
             xdotool search --name ".*" 2>/dev/null | while read -r wid; do
               printf 'WINDOW %s: ' "$wid"
               xdotool getwindowname "$wid" 2>/dev/null || true
             done
+            xwininfo -root -tree || true
+            import -window root /work/hardware/teststation/V1/CAD/verification/M2.9-K-OPEN-FAILURE.png 2>/dev/null || true
             exit 1
           fi
 
           echo "Confirmed legacy-source editor window $WINDOW: $(xdotool getwindowname "$WINDOW")"
-          xdotool windowfocus "$WINDOW" 2>/dev/null || true
+          xdotool windowactivate --sync "$WINDOW" 2>/dev/null || true
           sleep 3
-
-          # Save As is allowed only after the actual source filename appears in the
-          # editor title. The original .sch is never overwritten.
+          # Save As only after the title identifies the actual legacy source.
           xdotool key --clearmodifiers ctrl+shift+s
           sleep 3
           xdotool key --clearmodifiers ctrl+a
           xdotool type --clearmodifiers --delay 1 "/work/$EXPECTED"
           xdotool key --clearmodifiers Return
           sleep 5
-          # Log any prompt/window state rather than blindly assuming the save worked.
           xdotool search --name ".*" 2>/dev/null | while read -r wid; do
             printf 'WINDOW %s: ' "$wid"
             xdotool getwindowname "$wid" 2>/dev/null || true
