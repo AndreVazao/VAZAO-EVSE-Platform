@@ -39,7 +39,7 @@ def balanced_sexpressions(text: str) -> bool:
         if in_string:
             if escaped:
                 escaped = False
-            elif ch == "\\\\":
+            elif ch == "\\":
                 escaped = True
             elif ch == '"':
                 in_string = False
@@ -55,7 +55,7 @@ def balanced_sexpressions(text: str) -> bool:
     return depth == 0 and not in_string
 
 def top_symbol_blocks(text: str) -> dict[str, str]:
-    starts = list(re.finditer(r'^\\t\\(symbol "([^"]+)"', text, re.M))
+    starts = list(re.finditer(r'^\t\(symbol "([^"]+)"', text, re.M))
     result = {}
     for i, match in enumerate(starts):
         end = starts[i + 1].start() if i + 1 < len(starts) else text.rfind(')')
@@ -66,12 +66,12 @@ def read_pins(block: str) -> dict[int, str]:
     pins = {}
     lines = block.splitlines()
     for i, line in enumerate(lines):
-        if re.search(r'\\(pin (input|output|bidirectional|tri_state|passive|free|unspecified|power_in|power_out|open_collector|open_emitter) line', line):
+        if re.search(r'\(pin (input|output|bidirectional|tri_state|passive|free|unspecified|power_in|power_out|open_collector|open_emitter) line', line):
             name = None
             number = None
             for look in lines[i + 1:i + 5]:
-                nm = re.search(r'\\(name "([^"]*)"', look)
-                nu = re.search(r'\\(number "([^"]*)"', look)
+                nm = re.search(r'\(name "([^"]*)"', look)
+                nu = re.search(r'\(number "([^"]*)"', look)
                 if nm:
                     name = nm.group(1)
                 if nu:
@@ -95,7 +95,7 @@ def main() -> int:
     if not balanced_sexpressions(text):
         print("ERROR: unbalanced S-expressions or unterminated string", file=sys.stderr)
         return 2
-    if re.search(r'\\(pin no_connect line', text):
+    if re.search(r'\(pin no_connect line', text):
         print("ERROR: unsupported/incorrect no_connect electrical pin type; use passive and document NC status", file=sys.stderr)
         return 2
 
