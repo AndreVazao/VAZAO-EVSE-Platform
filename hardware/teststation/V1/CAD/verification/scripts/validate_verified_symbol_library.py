@@ -14,7 +14,7 @@ from pathlib import Path
 CAD_ROOT = Path(__file__).resolve().parents[2]
 LIB = CAD_ROOT / "symbols" / "VAZAO-EVSE-Verified-Components.kicad_sym"
 PAD_AUDIT = CAD_ROOT / "verification" / "netlist" / "M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv"
-AUDIT_EXPECTED_COUNTS = {"ADS131M06IPBSR": 32, "AMC1311BDWVR": 8, "TMCS1123A3AQDVGR": 10}
+AUDIT_EXPECTED_COUNTS = {"ADS131M06IPBSR": 32, "AMC1311BDWVR": 8, "TMCS1123A3AQDVGR": 10, "MEE1S2405SC": 4, "ISO1044BDWR": 8}
 AUDIT_COLUMNS = {"part_number", "package_from_manufacturer_evidence", "physical_pin", "symbol_pin_name", "kicad_electrical_type", "footprint_reference", "footprint_pad_number", "footprint_pad_status", "net_intent_status", "manufacturer_source"}
 
 EXPECTED = {
@@ -34,6 +34,8 @@ EXPECTED = {
         1:"IN+", 2:"IN−", 3:"GND", 4:"ALERT", 5:"VREF",
         6:"VOUT", 7:"OC", 8:"VS", 9:"VOC", 10:"NC",
     },
+    "MEE1S2405SC": {1:"-VIN", 2:"+VIN", 3:"-VOUT", 4:"+VOUT"},
+    "ISO1044BDWR": {1:"VCC1", 2:"TXD", 3:"RXD", 4:"GND1", 5:"CANL", 6:"CANH", 7:"GND2", 8:"VCC2"},
 }
 
 # Electrical types that are safety-/ERC-relevant and explicitly checked against
@@ -56,6 +58,8 @@ EXPECTED_TYPES = {
         5:"output", 6:"output", 7:"open_collector", 8:"power_in",
         9:"input", 10:"passive",
     },
+    "MEE1S2405SC": {1:"power_in", 2:"power_in", 3:"power_out", 4:"power_out"},
+    "ISO1044BDWR": {1:"power_in", 2:"input", 3:"output", 4:"power_in", 5:"passive", 6:"passive", 7:"power_in", 8:"power_in"},
 }
 
 def balanced_sexpressions(text: str) -> bool:
@@ -184,7 +188,7 @@ def validate_pad_audit() -> list[str]:
         if actual_pins != expected_pins:
             failures.append(f"pad audit {part}: pin coverage {sorted(actual_pins)} != {sorted(expected_pins)}")
     if not failures:
-        print("PASS symbol-to-footprint audit CSV: 50 unique pin rows; mappings remain explicitly unverified")
+        print(f"PASS symbol-to-footprint audit CSV: {len(rows)} unique pin rows; mappings remain explicitly unverified")
     return failures
 
 
@@ -209,6 +213,11 @@ def main() -> int:
 
     blocks = top_symbol_blocks(text)
     failures = list(audit_failures)
+    if set(blocks) != set(EXPECTED):
+        failures.append(
+            f"top-level symbol set mismatch; missing={sorted(set(EXPECTED) - set(blocks))}; "
+            f"unexpected={sorted(set(blocks) - set(EXPECTED))}"
+        )
     for symbol, expected in EXPECTED.items():
         if symbol not in blocks:
             failures.append(f"{symbol}: missing top-level symbol")
