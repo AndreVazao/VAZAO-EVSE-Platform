@@ -107,7 +107,7 @@ For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet 
 ## Automated checks
 
 - Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
-- Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7 and requires successful SVG export of all three symbols.
+- Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7, requires non-empty SVG export for all five draft symbols, and also exports a fresh ERC report and XML netlist for the unchanged master schematic as workflow artifacts.
 
 The static check and KiCad 10.0.7 parser/export are passing for the five-symbol isolated draft (run [38922904571](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38922904571)); the workflow is being tightened to assert all five SVG outputs. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
 
