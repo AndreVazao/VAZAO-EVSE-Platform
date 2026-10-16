@@ -106,7 +106,7 @@ def read_pins(block: str) -> dict[int, str]:
 
 def read_pin_types(block: str) -> dict[int, str]:
     types = {}
-    for match in re.finditer(r'\\(pin ([a-z_]+) line([\\s\\S]*?)\\(number "([0-9]+)"', block):
+    for match in re.finditer(r'\(pin ([a-z_]+) line([\s\S]*?)\(number "([0-9]+)"', block):
         pin_type, body, number = match.groups()
         n = int(number)
         if n in types:
