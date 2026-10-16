@@ -30,12 +30,15 @@ jobs:
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
 
-      - name: Install KiCad CLI for native parser validation
+      - name: Install KiCad 10 CLI for native parser validation
         run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
           sudo apt-get update
           sudo apt-get install -y kicad
 
-      - name: Confirm KiCad CLI is available
+      - name: Confirm KiCad 10 CLI is available
         run: |
           kicad-cli version
 
