@@ -6,11 +6,16 @@ load/export check. It validates balanced S-expressions and selected pin maps.
 """
 from __future__ import annotations
 
+import csv
 import re
 import sys
 from pathlib import Path
 
-LIB = Path(__file__).resolve().parents[2] / "symbols" / "VAZAO-EVSE-Verified-Components.kicad_sym"
+CAD_ROOT = Path(__file__).resolve().parents[2]
+LIB = CAD_ROOT / "symbols" / "VAZAO-EVSE-Verified-Components.kicad_sym"
+PAD_AUDIT = CAD_ROOT / "verification" / "netlist" / "M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv"
+AUDIT_EXPECTED_COUNTS = {"ADS131M06IPBSR": 32, "AMC1311BDWVR": 8, "TMCS1123A3AQDVGR": 10}
+AUDIT_COLUMNS = {"part_number", "package_from_manufacturer_evidence", "physical_pin", "symbol_pin_name", "kicad_electrical_type", "footprint_reference", "footprint_pad_number", "footprint_pad_status", "net_intent_status", "manufacturer_source"}
 
 EXPECTED = {
     "ADS131M06IPBSR": {
@@ -116,7 +121,63 @@ def read_pin_types(block: str) -> dict[int, str]:
         types[n] = pin_type
     return types
 
+def validate_pad_audit() -> list[str]:
+    """Check audit completeness without pretending unverified mappings are approved."""
+    failures = []
+    if not PAD_AUDIT.exists():
+        return [f"symbol-to-footprint audit CSV not found: {PAD_AUDIT}"]
+    try:
+        with PAD_AUDIT.open("r", encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            if set(reader.fieldnames or []) != AUDIT_COLUMNS:
+                return [f"pad audit CSV columns mismatch: {reader.fieldnames}"]
+            rows = list(reader)
+    except (OSError, csv.Error) as exc:
+        return [f"could not read pad audit CSV: {exc}"]
+
+    counts = {part: 0 for part in AUDIT_EXPECTED_COUNTS}
+    seen = set()
+    for line_number, row in enumerate(rows, start=2):
+        part = row["part_number"]
+        if part not in counts:
+            failures.append(f"pad audit line {line_number}: unexpected part {part!r}")
+            continue
+        counts[part] += 1
+        pin_text = row["physical_pin"].strip()
+        if not pin_text.isdigit():
+            failures.append(f"pad audit line {line_number}: invalid physical pin {pin_text!r}")
+            continue
+        key = (part, int(pin_text))
+        if key in seen:
+            failures.append(f"pad audit line {line_number}: duplicate part/pin {key}")
+        seen.add(key)
+        if not row["symbol_pin_name"].strip():
+            failures.append(f"pad audit line {line_number}: blank symbol pin name")
+        if not row["manufacturer_source"].startswith("https://"):
+            failures.append(f"pad audit line {line_number}: manufacturer source must be HTTPS")
+        if row["footprint_pad_status"] != "NOT_VERIFIED":
+            failures.append(f"pad audit line {line_number}: footprint status must remain NOT_VERIFIED")
+        if row["net_intent_status"] != "NOT_APPROVED":
+            failures.append(f"pad audit line {line_number}: net intent status must remain NOT_APPROVED")
+        if row["footprint_reference"].strip() or row["footprint_pad_number"].strip():
+            failures.append(f"pad audit line {line_number}: unreviewed footprint/pad fields must remain blank")
+
+    if len(rows) != sum(AUDIT_EXPECTED_COUNTS.values()):
+        failures.append(f"pad audit row count {len(rows)} != expected {sum(AUDIT_EXPECTED_COUNTS.values())}")
+    for part, expected_count in AUDIT_EXPECTED_COUNTS.items():
+        if counts[part] != expected_count:
+            failures.append(f"pad audit {part}: {counts[part]} rows != expected {expected_count}")
+        expected_pins = set(range(1, expected_count + 1))
+        actual_pins = {pin for p, pin in seen if p == part}
+        if actual_pins != expected_pins:
+            failures.append(f"pad audit {part}: pin coverage {sorted(actual_pins)} != {sorted(expected_pins)}")
+    if not failures:
+        print("PASS symbol-to-footprint audit CSV: 50 unique pin rows; mappings remain explicitly unverified")
+    return failures
+
+
 def main() -> int:
+    audit_failures = validate_pad_audit()
     if not LIB.exists():
         print(f"ERROR: library not found: {LIB}", file=sys.stderr)
         return 2
@@ -132,7 +193,7 @@ def main() -> int:
         return 2
 
     blocks = top_symbol_blocks(text)
-    failures = []
+    failures = list(audit_failures)
     for symbol, expected in EXPECTED.items():
         if symbol not in blocks:
             failures.append(f"{symbol}: missing top-level symbol")
