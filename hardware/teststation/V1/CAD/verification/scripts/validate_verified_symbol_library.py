@@ -151,8 +151,20 @@ def validate_pad_audit() -> list[str]:
         if key in seen:
             failures.append(f"pad audit line {line_number}: duplicate part/pin {key}")
         seen.add(key)
+        expected_name = EXPECTED.get(part, {}).get(int(pin_text))
         if not row["symbol_pin_name"].strip():
             failures.append(f"pad audit line {line_number}: blank symbol pin name")
+        elif expected_name is not None and row["symbol_pin_name"] != expected_name:
+            failures.append(
+                f"pad audit line {line_number}: pin name {row['symbol_pin_name']!r} "
+                f"does not match expected {expected_name!r} for {part} pin {pin_text}"
+            )
+        expected_type = EXPECTED_TYPES.get(part, {}).get(int(pin_text))
+        if expected_type is not None and row["kicad_electrical_type"] != expected_type:
+            failures.append(
+                f"pad audit line {line_number}: electrical type {row['kicad_electrical_type']!r} "
+                f"does not match expected {expected_type!r} for {part} pin {pin_text}"
+            )
         if not row["manufacturer_source"].startswith("https://"):
             failures.append(f"pad audit line {line_number}: manufacturer source must be HTTPS")
         if row["footprint_pad_status"] != "NOT_VERIFIED":
