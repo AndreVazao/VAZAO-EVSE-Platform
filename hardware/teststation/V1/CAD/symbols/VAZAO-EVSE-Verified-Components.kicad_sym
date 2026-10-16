@@ -15,7 +15,7 @@
 				(fill (type background)))
 		)
 		(symbol "ADS131M06IPBSR_1_1"
-			(pin output line
+			(pin input line
 				(at -12.7 19.05 0)
 				(length 5.08)
 				(name "AIN2P" (effects (font (size 1.0 1.0))))
@@ -162,7 +162,7 @@
 				(number "21" (effects (font (size 1.0 1.0))))
 				(uuid "00000000-0000-4000-8000-000000000451")
 			)
-			(pin input line
+			(pin output line
 				(at 12.7 6.350000000000001 180)
 				(length 5.08)
 				(name "XTAL2" (effects (font (size 1.0 1.0))))
