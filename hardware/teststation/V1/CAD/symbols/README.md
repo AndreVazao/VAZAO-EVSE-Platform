@@ -1,7 +1,7 @@
 # VAZAO EVSE verified-component symbol library — controlled draft
 
 Date: 2026-10-16  
-Status: **Draft generated; not yet validated by KiCad CLI or approved for schematic migration.**
+Status: **Draft passed static regression and KiCad 10.0.7 parser/export; footprints, pin-to-net intent and schematic migration remain unapproved.**
 
 ## Scope
 
@@ -25,7 +25,7 @@ The TMCS1123 function table does not, by itself, prove that the exact source ord
 
 ## Important limitations — do not treat as fabrication-ready
 
-1. The library has been created as a controlled draft but **has not yet passed a KiCad CLI parse/load test**. Run a KiCad library/schematic validation in a suitable KiCad 10 environment before use.
+1. The isolated draft passed KiCad 10.0.7 native parser/export in [CI run 38922330050](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38922330050). This validates loading and SVG export, not electrical correctness or schematic integration.
 2. No footprint is assigned. Package dimensions, land pattern, pad numbering and pin-1 orientation must be verified against manufacturer package drawings and the selected footprint.
 3. Symbol electrical types are engineering classifications for ERC use, not proof of a complete circuit.
 4. No pins have been assigned to nets and no intended wiring has been inferred. In particular, the ADC differential input polarity and mapping from each AMC1311/TMCS1123 output to ADS131M06 channels still require an approved pin-to-net intent table.
@@ -81,7 +81,7 @@ For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet 
 - Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
 - Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7 and requires successful SVG export of all three symbols.
 
-The static check is not a substitute for the KiCad CLI parser/export step; do not mark the library approved until the manual workflow passes.
+The static check and KiCad CLI parser/export are now passing for the isolated draft. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
 
 ## Controlled next steps
 
