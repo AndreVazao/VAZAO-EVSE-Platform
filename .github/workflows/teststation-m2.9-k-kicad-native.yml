@@ -47,7 +47,7 @@ jobs:
           export DISPLAY=:99 HOME=/tmp
           set -x
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb xdotool
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb xdotool openbox x11-utils
           command -v eeschema
           command -v Xvfb
           command -v xdotool
@@ -58,6 +58,12 @@ jobs:
           trap 'kill "$XVFB_PID" 2>/dev/null || true' EXIT
           sleep 2
           kill -0 "$XVFB_PID" || { cat /tmp/xvfb.log; exit 1; }
+          # A window manager is required for reliable focus/activation of wxWidgets
+          # modal dialogs. Xvfb alone provides a display, not window management.
+          openbox >/tmp/openbox.log 2>&1 &
+          OPENBOX_PID=$!
+          sleep 2
+          kill -0 "$OPENBOX_PID" || { cat /tmp/openbox.log; exit 1; }
 
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
           EXPECTED="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
@@ -83,24 +89,36 @@ jobs:
 
           if [ -n "$SETUP_WINDOW" ]; then
             echo "Detected first-run setup dialog $SETUP_WINDOW; advancing the wizard only while that dialog exists."
-            for i in $(seq 1 12); do
+            for i in $(seq 1 18); do
               STILL_SETUP=""
               for candidate in $(xdotool search --name "KiCad Setup" 2>/dev/null || true); do
                 STILL_SETUP="$candidate"
                 break
               done
               [ -z "$STILL_SETUP" ] && break
-              # Xvfb has no window manager by default: target the wizard
-              # window directly, then click the usual lower-right Next/Finish
-              # area as a fallback. A window title alone is never success.
+              echo "Wizard advance attempt $i; window=$STILL_SETUP"
               xdotool windowactivate --sync "$STILL_SETUP" 2>/dev/null || true
               xdotool windowfocus "$STILL_SETUP" 2>/dev/null || true
-              xdotool key --window "$STILL_SETUP" --clearmodifiers Return 2>/dev/null || true
-              xdotool mousemove 1150 850 click 1
+              # Send keys to the focused window through X, not directly to the
+              # window ID (which wxWidgets may ignore for modal dialogs).
+              xdotool key --clearmodifiers Return 2>/dev/null || true
+              sleep 0.4
+              # Geometry-aware fallback: click inside the actual dialog, near
+              # its lower-right action area, rather than a hard-coded screen point.
+              eval "$(xdotool getwindowgeometry --shell "$STILL_SETUP" 2>/dev/null)" || true
+              if [ -n "${X:-}" ] && [ -n "${Y:-}" ] && [ -n "${WIDTH:-}" ] && [ -n "${HEIGHT:-}" ]; then
+                CLICK_X=$((X + WIDTH - 70))
+                CLICK_Y=$((Y + HEIGHT - 45))
+                echo "Dialog geometry: x=$X y=$Y w=$WIDTH h=$HEIGHT; fallback click=$CLICK_X,$CLICK_Y"
+                xdotool mousemove --sync "$CLICK_X" "$CLICK_Y" click 1
+              fi
               sleep 1
             done
             if xdotool search --name "KiCad Setup" 2>/dev/null | grep -q .; then
-              echo "ERROR: KiCad first-run setup did not close after 12 wizard advances."
+              echo "ERROR: KiCad first-run setup did not close after 18 wizard advances."
+              echo "--- Dialog diagnostics ---"
+              xwininfo -root -tree || true
+              import -window root /tmp/kicad-setup-failure.png 2>/dev/null || true
               cat /tmp/eeschema-setup.log || true
               exit 1
             fi
@@ -193,7 +211,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: m2.9-k-kicad-upgrade-diagnostics
-          path: hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log
+          path: |
+            hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log
+            /tmp/kicad-setup-failure.png
           if-no-files-found: warn
 
       - name: Run native schematic ERC
