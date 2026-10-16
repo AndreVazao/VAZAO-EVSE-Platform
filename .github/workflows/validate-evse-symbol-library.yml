@@ -49,7 +49,9 @@ jobs:
           kicad-cli sym export svg \
             --output "$RUNNER_TEMP/evse-symbol-svg" \
             hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym
-          test -n "$(find "$RUNNER_TEMP/evse-symbol-svg" -type f -name '*.svg' -print -quit)"
+          test -s "$RUNNER_TEMP/evse-symbol-svg/ADS131M06IPBSR_unit1.svg"
+          test -s "$RUNNER_TEMP/evse-symbol-svg/AMC1311BDWVR_unit1.svg"
+          test -s "$RUNNER_TEMP/evse-symbol-svg/TMCS1123A3AQDVGR_unit1.svg"
 
       - name: Report validation result to control issue
         if: always()
