@@ -29,7 +29,7 @@ The TMCS1123 function table does not, by itself, prove that the exact source ord
 2. No footprint is assigned. Package dimensions, land pattern, pad numbering and pin-1 orientation must be verified against manufacturer package drawings and the selected footprint.
 3. Symbol electrical types are engineering classifications for ERC use, not proof of a complete circuit.
 4. No pins have been assigned to nets and no intended wiring has been inferred. In particular, the ADC differential input polarity and mapping from each AMC1311/TMCS1123 output to ADS131M06 channels still require an approved pin-to-net intent table.
-5. The ADS131M06 `NC` pins are represented as no-connect pin types; confirm that this is accepted by the target KiCad version and that no datasheet-specific exception applies.
+5. The ADS131M06 physical `NC` pins use passive pin types in the library because KiCad electrical pin types do not encode an NC instruction. The symbol/library documentation records that pins 9–12 and 27 are marked NC by the datasheet; the schematic instance must still use explicit no-connect markers where required.
 6. This work does not establish creepage/clearance, isolation class, safety compliance, or permission to energize the TestStation.
 
 ## Pin functions represented
