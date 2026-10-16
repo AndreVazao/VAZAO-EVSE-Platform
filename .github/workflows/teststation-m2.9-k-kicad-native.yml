@@ -90,8 +90,13 @@ jobs:
                 break
               done
               [ -z "$STILL_SETUP" ] && break
+              # Xvfb has no window manager by default: target the wizard
+              # window directly, then click the usual lower-right Next/Finish
+              # area as a fallback. A window title alone is never success.
+              xdotool windowactivate --sync "$STILL_SETUP" 2>/dev/null || true
               xdotool windowfocus "$STILL_SETUP" 2>/dev/null || true
-              xdotool key --clearmodifiers Return
+              xdotool key --window "$STILL_SETUP" --clearmodifiers Return 2>/dev/null || true
+              xdotool mousemove 1150 850 click 1
               sleep 1
             done
             if xdotool search --name "KiCad Setup" 2>/dev/null | grep -q .; then
