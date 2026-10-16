@@ -23,42 +23,120 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Convert legacy schematic using KiCad CLI (headless)
+      - name: Convert legacy schematic through KiCad editor (headless Xvfb)
         shell: bash
         run: |
           set -euo pipefail
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-          CACHE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE-cache.lib"
           NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
           LOG="hardware/teststation/V1/CAD/verification/M2.9-K-UPGRADE-CLI.log"
-          WORK="hardware/teststation/V1/CAD/verification/.m2.9-k-upgrade-work"
-          mkdir -p "$(dirname "$LOG")" "$WORK"
-          rm -f "$NATIVE" "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch" "$WORK/TS-V1-M2.9-F-MASTER-BASELINE-cache.lib"
-          trap 'rc=$?; echo "KiCad CLI conversion failed (exit $rc)"; if [ -f "$LOG" ]; then cat "$LOG"; fi; exit "$rc"' ERR
+          mkdir -p "$(dirname "$LOG")"
+          rm -f "$NATIVE" "hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
+          chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
 
           {
-            echo "Conversion method: official KiCad CLI; no GUI, X server, or keyboard automation."
-            echo "KiCad version:"
-            docker run --rm kicad/kicad:10.0.6 kicad-cli version
-            echo
-            echo "Copying source and cache library into isolated working directory; original legacy files remain untouched."
-            cp "$LEGACY" "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-            if [ -f "$CACHE" ]; then
-              cp "$CACHE" "$WORK/TS-V1-M2.9-F-MASTER-BASELINE-cache.lib"
+            echo "Conversion method: Eeschema GUI legacy importer under Xvfb."
+            echo "This input is the pre-S-expression legacy .sch format; kicad-cli sch upgrade cannot import it directly."
+            timeout 300s docker run --rm -i --user 0:0 \
+              -e HOME=/tmp -e DISPLAY=:99 \
+              -v "$GITHUB_WORKSPACE:/work" -w /work \
+              --entrypoint /bin/bash kicad/kicad:10.0.6 -s <<'CONTAINER_SCRIPT'
+          set -euo pipefail
+          export DISPLAY=:99 HOME=/tmp
+          set -x
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb xdotool
+          command -v eeschema
+          command -v Xvfb
+          command -v xdotool
+          export XDG_RUNTIME_DIR="$(mktemp -d /tmp/runtime.XXXXXX)"
+          chmod 700 "$XDG_RUNTIME_DIR"
+          Xvfb :99 -screen 0 1280x900x24 >/tmp/xvfb.log 2>&1 &
+          XVFB_PID=$!
+          trap 'kill "$XVFB_PID" 2>/dev/null || true' EXIT
+          sleep 2
+          kill -0 "$XVFB_PID" || { cat /tmp/xvfb.log; exit 1; }
+
+          LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
+          EXPECTED="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
+          rm -f "$EXPECTED"
+          echo "--- KiCad binary ---"
+          eeschema --version || true
+          echo "--- Launch Eeschema with legacy source ---"
+          eeschema "$LEGACY" >/tmp/eeschema.log 2>&1 &
+          EES_PID=$!
+          WINDOW=""
+          for i in $(seq 1 90); do
+            for candidate in $(xdotool search --name ".*" 2>/dev/null || true); do
+              title="$(xdotool getwindowname "$candidate" 2>/dev/null || true)"
+              case "$title" in
+                *M2.9-F-MASTER-BASELINE*|*Eeschema*|*Schematic*)
+                  WINDOW="$candidate"
+                  break
+                  ;;
+              esac
+            done
+            [ -n "$WINDOW" ] && break
+            if ! kill -0 "$EES_PID" 2>/dev/null; then
+              echo "Eeschema launcher exited before its window appeared."
+              break
             fi
-            echo "Running native KiCad schematic format upgrade."
-            docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
-              kicad-cli sch upgrade --force "/work/$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-            echo "Checking the output written by KiCad itself."
-            test -s "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-            head -n 3 "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-            grep -q "^(kicad_sch" "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch"
-            cp "$WORK/TS-V1-M2.9-F-MASTER-BASELINE.sch" "$NATIVE"
-            test -s "$NATIVE"
-            grep -q "^(kicad_sch" "$NATIVE"
-            echo "SUCCESS: KiCad CLI generated the native S-expression schematic."
+            sleep 1
+          done
+
+          if [ -z "$WINDOW" ]; then
+            echo "ERROR: No Eeschema window detected within 90 seconds."
+            cat /tmp/eeschema.log || true
+            cat /tmp/xvfb.log || true
+            xdotool search --name ".*" 2>/dev/null | while read -r wid; do
+              printf 'WINDOW %s: ' "$wid"
+              xdotool getwindowname "$wid" 2>/dev/null || true
+            done
+            exit 1
+          fi
+
+          echo "Found Eeschema window $WINDOW: $(xdotool getwindowname "$WINDOW" 2>/dev/null || true)"
+          xdotool windowactivate --sync "$WINDOW" 2>/dev/null || true
+          sleep 3
+          # Save As ensures KiCad writes a native .kicad_sch file and leaves the source .sch untouched.
+          xdotool key --clearmodifiers ctrl+shift+s
+          sleep 3
+          xdotool key --clearmodifiers ctrl+a
+          xdotool type --clearmodifiers --delay 1 "/work/$EXPECTED"
+          xdotool key --clearmodifiers Return
+          sleep 6
+          # Confirm any save-format or overwrite prompt if present.
+          xdotool key --clearmodifiers Return || true
+          sleep 3
+          xdotool key --clearmodifiers ctrl+s || true
+          sleep 5
+
+          echo "--- Expected native output ---"
+          ls -la "$EXPECTED" || true
+          echo "--- Eeschema log ---"
+          cat /tmp/eeschema.log || true
+          echo "--- Visible windows ---"
+          xdotool search --name ".*" 2>/dev/null | while read -r wid; do
+            printf 'WINDOW %s: ' "$wid"
+            xdotool getwindowname "$wid" 2>/dev/null || true
+          done
+
+          test -s "$EXPECTED" || {
+            echo "ERROR: KiCad did not save the native schematic at $EXPECTED"
+            exit 1
+          }
+          head -n 3 "$EXPECTED"
+          grep -q "^(kicad_sch" "$EXPECTED"
+          cp "$EXPECTED" hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch
+          xdotool key --clearmodifiers ctrl+q || true
+          sleep 2
+          kill "$EES_PID" 2>/dev/null || true
+          wait "$EES_PID" 2>/dev/null || true
+          CONTAINER_SCRIPT
           } 2>&1 | tee "$LOG"
-          rm -rf "$WORK"
+
+          test -s "$NATIVE"
+          grep -q "^(kicad_sch" "$NATIVE"
 
       - name: Persist KiCad upgrade diagnostics on failure
         if: failure()
