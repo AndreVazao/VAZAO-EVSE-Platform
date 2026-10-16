@@ -15,7 +15,7 @@
 				(fill (type background)))
 		)
 		(symbol "ADS131M06IPBSR_1_1"
-			(pin input line
+			(pin output line
 				(at -12.7 19.05 0)
 				(length 5.08)
 				(name "AIN2P" (effects (font (size 1.0 1.0))))
