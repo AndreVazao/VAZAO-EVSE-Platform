@@ -31,6 +31,26 @@ EXPECTED = {
     },
 }
 
+# Electrical types that are safety-/ERC-relevant and explicitly checked against
+# the manufacturers' pin-function tables. This is not a substitute for full review.
+EXPECTED_TYPES = {
+    "ADS131M06IPBSR": {
+        9:"passive", 10:"passive", 11:"passive", 12:"passive", 13:"power_in",
+        14:"input", 15:"power_in", 16:"input", 17:"input", 18:"output",
+        19:"input", 20:"output", 21:"input", 22:"output", 23:"input",
+        24:"passive", 25:"power_in", 26:"power_in", 27:"passive", 28:"power_in",
+    },
+    "AMC1311BDWVR": {
+        1:"power_in", 2:"input", 3:"input", 4:"power_in",
+        5:"power_in", 6:"output", 7:"output", 8:"power_in",
+    },
+    "TMCS1123A3AQDVGR": {
+        1:"input", 2:"input", 3:"power_in", 4:"open_collector",
+        5:"output", 6:"output", 7:"open_collector", 8:"power_in",
+        9:"input", 10:"passive",
+    },
+}
+
 def balanced_sexpressions(text: str) -> bool:
     depth = 0
     in_string = False
@@ -84,6 +104,16 @@ def read_pins(block: str) -> dict[int, str]:
             pins[n] = name
     return pins
 
+def read_pin_types(block: str) -> dict[int, str]:
+    types = {}
+    for match in re.finditer(r'\\(pin ([a-z_]+) line([\\s\\S]*?)\\(number "([0-9]+)"', block):
+        pin_type, body, number = match.groups()
+        n = int(number)
+        if n in types:
+            raise ValueError(f"duplicate physical pin type entry {n}")
+        types[n] = pin_type
+    return types
+
 def main() -> int:
     if not LIB.exists():
         print(f"ERROR: library not found: {LIB}", file=sys.stderr)
@@ -112,6 +142,14 @@ def main() -> int:
             failures.append(f"{symbol}: pin map mismatch; missing/wrong={missing}; extra/wrong={extra}")
         else:
             print(f"PASS {symbol}: {len(actual)} unique physical pin numbers match expected map")
+        actual_types = read_pin_types(blocks[symbol])
+        expected_types = EXPECTED_TYPES[symbol]
+        type_errors = [(pin, expected_types[pin], actual_types.get(pin)) for pin in expected_types
+                       if actual_types.get(pin) != expected_types[pin]]
+        if type_errors:
+            failures.append(f"{symbol}: electrical pin type mismatch {type_errors}")
+        else:
+            print(f"PASS {symbol}: {len(expected_types)} electrical pin types match reviewed expectations")
     if failures:
         for failure in failures:
             print("FAIL " + failure, file=sys.stderr)
