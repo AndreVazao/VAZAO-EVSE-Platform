@@ -12,6 +12,7 @@ on:
       - 'hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/audit_master_netlist_connectivity.py'
 
 permissions:
   contents: read
@@ -63,6 +64,12 @@ jobs:
           test -s "$RUNNER_TEMP/evse-master-audit/M2.9-K-MASTER-ERC.rpt"
           test -s "$RUNNER_TEMP/evse-master-audit/M2.9-K-MASTER.net"
 
+      - name: Audit master netlist connectivity
+        id: netlist-audit
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/audit_master_netlist_connectivity.py \
+            "$RUNNER_TEMP/evse-master-audit/M2.9-K-MASTER.net" \
+            "$RUNNER_TEMP/evse-master-audit/M2.9-K-NETLIST-CONNECTIVITY-AUDIT.md"
       - name: Summarize master schematic ERC baseline
         id: erc-summary
         run: |
@@ -98,7 +105,12 @@ jobs:
             const ercErrors = '${{ steps.erc-summary.outputs.erc_errors }}' || 'unavailable';
             const ercWarnings = '${{ steps.erc-summary.outputs.erc_warnings }}' || 'unavailable';
             const ercMessages = '${{ steps.erc-summary.outputs.erc_messages }}' || 'unavailable';
-            const body = `EVSE validation job result: **${result}**\n\nRun: ${runUrl}\nCommit: ${context.sha}\n\nSymbol validation: static pin maps and KiCad SVG export for five draft symbols.\nMaster schematic ERC baseline: ${ercMessages} messages, ${ercErrors} errors, ${ercWarnings} warnings (a tool run is not an ERC pass).\nThe ERC report and exported netlist are attached as workflow artifacts when generated.\n\nThis does not approve footprint pads, circuit connectivity, fabrication, or energization.`;
+            const connectivity = '${{ steps.netlist-audit.outputs.connectivity_status }}' || 'unavailable';
+            const components = '${{ steps.netlist-audit.outputs.netlist_components }}' || 'unavailable';
+            const nets = '${{ steps.netlist-audit.outputs.netlist_nets }}' || 'unavailable';
+            const multi = '${{ steps.netlist-audit.outputs.netlist_multi_node }}' || 'unavailable';
+            const critical = '${{ steps.netlist-audit.outputs.critical_connections }}' || 'unavailable';
+            const body = `EVSE validation job result: **${result}**\n\nRun: ${runUrl}\nCommit: ${context.sha}\n\nSymbol validation: static pin maps and KiCad SVG export for five draft symbols.\nMaster schematic ERC baseline: ${ercMessages} messages, ${ercErrors} errors, ${ercWarnings} warnings (a tool run is not an ERC pass).\nNetlist triage: ${components} components, ${nets} nets, ${multi} multi-node nets. Connectivity status: ${connectivity}; known suspicious U19/U2 connections: ${critical}/3.\nThe ERC report, netlist, and connectivity triage are attached as workflow artifacts when generated.\n\nThis does not approve footprint pads, circuit connectivity, fabrication, or energization.`;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
