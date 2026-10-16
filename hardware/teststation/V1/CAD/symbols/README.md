@@ -5,7 +5,7 @@ Status: **Draft passed static regression and KiCad 10.0.7 parser/export; footpri
 
 ## Scope
 
-`VAZAO-EVSE-Verified-Components.kicad_sym` is a separate, non-destructive symbol-library draft for three critical IC families whose cached legacy symbols have known pin omissions or pin-number/function errors:
+`VAZAO-EVSE-Verified-Components.kicad_sym` is a separate, non-destructive symbol-library draft for five components whose cached legacy symbols have known pin omissions, pin-number/function errors, or incomplete physical package representation:
 
 - `ADS131M06IPBSR` — 32 physical pins represented, using the manufacturer PBS/TQFP pin table.
 - `AMC1311BDWVR` — 8 physical pins represented, using the manufacturer DWV/SOIC pin table.
