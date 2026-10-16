@@ -225,10 +225,14 @@ jobs:
           mkdir -p hardware/teststation/V1/CAD/verification/erc
           ERC_REPORT="hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt"
           NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
-          # The GUI conversion container may leave root-owned outputs. Ensure
-          # the report can be replaced, and run CLI as root inside the container.
-          chmod -R a+rwX hardware/teststation/V1/CAD/verification hardware/teststation/V1/CAD/schematics
+          # Avoid recursive chmod: the schematics directory contains a nested
+          # .history Git repository whose entries may reject chmod on the runner.
+          # Only adjust the report directory and the report itself if it exists.
+          ERC_DIR="$(dirname "$ERC_REPORT")"
+          chmod a+rwX "$ERC_DIR"
+          if [ -e "$ERC_REPORT" ]; then chmod a+rw "$ERC_REPORT"; fi
           rm -f "$ERC_REPORT"
+          test -s "$NATIVE"
           set +e
           docker run --rm --user 0:0 -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
             kicad-cli sch erc --format report --severity-all \
