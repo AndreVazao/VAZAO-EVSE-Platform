@@ -244,6 +244,21 @@ jobs:
           echo "ERC report saved. KiCad CLI exit code: $ERC_EXIT_CODE (non-zero can indicate detected violations)."
           sed -n '1,100p' "$ERC_REPORT"
 
+      - name: Export native netlist for connectivity review
+        shell: bash
+        run: |
+          set -euo pipefail
+          NATIVE="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch"
+          NETLIST="hardware/teststation/V1/CAD/verification/netlist/M2.9-K-MASTER.net"
+          mkdir -p "$(dirname "$NETLIST")"
+          docker run --rm --user 0:0 -v "$GITHUB_WORKSPACE:/work" -w /work kicad/kicad:10.0.6 \
+            kicad-cli sch export netlist --format kicadxml --output "$NETLIST" "$NATIVE"
+          test -s "$NETLIST"
+          echo "Netlist exported: $NETLIST"
+          echo "Component records: $(grep -c '<comp ref=' "$NETLIST" || true)"
+          echo "Net records: $(grep -c '<net code=' "$NETLIST" || true)"
+          sed -n '1,45p' "$NETLIST"
+
       - name: Write conversion status
         shell: bash
         run: |
@@ -258,6 +273,8 @@ jobs:
             echo "**Native schematic:** \`$NATIVE\`"
             echo
             echo "**ERC report:** \`$ERC\`"
+            echo
+            echo "**Connectivity netlist:** \`hardware/teststation/V1/CAD/verification/netlist/M2.9-K-MASTER.net\` (exported for review; not proof of correctness)"
             echo
             ERC_SUMMARY="$(grep -E 'ERC messages:' "$ERC" | tail -n 1 | sed 's/^[[:space:]]*//')"
             echo "**ERC summary:** \`$ERC_SUMMARY\`"
@@ -281,7 +298,7 @@ jobs:
           set -euo pipefail
           git config user.name "VAZAO EVSE Engineering Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt hardware/teststation/V1/CAD/verification/M2.9-K-NATIVE-CI-RESULT.md
+          git add hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch hardware/teststation/V1/CAD/verification/erc/M2.9-K-MASTER-ERC.rpt hardware/teststation/V1/CAD/verification/netlist/M2.9-K-MASTER.net hardware/teststation/V1/CAD/verification/M2.9-K-NATIVE-CI-RESULT.md
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0
