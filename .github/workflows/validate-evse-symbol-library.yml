@@ -105,11 +105,11 @@ jobs:
             const ercErrors = '${{ steps.erc-summary.outputs.erc_errors }}' || 'unavailable';
             const ercWarnings = '${{ steps.erc-summary.outputs.erc_warnings }}' || 'unavailable';
             const ercMessages = '${{ steps.erc-summary.outputs.erc_messages }}' || 'unavailable';
-            const connectivity = '${{ steps.netlist-audit.outputs.connectivity_status }}' || 'unavailable';
-            const components = '${{ steps.netlist-audit.outputs.netlist_components }}' || 'unavailable';
-            const nets = '${{ steps.netlist-audit.outputs.netlist_nets }}' || 'unavailable';
-            const multi = '${{ steps.netlist-audit.outputs.netlist_multi_node }}' || 'unavailable';
-            const critical = '${{ steps.netlist-audit.outputs.critical_connections }}' || 'unavailable';
+            const connectivity = '${{ steps['netlist-audit'].outputs.connectivity_status }}' || 'unavailable';
+            const components = '${{ steps['netlist-audit'].outputs.netlist_components }}' || 'unavailable';
+            const nets = '${{ steps['netlist-audit'].outputs.netlist_nets }}' || 'unavailable';
+            const multi = '${{ steps['netlist-audit'].outputs.netlist_multi_node }}' || 'unavailable';
+            const critical = '${{ steps['netlist-audit'].outputs.critical_connections }}' || 'unavailable';
             const body = `EVSE validation job result: **${result}**\n\nRun: ${runUrl}\nCommit: ${context.sha}\n\nSymbol validation: static pin maps and KiCad SVG export for five draft symbols.\nMaster schematic ERC baseline: ${ercMessages} messages, ${ercErrors} errors, ${ercWarnings} warnings (a tool run is not an ERC pass).\nNetlist triage: ${components} components, ${nets} nets, ${multi} multi-node nets. Connectivity status: ${connectivity}; known suspicious U19/U2 connections: ${critical}/3.\nThe ERC report, netlist, and connectivity triage are attached as workflow artifacts when generated.\n\nThis does not approve footprint pads, circuit connectivity, fabrication, or energization.`;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
