@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   validate-symbol-library:
-    if: github.event_name != 'issue_comment' || (github.event.comment.body == '/run-evse-symbol-validation' && github.event.comment.author_association == 'OWNER')
+    if: github.event_name != 'issue_comment' || (github.event.comment.body == '/run-evse-symbol-validation' && github.event.comment.user.login == 'AndreVazao')
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
