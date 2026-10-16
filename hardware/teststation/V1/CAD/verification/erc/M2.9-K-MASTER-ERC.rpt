@@ -1,0 +1,1072 @@
+ERC report (2026-10-16T13:42:57, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 36.83 mm): Symbol U3 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 36.83 mm): Symbol U3 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 39.37 mm): Symbol U3 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 39.37 mm): Symbol U3 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 43.18 mm): Label 'A_L1_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 45.72 mm): Label 'A_L1_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 46.99 mm): Symbol U3 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 46.99 mm): Symbol U3 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 49.53 mm): Symbol U3 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 49.53 mm): Symbol U3 Pin 3 [GND1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 52.07 mm): Symbol U4 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 52.07 mm): Symbol U4 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 54.61 mm): Symbol U4 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 54.61 mm): Symbol U4 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 58.42 mm): Label 'A_L2_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 60.96 mm): Label 'A_L2_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 62.23 mm): Symbol U4 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 62.23 mm): Symbol U4 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 64.77 mm): Symbol U4 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 64.77 mm): Symbol U4 Pin 3 [GND1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 67.31 mm): Symbol U5 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 67.31 mm): Symbol U5 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 69.85 mm): Symbol U5 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 69.85 mm): Symbol U5 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 73.66 mm): Label 'A_L3_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 76.20 mm): Label 'A_L3_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 77.47 mm): Symbol U5 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(17.78 mm, 77.47 mm): Symbol U5 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(17.78 mm, 80.01 mm): Symbol U5 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(17.78 mm, 80.01 mm): Symbol U5 Pin 3 [GND1, Power input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(17.78 mm, 96.52 mm): Label '24V_SELV'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(19.05 mm, 93.98 mm): Symbol U9 Pin 1 [VIN+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(19.05 mm, 93.98 mm): Symbol U9 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(19.05 mm, 99.06 mm): Symbol U9 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(19.05 mm, 99.06 mm): Symbol U9 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(39.37 mm, 93.98 mm): Symbol U10 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(39.37 mm, 99.06 mm): Symbol U10 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(39.37 mm, 99.06 mm): Symbol U10 Pin 2 [VIN-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(41.91 mm, 93.98 mm): Symbol U9 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(41.91 mm, 93.98 mm): Symbol U9 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(41.91 mm, 99.06 mm): Symbol U9 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(41.91 mm, 99.06 mm): Symbol U9 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 36.83 mm): Symbol U3 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 36.83 mm): Symbol U3 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 39.37 mm): Symbol U3 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 46.99 mm): Symbol U3 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 49.53 mm): Symbol U3 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 49.53 mm): Symbol U3 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 52.07 mm): Symbol U4 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 52.07 mm): Symbol U4 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 54.61 mm): Symbol U4 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 62.23 mm): Symbol U4 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 64.77 mm): Symbol U4 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 64.77 mm): Symbol U4 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 67.31 mm): Symbol U5 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 67.31 mm): Symbol U5 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 69.85 mm): Symbol U5 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 77.47 mm): Symbol U5 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(43.18 mm, 80.01 mm): Symbol U5 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 80.01 mm): Symbol U5 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 55.88 mm): Symbol U1 Pin 1 [AIN0P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 55.88 mm): Symbol U1 Pin 1 [AIN0P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 58.42 mm): Symbol U1 Pin 2 [AIN0N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 58.42 mm): Symbol U1 Pin 2 [AIN0N, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 60.96 mm): Symbol U1 Pin 3 [AIN1P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 60.96 mm): Symbol U1 Pin 3 [AIN1P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 63.50 mm): Symbol U1 Pin 4 [AIN1N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 63.50 mm): Symbol U1 Pin 4 [AIN1N, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 66.04 mm): Symbol U1 Pin 5 [AIN2P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 66.04 mm): Symbol U1 Pin 5 [AIN2P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(53.34 mm, 68.58 mm): Symbol U1 Pin 6 [AIN2N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(53.34 mm, 68.58 mm): Symbol U1 Pin 6 [AIN2N, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(55.88 mm, 99.06 mm): Symbol REF1 Pin 1 [VDD, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(55.88 mm, 99.06 mm): Symbol REF1 Pin 1 [VDD, Power input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(55.88 mm, 101.60 mm): Label '3V3_MEAS'
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(55.88 mm, 104.14 mm): Symbol REF1 Pin 2 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(59.69 mm, 93.98 mm): Symbol U11 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(59.69 mm, 99.06 mm): Symbol U11 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(59.69 mm, 99.06 mm): Symbol U11 Pin 2 [VIN-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(62.23 mm, 93.98 mm): Symbol U10 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(62.23 mm, 93.98 mm): Symbol U10 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(62.23 mm, 99.06 mm): Symbol U10 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(62.23 mm, 99.06 mm): Symbol U10 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(76.20 mm, 101.60 mm): Symbol REF1 Pin 3 [VREF, Output, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(76.20 mm, 104.14 mm): Label 'AGND_B'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(78.74 mm, 55.88 mm): Symbol U1 Pin 20 [DOUT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(78.74 mm, 58.42 mm): Symbol U1 Pin 21 [DIN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(78.74 mm, 58.42 mm): Symbol U1 Pin 21 [DIN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(78.74 mm, 60.96 mm): Symbol U1 Pin 19 [SCLK, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(78.74 mm, 60.96 mm): Symbol U1 Pin 19 [SCLK, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(78.74 mm, 63.50 mm): Symbol U1 Pin 17 [CS, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(78.74 mm, 63.50 mm): Symbol U1 Pin 17 [CS, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(78.74 mm, 66.04 mm): Symbol U1 Pin 18 [DRDY, Output, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(78.74 mm, 93.98 mm): Label 'ISO5_A3'
+[label_dangling]: Label not connected
+    ; error
+    @(81.28 mm, 121.92 mm): Label 'ADC_A_SPI'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 93.98 mm): Symbol U11 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(82.55 mm, 93.98 mm): Symbol U11 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 99.06 mm): Symbol U11 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(82.55 mm, 99.06 mm): Symbol U11 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 120.65 mm): Symbol U21 Pin 1 [SPI_A, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(82.55 mm, 120.65 mm): Symbol U21 Pin 1 [SPI_A, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 123.19 mm): Symbol U21 Pin 2 [SPI_B, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(82.55 mm, 123.19 mm): Symbol U21 Pin 2 [SPI_B, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 125.73 mm): Symbol U21 Pin 3 [DRDY_A, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(82.55 mm, 125.73 mm): Symbol U21 Pin 3 [DRDY_A, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 128.27 mm): Symbol U21 Pin 4 [DRDY_B, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(82.55 mm, 128.27 mm): Symbol U21 Pin 4 [DRDY_B, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(82.55 mm, 130.81 mm): Symbol U21 Pin 5 [SYNC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 38.10 mm): Symbol U15 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(88.90 mm, 38.10 mm): Symbol U15 Pin 1 [IN+, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 40.64 mm): Symbol U15 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 45.72 mm): Symbol U15 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 45.72 mm): Symbol U15 Pin 8 [VS, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 48.26 mm): Symbol U15 Pin 3 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 48.26 mm): Symbol U15 Pin 3 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 53.34 mm): Symbol U16 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(88.90 mm, 53.34 mm): Symbol U16 Pin 1 [IN+, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 55.88 mm): Symbol U16 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 60.96 mm): Symbol U16 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 60.96 mm): Symbol U16 Pin 8 [VS, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 63.50 mm): Symbol U16 Pin 3 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 63.50 mm): Symbol U16 Pin 3 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 68.58 mm): Symbol U17 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(88.90 mm, 68.58 mm): Symbol U17 Pin 1 [IN+, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 71.12 mm): Symbol U17 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 76.20 mm): Symbol U17 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 76.20 mm): Symbol U17 Pin 8 [VS, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(88.90 mm, 78.74 mm): Symbol U17 Pin 3 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(88.90 mm, 78.74 mm): Symbol U17 Pin 3 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(110.49 mm, 120.65 mm): Symbol U21 Pin 6 [CAN_TX, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(110.49 mm, 123.19 mm): Symbol U21 Pin 7 [CAN_RX, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(110.49 mm, 123.19 mm): Symbol U21 Pin 7 [CAN_RX, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(110.49 mm, 125.73 mm): Symbol U21 Pin 8 [WDOG, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(110.49 mm, 128.27 mm): Symbol U21 Pin 9 [SAFE, Output, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(111.76 mm, 43.18 mm): Label 'A_L1_I'
+[label_dangling]: Label not connected
+    ; error
+    @(111.76 mm, 58.42 mm): Label 'A_L2_I'
+[label_dangling]: Label not connected
+    ; error
+    @(111.76 mm, 73.66 mm): Label 'A_L3_I'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 38.10 mm): Symbol U15 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 40.64 mm): Symbol U15 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(114.30 mm, 45.72 mm): Symbol U15 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 48.26 mm): Symbol U15 Pin 4 [ALERT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 53.34 mm): Symbol U16 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 55.88 mm): Symbol U16 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(114.30 mm, 60.96 mm): Symbol U16 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 63.50 mm): Symbol U16 Pin 4 [ALERT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 68.58 mm): Symbol U17 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 71.12 mm): Symbol U17 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(114.30 mm, 76.20 mm): Symbol U17 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(114.30 mm, 78.74 mm): Symbol U17 Pin 4 [ALERT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 36.83 mm): Symbol U6 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 36.83 mm): Symbol U6 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 39.37 mm): Symbol U6 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 39.37 mm): Symbol U6 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 43.18 mm): Label 'B_L1_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 45.72 mm): Label 'B_L1_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 46.99 mm): Symbol U6 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 46.99 mm): Symbol U6 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 49.53 mm): Symbol U6 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 49.53 mm): Symbol U6 Pin 3 [GND1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 52.07 mm): Symbol U7 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 52.07 mm): Symbol U7 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 54.61 mm): Symbol U7 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 54.61 mm): Symbol U7 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 58.42 mm): Label 'B_L2_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 60.96 mm): Label 'B_L2_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 62.23 mm): Symbol U7 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 62.23 mm): Symbol U7 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 64.77 mm): Symbol U7 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 64.77 mm): Symbol U7 Pin 3 [GND1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 67.31 mm): Symbol U8 Pin 4 [VDD1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 67.31 mm): Symbol U8 Pin 4 [VDD1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 69.85 mm): Symbol U8 Pin 1 [VINP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 69.85 mm): Symbol U8 Pin 1 [VINP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 73.66 mm): Label 'B_L3_VP'
+[label_dangling]: Label not connected
+    ; error
+    @(129.54 mm, 76.20 mm): Label 'B_L3_VN'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 77.47 mm): Symbol U8 Pin 2 [VINN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(129.54 mm, 77.47 mm): Symbol U8 Pin 2 [VINN, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(129.54 mm, 80.01 mm): Symbol U8 Pin 3 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(129.54 mm, 80.01 mm): Symbol U8 Pin 3 [GND1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(130.81 mm, 93.98 mm): Symbol U12 Pin 1 [VIN+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(130.81 mm, 93.98 mm): Symbol U12 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(130.81 mm, 99.06 mm): Symbol U12 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(130.81 mm, 99.06 mm): Symbol U12 Pin 2 [VIN-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(132.08 mm, 120.65 mm): Symbol U23 Pin 6 [VCC1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(132.08 mm, 120.65 mm): Symbol U23 Pin 6 [VCC1, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(132.08 mm, 123.19 mm): Symbol U23 Pin 1 [TXD, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(132.08 mm, 123.19 mm): Symbol U23 Pin 1 [TXD, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(132.08 mm, 124.46 mm): Label 'CAN_TX'
+[label_dangling]: Label not connected
+    ; error
+    @(132.08 mm, 129.54 mm): Label 'CAN_RX'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(132.08 mm, 130.81 mm): Symbol U23 Pin 2 [RXD, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(132.08 mm, 133.35 mm): Symbol U23 Pin 5 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(132.08 mm, 133.35 mm): Symbol U23 Pin 5 [GND1, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(151.13 mm, 93.98 mm): Symbol U13 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(151.13 mm, 99.06 mm): Symbol U13 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(151.13 mm, 99.06 mm): Symbol U13 Pin 2 [VIN-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(153.67 mm, 93.98 mm): Symbol U12 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(153.67 mm, 93.98 mm): Symbol U12 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(153.67 mm, 99.06 mm): Symbol U12 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(153.67 mm, 99.06 mm): Symbol U12 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 36.83 mm): Symbol U6 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 36.83 mm): Symbol U6 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 39.37 mm): Symbol U6 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 46.99 mm): Symbol U6 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 49.53 mm): Symbol U6 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 49.53 mm): Symbol U6 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 52.07 mm): Symbol U7 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 52.07 mm): Symbol U7 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 54.61 mm): Symbol U7 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 62.23 mm): Symbol U7 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 64.77 mm): Symbol U7 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 64.77 mm): Symbol U7 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 67.31 mm): Symbol U8 Pin 8 [VDD2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 67.31 mm): Symbol U8 Pin 8 [VDD2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 69.85 mm): Symbol U8 Pin 5 [VOUTP, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 77.47 mm): Symbol U8 Pin 6 [VOUTN, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(154.94 mm, 80.01 mm): Symbol U8 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(154.94 mm, 80.01 mm): Symbol U8 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(157.48 mm, 120.65 mm): Symbol U23 Pin 8 [VCC2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(157.48 mm, 120.65 mm): Symbol U23 Pin 8 [VCC2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(157.48 mm, 123.19 mm): Symbol U23 Pin 3 [CANH, Bidirectional, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(157.48 mm, 124.46 mm): Label 'CANH'
+[label_dangling]: Label not connected
+    ; error
+    @(157.48 mm, 129.54 mm): Label 'CANL'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(157.48 mm, 130.81 mm): Symbol U23 Pin 4 [CANL, Bidirectional, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(157.48 mm, 133.35 mm): Symbol U23 Pin 7 [GND2, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(157.48 mm, 133.35 mm): Symbol U23 Pin 7 [GND2, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 55.88 mm): Symbol U2 Pin 1 [AIN0P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 55.88 mm): Symbol U2 Pin 1 [AIN0P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 58.42 mm): Symbol U2 Pin 2 [AIN0N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 58.42 mm): Symbol U2 Pin 2 [AIN0N, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 60.96 mm): Symbol U2 Pin 3 [AIN1P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 60.96 mm): Symbol U2 Pin 3 [AIN1P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 63.50 mm): Symbol U2 Pin 4 [AIN1N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 63.50 mm): Symbol U2 Pin 4 [AIN1N, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 66.04 mm): Symbol U2 Pin 5 [AIN2P, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 66.04 mm): Symbol U2 Pin 5 [AIN2P, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(165.10 mm, 68.58 mm): Symbol U2 Pin 6 [AIN2N, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(165.10 mm, 68.58 mm): Symbol U2 Pin 6 [AIN2N, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(167.64 mm, 121.92 mm): Label 'ADC_B_SPI'
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(171.45 mm, 93.98 mm): Symbol U14 Pin 1 [VIN+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(171.45 mm, 99.06 mm): Symbol U14 Pin 2 [VIN-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(171.45 mm, 99.06 mm): Symbol U14 Pin 2 [VIN-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(173.99 mm, 93.98 mm): Symbol U13 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(173.99 mm, 93.98 mm): Symbol U13 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(173.99 mm, 99.06 mm): Symbol U13 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(173.99 mm, 99.06 mm): Symbol U13 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(180.34 mm, 123.19 mm): Symbol U22 Pin 1 [CP_PWM, Output, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(180.34 mm, 124.46 mm): Label 'CP_PWM'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(180.34 mm, 125.73 mm): Symbol U22 Pin 2 [CP_FB, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(180.34 mm, 125.73 mm): Symbol U22 Pin 2 [CP_FB, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(180.34 mm, 128.27 mm): Symbol U22 Pin 3 [PP_SENSE, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(180.34 mm, 128.27 mm): Symbol U22 Pin 3 [PP_SENSE, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(180.34 mm, 129.54 mm): Label 'CP_FB'
+[label_dangling]: Label not connected
+    ; error
+    @(180.34 mm, 132.08 mm): Label 'PP_SENSE'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 38.10 mm): Symbol U18 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(190.50 mm, 38.10 mm): Symbol U18 Pin 1 [IN+, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 40.64 mm): Symbol U18 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 45.72 mm): Symbol U18 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 45.72 mm): Symbol U18 Pin 8 [VS, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 48.26 mm): Symbol U18 Pin 3 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 48.26 mm): Symbol U18 Pin 3 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 53.34 mm): Symbol U19 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(190.50 mm, 53.34 mm): Symbol U19 Pin 1 [IN+, Input, Line]
+[pin_to_pin]: Pins of type Output and Output are connected
+    ; error
+    @(190.50 mm, 55.88 mm): Symbol U2 Pin 20 [DOUT, Output, Line]
+    @(190.50 mm, 55.88 mm): Symbol U19 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 58.42 mm): Symbol U2 Pin 21 [DIN, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(190.50 mm, 58.42 mm): Symbol U2 Pin 21 [DIN, Input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 60.96 mm): Symbol U19 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 63.50 mm): Symbol U19 Pin 3 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 66.04 mm): Symbol U2 Pin 18 [DRDY, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 68.58 mm): Symbol U20 Pin 1 [IN+, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(190.50 mm, 68.58 mm): Symbol U20 Pin 1 [IN+, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 71.12 mm): Symbol U20 Pin 2 [IN-, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 76.20 mm): Symbol U20 Pin 8 [VS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 76.20 mm): Symbol U20 Pin 8 [VS, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(190.50 mm, 78.74 mm): Symbol U20 Pin 3 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 78.74 mm): Symbol U20 Pin 3 [GND, Power input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(190.50 mm, 93.98 mm): Label 'ISO5_B3'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(194.31 mm, 93.98 mm): Symbol U14 Pin 4 [VOUT+, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(194.31 mm, 93.98 mm): Symbol U14 Pin 4 [VOUT+, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(194.31 mm, 99.06 mm): Symbol U14 Pin 3 [VOUT-, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(194.31 mm, 99.06 mm): Symbol U14 Pin 3 [VOUT-, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(205.74 mm, 123.19 mm): Symbol U22 Pin 4 [CONTACTOR, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(205.74 mm, 125.73 mm): Symbol U22 Pin 5 [FAULT, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(205.74 mm, 125.73 mm): Symbol U22 Pin 5 [FAULT, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(205.74 mm, 128.27 mm): Symbol U22 Pin 6 [ESTOP, Input, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(205.74 mm, 128.27 mm): Symbol U22 Pin 6 [ESTOP, Input, Line]
+[label_dangling]: Label not connected
+    ; error
+    @(213.36 mm, 43.18 mm): Label 'B_L1_I'
+[label_dangling]: Label not connected
+    ; error
+    @(213.36 mm, 58.42 mm): Label 'B_L2_I'
+[label_dangling]: Label not connected
+    ; error
+    @(213.36 mm, 73.66 mm): Label 'B_L3_I'
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 38.10 mm): Symbol U18 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 40.64 mm): Symbol U18 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(215.90 mm, 45.72 mm): Symbol U18 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 48.26 mm): Symbol U18 Pin 4 [ALERT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 53.34 mm): Symbol U19 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 55.88 mm): Symbol U19 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(215.90 mm, 60.96 mm): Symbol U19 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 63.50 mm): Symbol U19 Pin 4 [ALERT, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 68.58 mm): Symbol U20 Pin 7 [OC, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 71.12 mm): Symbol U20 Pin 6 [VOUT, Output, Line]
+[pin_not_driven]: Input pin not driven by any Output pins
+    ; error
+    @(215.90 mm, 76.20 mm): Symbol U20 Pin 5 [VREF, Input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(215.90 mm, 78.74 mm): Symbol U20 Pin 4 [ALERT, Output, Line]
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(17.78 mm, 96.52 mm): Horizontal Wire, length 1.27 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(30.48 mm, 43.18 mm): Symbol U3 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(30.48 mm, 58.42 mm): Symbol U4 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(30.48 mm, 73.66 mm): Symbol U5 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(30.48 mm, 96.52 mm): Symbol U9 [MEE1S2405SC]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(38.10 mm, 93.98 mm): Label 'ISO5_A1'
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(50.80 mm, 96.52 mm): Symbol U10 [MEE1S2405SC]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(55.88 mm, 104.14 mm): Label 'AGND_A'
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(58.42 mm, 93.98 mm): Label 'ISO5_A2'
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(66.04 mm, 60.96 mm): Symbol U1 [ADS131M06IPBSR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(66.04 mm, 101.60 mm): Symbol REF1 [REF_ADC]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(71.12 mm, 96.52 mm): Symbol U11 [MEE1S2405SC]
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(78.74 mm, 93.98 mm): Horizontal Wire, length 1.27 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(81.28 mm, 121.92 mm): Horizontal Wire, length 2.54 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(96.52 mm, 127.00 mm): Symbol U21 [STM32G474RET6]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(101.60 mm, 43.18 mm): Symbol U15 [TMCS1123A3AQDVGR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(101.60 mm, 58.42 mm): Symbol U16 [TMCS1123A3AQDVGR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(101.60 mm, 73.66 mm): Symbol U17 [TMCS1123A3AQDVGR]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(111.76 mm, 45.72 mm): Label 'A_L1_I_RET'
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(111.76 mm, 60.96 mm): Label 'A_L2_I_RET'
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(111.76 mm, 76.20 mm): Label 'A_L3_I_RET'
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(111.76 mm, 43.18 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(111.76 mm, 58.42 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(111.76 mm, 73.66 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(132.08 mm, 124.46 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(132.08 mm, 129.54 mm): Horizontal Wire, length 2.54 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(142.24 mm, 43.18 mm): Symbol U6 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(142.24 mm, 58.42 mm): Symbol U7 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(142.24 mm, 73.66 mm): Symbol U8 [AMC1311BDWVR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(142.24 mm, 96.52 mm): Symbol U12 [MEE1S2405SC]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(144.78 mm, 127.00 mm): Symbol U23 [ISO1044BDWR]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(149.86 mm, 93.98 mm): Label 'ISO5_B1'
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(157.48 mm, 124.46 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(157.48 mm, 129.54 mm): Horizontal Wire, length 2.54 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(162.56 mm, 96.52 mm): Symbol U13 [MEE1S2405SC]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(170.18 mm, 93.98 mm): Label 'ISO5_B2'
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(167.64 mm, 121.92 mm): Horizontal Wire, length 2.54 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(177.80 mm, 60.96 mm): Symbol U2 [ADS131M06IPBSR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(182.88 mm, 96.52 mm): Symbol U14 [MEE1S2405SC]
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(180.34 mm, 124.46 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(180.34 mm, 129.54 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(180.34 mm, 132.08 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(190.50 mm, 93.98 mm): Horizontal Wire, length 1.27 mm
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(193.04 mm, 127.00 mm): Symbol U22 [STM32G031K8T6]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(203.20 mm, 43.18 mm): Symbol U18 [TMCS1123A3AQDVGR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(203.20 mm, 58.42 mm): Symbol U19 [TMCS1123A3AQDVGR]
+[lib_symbol_issues]: The current configuration does not include the symbol library 'TS-V1-M2.9-F-MASTER-BASELINE-cache'
+    ; warning
+    @(203.20 mm, 73.66 mm): Symbol U20 [TMCS1123A3AQDVGR]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(213.36 mm, 45.72 mm): Label 'B_L1_I_RET'
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(213.36 mm, 60.96 mm): Label 'B_L2_I_RET'
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(213.36 mm, 76.20 mm): Label 'B_L3_I_RET'
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(213.36 mm, 43.18 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(213.36 mm, 58.42 mm): Horizontal Wire, length 2.54 mm
+[unconnected_wire_endpoint]: Unconnected wire endpoint
+    ; warning
+    @(213.36 mm, 73.66 mm): Horizontal Wire, length 2.54 mm
+
+ ** ERC messages: 353  Errors 300  Warnings 53
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters
