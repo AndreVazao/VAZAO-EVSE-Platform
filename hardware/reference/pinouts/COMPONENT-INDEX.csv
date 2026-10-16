@@ -1,12 +1,12 @@
 record_type,manufacturer,part_or_interface,package_or_scope,pin_count,status,datasheet_or_spec_url,notes,review_date
 interface,Various,I2C,logical_signals,,reference,"https://www.nxp.com/docs/en/user-guide/UM10204.pdf","SDA/SCL signals; connector order is not universal",2026-10-16
-interface,Various,SPI,logical_signals,,reference,"https://www.analog.com/media/en/technical-documentation/application-notes/AN-1248.pdf","SCLK/MOSI/MISO/CS naming and directions depend on viewpoint",2026-10-16
+interface,Various,SPI,logical_signals,,reference,"","SCLK/MOSI/MISO/CS naming and directions depend on viewpoint",2026-10-16
 interface,Various,UART,logic-level_serial,,reference,"","TX-to-RX typical; not electrically equivalent to RS-232 or RS-485",2026-10-16
 interface,Various,CAN/CAN-FD,physical_and_logic_layers,,reference,"https://www.ti.com/product/ISO1044","Separate controller and transceiver roles; topology determines termination",2026-10-16
 interface,Various,RS-485,physical_layer,,reference,"","A/B naming differs across manufacturers; check the exact transceiver",2026-10-16
 interface,USB-IF,USB Type-C,receptacle_specification,24,reference,"https://www.usb.org/documents","Use exact connector drawing and role/CC design requirements",2026-10-16
 component,Texas Instruments,LM358,SOIC-8_or_PDIP-8_variant-specific,8,datasheet-linked,"https://www.ti.com/product/LM358","Classic dual-op-amp pin map; verify exact suffix and package",2026-10-16
-component,Various,NE555,DIP-8_or_SOIC-8_variant-specific,8,reference,"","Common timer pin map; add exact manufacturer datasheet before design use",2026-10-16
+component,Texas Instruments,NE555,PDIP-8_or_SOIC-8_variant-specific,8,datasheet-linked,"https://www.ti.com/lit/ds/symlink/ne555.pdf","Common timer pin map; confirm exact suffix and package",2026-10-16
 component,Microchip,MCP2515,PDIP/SOIC-18,18,datasheet-checked,"https://ww1.microchip.com/downloads/en/DeviceDoc/MCP2515-Family-Data-Sheet-DS20001801K.pdf","Only 18-pin PDIP/SOIC mapping; TSSOP/QFN numbering differs",2026-10-16
 component,Texas Instruments,ISO1044,SOIC-8,8,datasheet-linked,"https://www.ti.com/product/ISO1044","Check isolation requirements and exact suffix",2026-10-16
 component,Texas Instruments,ADS131M06IPBSR,TQFP-32,32,datasheet-checked,"https://www.ti.com/product/ADS131M06/part-details/ADS131M06IPBSR","Legacy cached symbol had confirmed channel-to-pin mismatches; native schematic not migrated",2026-10-16
