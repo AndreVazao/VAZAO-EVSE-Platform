@@ -203,8 +203,8 @@ jobs:
           grep -q "^(kicad_sch" hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-K-MASTER.kicad_sch
           xdotool key --clearmodifiers ctrl+q || true
           sleep 2
-          kill "$EES_PID" 2>/dev/null || true
-          wait "$EES_PID" 2>/dev/null || true
+          kill "$SETUP_PID" 2>/dev/null || true
+          wait "$SETUP_PID" 2>/dev/null || true
           CONTAINER_SCRIPT
           } 2>&1 | tee "$LOG"
 
