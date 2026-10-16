@@ -30,6 +30,7 @@ jobs:
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
 
+      # The library format version 20231120 requires a KiCad 8+ parser; use stable KiCad 10 in CI.
       - name: Install KiCad 10 CLI for native parser validation
         run: |
           sudo apt-get update
