@@ -100,7 +100,7 @@ def read_pins(block: str) -> dict[int, str]:
         if re.search(r'\(pin (input|output|bidirectional|tri_state|passive|free|unspecified|power_in|power_out|open_collector|open_emitter) line', line):
             name = None
             number = None
-            for look in lines[i + 1:i + 5]:
+            for look in lines[i:i + 5]:
                 nm = re.search(r'\(name "([^"]*)"', look)
                 nu = re.search(r'\(number "([^"]*)"', look)
                 if nm:
