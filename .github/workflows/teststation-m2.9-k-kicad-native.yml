@@ -60,8 +60,7 @@ jobs:
           LEGACY="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.sch"
           EXPECTED="hardware/teststation/V1/CAD/schematics/TS-V1-M2.9-F-MASTER-BASELINE.kicad_sch"
           rm -f "$EXPECTED"
-          echo "--- KiCad binary ---"
-          eeschema --version || true
+          echo "--- KiCad binary present; skip --version because Eeschema is a GUI application ---"
           echo "--- Launch Eeschema with legacy source ---"
           eeschema "$LEGACY" >/tmp/eeschema.log 2>&1 &
           EES_PID=$!
