@@ -52,6 +52,8 @@ jobs:
           test -s "$RUNNER_TEMP/evse-symbol-svg/ADS131M06IPBSR_unit1.svg"
           test -s "$RUNNER_TEMP/evse-symbol-svg/AMC1311BDWVR_unit1.svg"
           test -s "$RUNNER_TEMP/evse-symbol-svg/TMCS1123A3AQDVGR_unit1.svg"
+          test -s "$RUNNER_TEMP/evse-symbol-svg/MEE1S2405SC_unit1.svg"
+          test -s "$RUNNER_TEMP/evse-symbol-svg/ISO1044BDWR_unit1.svg"
 
       - name: Report validation result to control issue
         if: always()
