@@ -40,6 +40,7 @@ EXPECTED_TYPES = {
         14:"input", 15:"power_in", 16:"input", 17:"input", 18:"output",
         19:"input", 20:"output", 21:"input", 22:"output", 23:"input",
         24:"passive", 25:"power_in", 26:"power_in", 27:"passive", 28:"power_in",
+        29:"input", 30:"input", 31:"input", 32:"input",
     },
     "AMC1311BDWVR": {
         1:"power_in", 2:"input", 3:"input", 4:"power_in",
@@ -145,6 +146,11 @@ def main() -> int:
             print(f"PASS {symbol}: {len(actual)} unique physical pin numbers match expected map")
         actual_types = read_pin_types(blocks[symbol])
         expected_types = EXPECTED_TYPES[symbol]
+        if set(expected_types) != set(expected):
+            failures.append(
+                f"{symbol}: checker configuration error; electrical-type pins "
+                f"{sorted(expected_types)} do not cover pin map {sorted(expected)}"
+            )
         type_errors = [(pin, expected_types[pin], actual_types.get(pin)) for pin in expected_types
                        if actual_types.get(pin) != expected_types[pin]]
         if type_errors:
