@@ -37,6 +37,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/03-engineering/CHARGER-HARDWARE-V1-WIRING-SCHEDULE.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-INTERNAL-ASSEMBLY.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
