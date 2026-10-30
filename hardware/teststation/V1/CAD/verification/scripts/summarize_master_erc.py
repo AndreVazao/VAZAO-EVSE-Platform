@@ -13,10 +13,13 @@ def summarize(report: str) -> str:
     affected = defaultdict(set)
     current = None
     severity = 'unknown'
+    counted_current = False
     for line in report.splitlines():
         match = RULE.match(line.strip())
         if match:
             current = (match.group(1), match.group(2))
+            counted_current = False
+            severity = 'unknown'
             continue
         stripped = line.strip()
         if stripped == '; error':
@@ -25,7 +28,9 @@ def summarize(report: str) -> str:
             severity = 'warning'; continue
         if current is None or not stripped.startswith('@'):
             continue
-        counts[(severity, current[0])] += 1
+        if not counted_current:
+            counts[(severity, current[0])] += 1
+            counted_current = True
         symbol, label, wire = SYMBOL.search(stripped), LABEL.search(stripped), WIRE.search(stripped)
         if symbol:
             affected[(severity, current[0])].add(f'{symbol.group(1)} pin {symbol.group(2)} [{symbol.group(3)}]')
