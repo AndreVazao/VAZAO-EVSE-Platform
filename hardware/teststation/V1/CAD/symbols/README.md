@@ -23,7 +23,7 @@ Manufacturer pin-number/function references:
 - AMC1311: [TI datasheet](https://www.ti.com/lit/ds/symlink/amc1311.pdf) and [AMC1311BDWVR orderable page](https://www.ti.com/product/AMC1311/part-details/AMC1311BDWVR).
 - TMCS1123: [TI datasheet](https://www.ti.com/lit/ds/symlink/tmcs1123.pdf) and [TMCS1123 product page](https://www.ti.com/product/TMCS1123).
 
-The TMCS1123 function table does not, by itself, prove that the exact source order code `TMCS1123A3AQDVGR` is currently an orderable variant. That exact suffix remains **unverified, not invalid**. Confirm it against TI/purchasing evidence before freezing the BOM.
+TI's exact orderable-part page lists `TMCS1123A3AQDVGR` as **ACTIVE**, package SOIC (DVG), 10 pins: [TI exact part details](https://www.ti.com/product/TMCS1123/part-details/TMCS1123A3AQDVGR). The A3 sensitivity variant is therefore verified as an orderable part; stock availability is a separate purchasing check.
 
 ### MEE1S2405SC
 
@@ -115,7 +115,7 @@ The static check and KiCad 10.0.7 parser/export passed for the five-symbol isola
 
 1. Validate the library syntax using the target KiCad CLI; repair syntax only in this isolated library.
 2. Compare symbol pin numbers to manufacturer package drawings and the intended footprint pad map.
-3. Verify the exact TMCS1123 suffix and selected package/footprint.
+3. Confirm the selected TMCS1123A3 sensitivity is correct for the required current range, then verify the DVG land pattern and board clearances.
 4. Approve the pin-to-net intent table, including every ADC differential pair and each isolation domain.
 5. Only then create a separate migrated schematic copy, replace symbols and re-export netlist/ERC.
 6. Keep the existing M2.9-K master and legacy M2.9-L source untouched until review passes.
