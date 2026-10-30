@@ -1,0 +1,66 @@
+name: Validate EVSE physical symbol migration
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/validate-evse-symbol-migration.yml'
+      - 'hardware/teststation/V1/CAD/review/physical-symbol-migration/**'
+      - 'hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-review-schematics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run verified symbol pin-map regression
+        run: python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
+
+      - name: Install KiCad 10 CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
+          sudo apt-get update
+          sudo apt-get install -y kicad
+
+      - name: Confirm KiCad version
+        run: kicad-cli version
+
+      - name: Export baseline and migrated review schematics
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/evse-symbol-migration"
+          mkdir -p "$OUT/baseline" "$OUT/migrated"
+          BASE="hardware/teststation/V1/CAD/review/physical-symbol-migration/TS-V1-M2.9-K-MASTER-REVIEW-BASE.kicad_sch"
+          MIG="hardware/teststation/V1/CAD/review/physical-symbol-migration/TS-V1-M2.9-K-MASTER-SYMBOL-MIGRATION.kicad_sch"
+          kicad-cli sch erc --output "$OUT/baseline/erc.rpt" "$BASE"
+          kicad-cli sch export netlist --format kicadxml --output "$OUT/baseline/netlist.xml" "$BASE"
+          kicad-cli sch erc --output "$OUT/migrated/erc.rpt" "$MIG"
+          kicad-cli sch export netlist --format kicadxml --output "$OUT/migrated/netlist.xml" "$MIG"
+          test -s "$OUT/baseline/erc.rpt"
+          test -s "$OUT/baseline/netlist.xml"
+          test -s "$OUT/migrated/erc.rpt"
+          test -s "$OUT/migrated/netlist.xml"
+          echo "BASELINE ERC:"
+          tail -n 8 "$OUT/baseline/erc.rpt"
+          echo "MIGRATED ERC:"
+          tail -n 8 "$OUT/migrated/erc.rpt"
+
+      - name: Upload comparison evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evse-symbol-migration-kicad10-${{ github.event.pull_request.number }}
+          path: |
+            ${{ runner.temp }}/evse-symbol-migration/baseline/erc.rpt
+            ${{ runner.temp }}/evse-symbol-migration/baseline/netlist.xml
+            ${{ runner.temp }}/evse-symbol-migration/migrated/erc.rpt
+            ${{ runner.temp }}/evse-symbol-migration/migrated/netlist.xml
+          if-no-files-found: error
+          retention-days: 30
