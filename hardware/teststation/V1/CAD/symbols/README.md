@@ -53,7 +53,7 @@ Source: [TI ISO1044 datasheet](https://www.ti.com/lit/ds/symlink/iso1044.pdf). T
 
 ## Important limitations — do not treat as fabrication-ready
 
-1. The isolated draft passed KiCad 10.0.7 native parser/export in [CI run 38922330050](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38922330050). This validates loading and SVG export, not electrical correctness or schematic integration.
+1. The isolated five-symbol draft passed KiCad 10.0.7 native parser/export in [CI run 38924072047](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38924072047). This validates loading and SVG export, not electrical correctness or schematic integration.
 2. No footprint is assigned. Package dimensions, land pattern, pad numbering and pin-1 orientation must be verified against manufacturer package drawings and the selected footprint.
 3. Symbol electrical types are engineering classifications for ERC use, not proof of a complete circuit.
 4. No pins have been assigned to nets and no intended wiring has been inferred. In particular, the ADC differential input polarity and mapping from each AMC1311/TMCS1123 output to ADS131M06 channels still require an approved pin-to-net intent table.
@@ -109,7 +109,7 @@ For TMCS1123 pins 4, 5, 7 and 9, confirm unused-pin handling from the datasheet 
 - Static regression script: [`validate_verified_symbol_library.py`](../verification/scripts/validate_verified_symbol_library.py).
 - Automated KiCad parser/export workflow: [`.github/workflows/validate-evse-symbol-library.yml`](../../../../../.github/workflows/validate-evse-symbol-library.yml). It runs on scoped updates to `main`, can be started by the repository owner by commenting `/run-evse-symbol-validation` on [control issue #3](https://github.com/AndreVazao/VAZAO-EVSE-Platform/issues/3), and reports its result there. It uses KiCad 10.0.7, requires non-empty SVG export for all five draft symbols, and also exports a fresh ERC report and XML netlist for the unchanged master schematic as workflow artifacts.
 
-The static check and KiCad 10.0.7 parser/export are passing for the five-symbol isolated draft (run [38922904571](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38922904571)); the workflow is being tightened to assert all five SVG outputs. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
+The static check and KiCad 10.0.7 parser/export passed for the five-symbol isolated draft in [run 38924072047](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/38924072047). The same workflow also exports the unchanged master schematic ERC report and netlist, then performs a non-prescriptive connectivity triage; see the current status record for the latest ERC counts and blockers. Do not mark the library approved for PCB use until footprint pad mapping, exact order codes and an approved pin-to-net matrix have passed engineering review.
 
 ## Controlled next steps
 
