@@ -4,9 +4,9 @@ from __future__ import annotations
 import re, sys
 from collections import Counter, defaultdict
 from pathlib import Path
-RULE = re.compile(r'^\\[([a-z0-9_]+)\\]:\\s*(.+)$')
-SYMBOL = re.compile(r'Symbol\\s+([A-Za-z0-9_]+)\\s+Pin\\s+([0-9]+)\\s+\\[([^\\]]+)\\]')
-LABEL = re.compile(r"Label\\s+'([^']+)'")
+RULE = re.compile(r'^\[([a-z0-9_]+)\]:\s*(.+)$')
+SYMBOL = re.compile(r'Symbol\s+([A-Za-z0-9_]+)\s+Pin\s+([0-9]+)\s+\[([^\]]+)\]')
+LABEL = re.compile(r"Label\s+'([^']+)'")
 WIRE = re.compile(r'(Horizontal|Vertical) Wire, length ([0-9.]+) mm')
 def summarize(report: str) -> str:
     counts = Counter()
@@ -35,7 +35,7 @@ def summarize(report: str) -> str:
             affected[(severity, current[0])].add(f'{wire.group(1).lower()} wire endpoint ({wire.group(2)} mm)')
         else:
             affected[(severity, current[0])].add(stripped)
-    match = re.search(r'\\*\\*\\s*ERC messages:\\s*(\\d+)\\s+Errors\\s+(\\d+)\\s+Warnings\\s+(\\d+)', report)
+    match = re.search(r'\*\*\s*ERC messages:\s*(\d+)\s+Errors\s+(\d+)\s+Warnings\s+(\d+)', report)
     if not match:
         raise ValueError('KiCad ERC total summary not found')
     total, errors, warnings = map(int, match.groups())
@@ -50,7 +50,7 @@ def summarize(report: str) -> str:
         out.extend(f'- {item}' for item in sorted(items))
         out.append('')
     out += ['## Review boundary', '', 'This report does not infer intended wiring, assign missing nets, suppress ERC checks, or approve footprints. Resolve root causes against the approved interface register and manufacturer pin tables, then regenerate netlist and ERC.', '']
-    return '\\n'.join(out)
+    return '\n'.join(out)
 def main() -> int:
     if len(sys.argv) != 3:
         print('usage: summarize_master_erc.py INPUT.rpt OUTPUT.md', file=sys.stderr); return 2
