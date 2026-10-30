@@ -13,6 +13,7 @@ on:
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/audit_master_netlist_connectivity.py'
+      - 'hardware/teststation/V1/CAD/verification/scripts/summarize_master_erc.py'
 
 permissions:
   contents: read
@@ -86,6 +87,13 @@ jobs:
               output.write(f'erc_messages={total}\nerc_errors={errors}\nerc_warnings={warnings}\n')
           print(f'ERC baseline: {total} messages; {errors} errors; {warnings} warnings')
           PY
+
+      - name: Generate grouped ERC triage summary
+        if: always() && steps.erc-summary.outcome == 'success'
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/summarize_master_erc.py \
+            "$RUNNER_TEMP/evse-master-audit/M2.9-K-MASTER-ERC.rpt" \
+            "$RUNNER_TEMP/evse-master-audit/M2.9-K-ERC-TRIAGE.md"
 
       - name: Upload master ERC report and netlist
         if: always()
