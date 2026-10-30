@@ -12,7 +12,7 @@ The strongest current approach is to use a purpose-built EVSE charge controller 
 | Function | Candidate | Current decision | Why / remaining gate |
 |---|---|---|---|
 | EVSE controller, single output | Phoenix Contact CHARX control advanced EM-CP-PP-ETH, order no. 2902802 | **Primary candidate for single-output evaluation** | Manufacturer describes Type 2, Mode 3, Case B+C, three-phase and stand-alone/client modes. Obtain full manual, I/O list, contactor feedback support, residual-current strategy, firmware/OCPP options and exact wiring before acceptance. |
-| EVSE controller, multi-point / load management | Bender CC613 family | **Primary candidate for multi-output architecture study** | Manufacturer documents IEC 61851 Mode 3, configurable master/slave, dynamic load management, external Type A RCD requirement with integrated residual DC monitoring module, and OCPP 1.5/1.6. Verify exact variant, number of outputs per controller, local availability, licensing and interface requirements. |
+| EVSE controller, multi-point / load management | Bender CC613 family | **Historical architecture reference — procurement blocked** | Manual D00381 documents IEC 61851 Mode 3, configurable master/slave, dynamic load management, external Type A RCD requirement with RDC-M, and OCPP 1.5/1.6. However, the manufacturer product page currently marks CC613 as discontinued. Do not procure or select it; request a supported successor and written lifecycle confirmation. |
 | Energy meter, direct 3-phase | Carlo Gavazzi EM340DINAV23XS1PFB | **Candidate for per-output metering** | Manufacturer lists 5(65) A, 230/400 V, RS485 Modbus RTU and MID (Europe). Confirm exact MID certificate/variant and suitability for the intended Portuguese billing arrangement. |
 | Energy meter, Ethernet alternative | Carlo Gavazzi EM24DINAV23XE1PFA | **Alternative pending detailed review** | Manufacturer lists 10(65) A, 230/400 V, Modbus TCP/IP and MID. Verify exact order code, measurement configuration and certification documents before selection. |
 
@@ -48,7 +48,7 @@ Manufacturer-published features include:
 - OCPP 1.5 and OCPP 1.6 support;
 - Ethernet and optional modem variants documented across the product family.
 
-**Evaluation:** particularly relevant to VAZÃO's future dual/quad and MultiStation architecture. Do not assume one CC613 controls four independent outputs: confirm the exact master/slave topology, controller count, communication wiring and supported point count with Bender before designing the quad variant.
+**Evaluation:** retain only as historical technical reference for the Master/Slave and load-management architecture. Procurement is blocked because Bender currently marks CC613 discontinued. Request a supported successor, lifecycle statement and updated multi-point topology before choosing a Bender platform. Do not assume one CC613 controls four independent outputs.
 
 ## 3. Metering candidates
 
@@ -103,7 +103,7 @@ Do not infer these values from 22 kW or 32 A alone.
 
 **Prototype A — single output:** evaluate Phoenix Contact 2902802 as the integrated EVSE controller candidate, with a separately selected contactor/protection/metering chain. Evaluate the EM340 Modbus RTU variant for energy metering. The controller's own documentation must determine how contactor drive, feedback, RCD/DC detection and emergency stop are wired.
 
-**Architecture B — dual/quad:** evaluate Bender CC613 master/slave for local dynamic load management. Each charging point must retain the required local control and protection boundary. Do not use a central Master as a substitute for per-output safety functions.
+**Architecture B — dual/quad:** study the CC613 manual only as a historical Master/Slave reference; do not procure it while discontinued. Identify and validate a currently supported successor before selecting the multi-point controller architecture. Each charging point must retain the required local control and protection boundary.
 
 **Important:** do not mix controller wiring assumptions between Phoenix Contact and Bender. Each candidate requires its own manufacturer-specific schematic and review.
 
@@ -130,4 +130,4 @@ Before purchasing any candidate:
 
 ## 8. Release status
 
-**M1.2 shortlist only.** This document supports supplier enquiry and detailed engineering evaluation. It is not a final BOM, wiring instruction, certification, installation approval or authorization to energize mains.
+**M1.2 shortlist only. CC613 is now procurement-blocked as discontinued; it is retained solely as a historical architecture reference.** This document supports supplier enquiry and detailed engineering evaluation. It is not a final BOM, wiring instruction, certification, installation approval or authorization to energize mains.
