@@ -41,6 +41,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-BENDER-CC613-INTERFACE-REVIEW-M1-4B.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-MODULAR-CONTROLLER-ARCHITECTURE-REVIEW-M1-5.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
