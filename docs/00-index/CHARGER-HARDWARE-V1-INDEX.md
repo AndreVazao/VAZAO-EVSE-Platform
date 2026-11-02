@@ -47,6 +47,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/03-engineering/CHARGER-HARDWARE-V1-MODULE-COMPATIBILITY-AND-INTERFACES-M1-7.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-TOPOLOGY-AND-CONNECTOR-REGISTER-M1-8.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-METERING-FAULT-CONTAINMENT-POWER-BUDGET-M1-9.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-COMPONENT-LIFECYCLE-AND-PERIPHERAL-REVIEW-M1-10.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
@@ -69,3 +70,8 @@ M1.6 now defines mandatory modular product architecture: a safe charging core pe
 ### M1.9 — metering, RFID failure and cluster fault containment
 
 M1.9 records Phoenix Contact evidence for per-charging-point energy measurement and load management, the explicit RFID-reader-absent error condition, and the shared SEC-3xxx/SEC-1000 backplane/server dependencies. The quad assembly is therefore described as four locally controlled outputs in a shared cluster—not as four fully autonomous units—until server, client and bus fault-injection tests pass. The 6 A backplane limit remains a hard constraint; no PSU or branch protection rating is selected. Exact meter SKU, terminal schedule, 12 V load budget and fault recovery remain open. This is not a released wiring or energisation design.
+
+
+### M1.10 — component lifecycle and peripheral candidates
+
+M1.10 adds manufacturer data for the CHARX RFID/NFC-PCB (1391227), EV-RCM-6DC-WAT (1309697), accessory cable 1360462 and 12 V STEP3 supply 1170953. It identifies the previously shortlisted ISKRA WM3M4C meter 1429603 as no longer in the Phoenix Contact product range and blocks new procurement. The 2.5 A PSU is explicitly not approved for the quad cluster. Current meter replacement/CHARX compatibility, exact terminal-level pinout, approved cluster feed and complete power budget remain open. No BOM or wiring release is made.
