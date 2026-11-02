@@ -46,6 +46,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/03-engineering/CHARGER-HARDWARE-V1-QUAD-MODULAR-ARCHITECTURE-M1-6.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-MODULE-COMPATIBILITY-AND-INTERFACES-M1-7.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-TOPOLOGY-AND-CONNECTOR-REGISTER-M1-8.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-METERING-FAULT-CONTAINMENT-POWER-BUDGET-M1-9.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
@@ -63,3 +64,8 @@ This is an engineering/documentation baseline, **not a construction certificate 
 ## Current engineering baseline
 
 M1.6 now defines mandatory modular product architecture: a safe charging core per output plus physically prepared, optional RFID, communications, HMI, payment and service modules. It decomposes the quad pedestal into four repeatable output cells and shared services, and records fault-containment and release gates. Exact controller count, bus topology, per-output meter wiring and failure isolation remain unverified and are explicitly deferred to M1.7. The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, records the preliminary BOM, and adds the M1.3 controller-interface review matrix and the M1.4A/M1.4B manufacturer-interface evidence reviews. Phoenix terminal-level documentation remains incomplete; Bender CC613 is marked discontinued by its manufacturer and is blocked for procurement. The new component-zoning drawing is provisional and not a dimensioned mounting plate or wiring instruction. These drawings are not authorisation for mains energisation.
+
+
+### M1.9 — metering, RFID failure and cluster fault containment
+
+M1.9 records Phoenix Contact evidence for per-charging-point energy measurement and load management, the explicit RFID-reader-absent error condition, and the shared SEC-3xxx/SEC-1000 backplane/server dependencies. The quad assembly is therefore described as four locally controlled outputs in a shared cluster—not as four fully autonomous units—until server, client and bus fault-injection tests pass. The 6 A backplane limit remains a hard constraint; no PSU or branch protection rating is selected. Exact meter SKU, terminal schedule, 12 V load budget and fault recovery remain open. This is not a released wiring or energisation design.
