@@ -43,6 +43,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/03-engineering/CHARGER-HARDWARE-V1-BENDER-CC613-INTERFACE-REVIEW-M1-4B.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-MODULAR-CONTROLLER-ARCHITECTURE-REVIEW-M1-5.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-MODULAR-MANUAL-INTERFACE-EXTRACTION-M1-5A.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-QUAD-MODULAR-ARCHITECTURE-M1-6.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
@@ -59,4 +60,4 @@ This is an engineering/documentation baseline, **not a construction certificate 
 
 ## Current engineering baseline
 
-The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, records the preliminary BOM, and adds the M1.3 controller-interface review matrix and the M1.4A/M1.4B manufacturer-interface evidence reviews. Phoenix terminal-level documentation remains incomplete; Bender CC613 is marked discontinued by its manufacturer and is blocked for procurement. The new component-zoning drawing is provisional and not a dimensioned mounting plate or wiring instruction. These drawings are not authorisation for mains energisation.
+M1.6 now defines mandatory modular product architecture: a safe charging core per output plus physically prepared, optional RFID, communications, HMI, payment and service modules. It decomposes the quad pedestal into four repeatable output cells and shared services, and records fault-containment and release gates. Exact controller count, bus topology, per-output meter wiring and failure isolation remain unverified and are explicitly deferred to M1.7. The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, records the preliminary BOM, and adds the M1.3 controller-interface review matrix and the M1.4A/M1.4B manufacturer-interface evidence reviews. Phoenix terminal-level documentation remains incomplete; Bender CC613 is marked discontinued by its manufacturer and is blocked for procurement. The new component-zoning drawing is provisional and not a dimensioned mounting plate or wiring instruction. These drawings are not authorisation for mains energisation.
