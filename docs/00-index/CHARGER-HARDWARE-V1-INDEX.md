@@ -75,3 +75,10 @@ M1.9 records Phoenix Contact evidence for per-charging-point energy measurement 
 ### M1.10 — component lifecycle and peripheral candidates
 
 M1.10 adds manufacturer data for the CHARX RFID/NFC-PCB (1391227), EV-RCM-6DC-WAT (1309697), accessory cable 1360462 and 12 V STEP3 supply 1170953. It identifies the previously shortlisted ISKRA WM3M4C meter 1429603 as no longer in the Phoenix Contact product range and blocks new procurement. The 2.5 A PSU is explicitly not approved for the quad cluster. Current meter replacement/CHARX compatibility, exact terminal-level pinout, approved cluster feed and complete power budget remain open. No BOM or wiring release is made.
+
+
+### M1.11 — wiring evidence, meter lifecycle and 12 V power-budget closure
+
+M1.11 identifies the official CHARX UM EN Revision 06 / firmware 1.9.1 manual and supported controller variants, while keeping the connector register functional rather than terminal-numbered because the complete wiring figures and exact terminal schedule were not extractable from the accessible manual landing page. It confirms EEM-MA370-R 2907980 as a Modbus RTU/TCP investigation candidate only; MID certification, direct/CT topology, CHARX integration and billing suitability remain unverified. EEM-MA370 2907983 is a distinct Modbus/TCP CT-input model and is not a drop-in replacement. The 12 V budget is formalised into separate controller/backplane, auxiliary, contactor-coil and safety domains; the 6 A nominal backplane limit remains hard, and no PSU is selected. The 1/2/4-output load schedules, terminal-level wiring, meter selection and SELV fault-injection remain open. No production BOM, wiring or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-11-WIRING-METER-POWER-BUDGET-CLOSURE.md`
