@@ -35,6 +35,12 @@ jobs:
       - name: Confirm KiCad version
         run: kicad-cli version
 
+      - name: Load review-only footprint with KiCad pcbnew API
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=/usr/lib/python3/dist-packages /usr/bin/python3 hardware/teststation/V1/CAD/review/physical-symbol-migration/footprints/validate_kicad_footprint_load.py
+
       - name: Export baseline and migrated review schematics
         shell: bash
         run: |
