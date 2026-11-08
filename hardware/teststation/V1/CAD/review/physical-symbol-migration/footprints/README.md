@@ -41,3 +41,12 @@ No master schematic, legacy baseline, production PCB or wiring was modified. No 
 - Artifact SHA-256: `536fb5aab8ac3b8197c73cc68ccf03fcb5058973580f3bc4bc97adb11fff067d`.
 
 **Scope limitation:** the workflow ran the Python static guard and KiCad CLI schematic exports. It did not load/render the custom footprint in KiCad's footprint editor, verify its manufacturability, or prove the interpreted TI dimensions. The candidate remains review-only and unapproved.
+
+
+## 2026-11-08 — KiCad-native footprint load guard added
+
+Added `validate_kicad_footprint_load.py`. It imports KiCad's `pcbnew` Python API, loads the review-only U2 footprint from the custom library, checks that KiCad sees exactly pads 1–32, and compares the loaded pad centres and sizes against the review CSV (0.001 mm tolerance). This closes a gap in the previous CI: the earlier workflow checked footprint text/CSV consistency but never asked KiCad to parse the custom footprint.
+
+The workflow now runs this test after installing KiCad 10. **This check has not yet been confirmed by a completed CI run at the time of this entry.** If the Ubuntu runner's Python environment cannot import `pcbnew`, the workflow must be repaired rather than silently skipping the test.
+
+Scope remains limited: successful loading proves KiCad parser/API compatibility and agreement with the CSV, not that the CSV coordinates are an exact transcription of TI's land-pattern drawing, not PCB-level clearances, and not manufacturing approval. U2 remains `REVIEW_ONLY_NOT_APPROVED`; U19 remains without a footprint.
