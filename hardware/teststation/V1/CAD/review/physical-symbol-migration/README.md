@@ -55,3 +55,10 @@ The original master and legacy baseline remain untouched.
 ## 2026-11-08 — review-only footprint work
 
 A dedicated `footprints/` directory now holds an isolated U2 candidate footprint and coordinate transcription. U19 remains intentionally without a generated footprint because its pad-centre geometry and board-level insulation design are not yet verified. See `footprints/README.md`. No footprint was assigned to any schematic or PCB.
+
+
+## 2026-11-08 — workflow #8 and U2 review-only candidate
+
+The U2 ADS131M06IPBSR PBS TQFP-32 review-only footprint candidate, coordinate CSV and static validator were added in commit `9868785dda6340ccf575cc6d15010311ee13eebb`. Workflow [#8](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42473979552) completed successfully. Its static footprint guard and KiCad 10 schematic export steps passed. Artifact: `evse-symbol-migration-kicad10-7`, ID `13614214105`, SHA-256 `536fb5aab8ac3b8197c73cc68ccf03fcb5058973580f3bc4bc97adb11fff067d`.
+
+Important limitation: CI did not open or render the custom footprint in the KiCad footprint editor and does not prove the coordinate interpretation against independent manufacturer CAD. Candidate remains **REVIEW ONLY / NOT APPROVED**. U19 has no footprint. No schematic assignment, PCB edit, fabrication or mains energization is authorized.
