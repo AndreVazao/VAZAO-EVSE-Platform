@@ -31,3 +31,13 @@ The coordinate CSV is a transcription of the drawing interpretation, not a manuf
 ## Safety boundary
 
 No master schematic, legacy baseline, production PCB or wiring was modified. No footprint property was assigned. No fabrication, PCB release, or mains energization is authorized.
+
+
+## 2026-11-08 — CI run #8
+
+- Workflow: [run #8](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42473979552), commit `9868785dda6340ccf575cc6d15010311ee13eebb`.
+- Result: completed / success. The static review-footprint geometry/CSV guard passed; KiCad 10 CLI installation/version confirmation passed; baseline and migrated schematic exports passed; evidence upload passed.
+- Artifact: `evse-symbol-migration-kicad10-7`, ID `13614214105`, 17,784 bytes, expires 2026-12-08.
+- Artifact SHA-256: `536fb5aab8ac3b8197c73cc68ccf03fcb5058973580f3bc4bc97adb11fff067d`.
+
+**Scope limitation:** the workflow ran the Python static guard and KiCad CLI schematic exports. It did not load/render the custom footprint in KiCad's footprint editor, verify its manufacturability, or prove the interpreted TI dimensions. The candidate remains review-only and unapproved.
