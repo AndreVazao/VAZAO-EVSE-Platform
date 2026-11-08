@@ -82,3 +82,10 @@ M1.10 adds manufacturer data for the CHARX RFID/NFC-PCB (1391227), EV-RCM-6DC-WA
 M1.11 identifies the official CHARX UM EN Revision 06 / firmware 1.9.1 manual and supported controller variants, while keeping the connector register functional rather than terminal-numbered because the complete wiring figures and exact terminal schedule were not extractable from the accessible manual landing page. It confirms EEM-MA370-R 2907980 as a Modbus RTU/TCP investigation candidate only; MID certification, direct/CT topology, CHARX integration and billing suitability remain unverified. EEM-MA370 2907983 is a distinct Modbus/TCP CT-input model and is not a drop-in replacement. The 12 V budget is formalised into separate controller/backplane, auxiliary, contactor-coil and safety domains; the 6 A nominal backplane limit remains hard, and no PSU is selected. The 1/2/4-output load schedules, terminal-level wiring, meter selection and SELV fault-injection remain open. No production BOM, wiring or energisation release.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-11-WIRING-METER-POWER-BUDGET-CLOSURE.md`
+
+
+### M1.12 — MID meter candidate and lifecycle review
+
+M1.12 identifies Phoenix Contact EEM-XM375 1674510 as the strongest current MID candidate found: three-phase, CT 1 A/5 A, Modbus/TCP Ethernet, bidirectional, MID 2014/32/EU and manufacturer-stated class C EN 50470-3. It remains a candidate only: CT chain, certificate scope, CHARX profile, per-output transaction attribution and Portuguese billing suitability are open. Corrected lifecycle: EEM-EM355 2908578 is marked no longer in product range and its manufacturer-listed replacement is EEM-XM355 1674509; do not procure 2908578 for new design. EEM-MA370-R 2907980 supports Modbus RTU/TCP but MID was not evidenced on its reviewed page. No production meter is selected.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-12-MID-METER-CANDIDATE-AND-LIFECYCLE-REVIEW.md`
