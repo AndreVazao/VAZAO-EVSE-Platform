@@ -50,3 +50,8 @@ The original master and legacy baseline remain untouched.
 - ERC baseline and migrated report are both archived; improvements are not achieved by suppressing rules or adding arbitrary no-connect markers.
 - No fabrication or mains energization approval is implied.
 
+
+
+## 2026-11-08 — review-only footprint work
+
+A dedicated `footprints/` directory now holds an isolated U2 candidate footprint and coordinate transcription. U19 remains intentionally without a generated footprint because its pad-centre geometry and board-level insulation design are not yet verified. See `footprints/README.md`. No footprint was assigned to any schematic or PCB.

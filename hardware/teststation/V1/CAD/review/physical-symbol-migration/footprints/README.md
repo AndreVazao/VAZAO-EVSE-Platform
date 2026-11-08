@@ -1,0 +1,33 @@
+# Review-only footprint workspace
+
+**Nothing in this directory is approved for PCB fabrication or production.** These files are isolated engineering candidates and are not assigned to the production schematic or PCB.
+
+## U2 — ADS131M06IPBSR, TI PBS TQFP-32
+
+Candidate: `VAZAO_EVSE_Review.pretty/ADS131M06IPBSR_PBS_TQFP-32_5x5mm_P0.5mm.kicad_mod`
+
+Evidence basis: TI ADS131M06 datasheet, drawing PBS land pattern 4212229/A (PDF page 100), visually reviewed in the source PDF.
+- 32 pads, four sides × eight pads.
+- 0.50 mm pitch.
+- 1.60 × 0.30 mm rectangular pads.
+- Opposing pad-row centre lines 6.20 mm apart; candidate centres at ±3.10 mm.
+- Package body outline 5.00 × 5.00 mm, from TI PBS mechanical drawing 4087735/B.
+- Pin numbering follows the TI top view: pins 1–8 along bottom left-to-right; 9–16 up right side; 17–24 along top right-to-left; 25–32 down left side.
+
+The coordinate CSV is a transcription of the drawing interpretation, not a manufacturer-provided coordinate table. It must be independently checked against the drawing image and the actual component land pattern before use. In particular, verify pad-row centre dimensions, pad numbering/orientation, mask expansion, paste aperture design, courtyard and silkscreen clearances.
+
+### Required verification before approval
+1. Independently reconstruct all 32 pad centres from TI drawing 4212229/A and verify the coordinate CSV.
+2. Verify numbering against TI package top view and the symbol's physical pin numbers.
+3. Load the footprint in KiCad 10; inspect 1:1 rendering and run footprint checks.
+4. Compare against a physical sample or manufacturer CAD data if available.
+5. Review solder-mask/paste rules, courtyard, assembly and PCB fab constraints.
+6. Run the full symbol-pin-to-pad audit; no footprint assignment is allowed until signed off.
+
+## U19 — TMCS1123A3AQDVGR, TI DVG SOIC-10
+
+**No footprint generated yet.** Although TI Rev D shows IPC and HV/isolation land-pattern options, exact pad-centre coordinates and complete PCB-level creepage/clearance assessment remain unresolved. Do not substitute a generic SOIC-10 footprint. The 8.1 mm HV option is a candidate for study only; it is not proof of finished-board insulation compliance.
+
+## Safety boundary
+
+No master schematic, legacy baseline, production PCB or wiring was modified. No footprint property was assigned. No fabrication, PCB release, or mains energization is authorized.

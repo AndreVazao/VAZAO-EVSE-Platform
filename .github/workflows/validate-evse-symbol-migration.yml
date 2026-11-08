@@ -21,6 +21,9 @@ jobs:
       - name: Run verified symbol pin-map regression
         run: python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
 
+      - name: Validate review-only footprint geometry and CSV
+        run: python3 hardware/teststation/V1/CAD/review/physical-symbol-migration/footprints/validate_review_footprints.py
+
       - name: Install KiCad 10 CLI
         run: |
           sudo apt-get update
