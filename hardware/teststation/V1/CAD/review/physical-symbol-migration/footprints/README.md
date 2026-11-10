@@ -63,3 +63,12 @@ The workflow runs this test after installing KiCad 10. The completed CI result i
 **Correction to the previous entry:** the KiCad-native load check is no longer pending; CI #14 confirms it passed. The check proves parser/API compatibility and agreement between the loaded footprint and the review CSV only. It does not independently validate the coordinate transcription against TI's drawing, perform a graphical 1:1 footprint-editor inspection, establish board-level clearances, or approve fabrication. U2 remains `REVIEW_ONLY_NOT_APPROVED`; U19 remains without a generated footprint.
 
 The same CI run re-confirmed the unresolved schematic comparison: baseline ERC 353 messages (300 errors, 53 warnings); migrated ERC 436 messages (383 errors, 53 warnings), a regression of 83 errors. This workflow is a successful validation/evidence pipeline, **not** an electrical-design pass.
+
+
+## 2026-11-10 — CI #17 repeat validation
+
+Workflow [#17](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42807619534) completed successfully on commit 5199baad11f8d787ade6785307cde06fe75f5aff. All steps passed, including static footprint geometry/CSV validation, KiCad 10 version confirmation, KiCad pcbnew API loading of the U2 candidate, baseline/migrated schematic exports, and evidence upload.
+
+Artifact: evse-symbol-migration-kicad10-7, ID 13761195036, 17,784 bytes, expires 2026-12-10. SHA-256: af0c882993c9e20acd74e2cc83459cbad50abd6bfca93aa50e6ce6e5217311e0.
+
+This repeat run confirms the review footprint remains parseable by KiCad 10 and internally consistent with its coordinate CSV. It does not validate the manufacturer's drawing independently, perform graphical 1:1 inspection, or approve fabrication. U2 remains review-only/not approved; U19 remains without a footprint.
