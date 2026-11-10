@@ -24,6 +24,9 @@ jobs:
       - name: Validate review-only footprint geometry and CSV
         run: python3 hardware/teststation/V1/CAD/review/physical-symbol-migration/footprints/validate_review_footprints.py
 
+      - name: Validate U19 TI-derived review coordinates
+        run: python3 hardware/teststation/V1/CAD/review/physical-symbol-migration/footprints/validate_u19_review_coordinates.py
+
       - name: Install KiCad 10 CLI
         run: |
           sudo apt-get update
