@@ -45,8 +45,21 @@ No master schematic, legacy baseline, production PCB or wiring was modified. No 
 
 ## 2026-11-08 — KiCad-native footprint load guard added
 
-Added `validate_kicad_footprint_load.py`. It imports KiCad's `pcbnew` Python API, loads the review-only U2 footprint from the custom library, checks that KiCad sees exactly pads 1–32, and compares the loaded pad centres and sizes against the review CSV (0.001 mm tolerance). This closes a gap in the previous CI: the earlier workflow checked footprint text/CSV consistency but never asked KiCad to parse the custom footprint.
+Added `validate_kicad_footprint_load.py`. It imports KiCad's `pcbnew` Python API, loads the review-only U2 footprint from the custom library, checks that KiCad sees exactly pads 1–32, and compares the loaded pad centres and sizes against the review CSV (0.001 mm tolerance). This asks KiCad itself to parse the custom footprint rather than relying only on text/CSV consistency.
 
-The workflow now runs this test after installing KiCad 10. **This check has not yet been confirmed by a completed CI run at the time of this entry.** If the Ubuntu runner's Python environment cannot import `pcbnew`, the workflow must be repaired rather than silently skipping the test.
+The workflow runs this test after installing KiCad 10. The completed CI result is recorded below.
 
-Scope remains limited: successful loading proves KiCad parser/API compatibility and agreement with the CSV, not that the CSV coordinates are an exact transcription of TI's land-pattern drawing, not PCB-level clearances, and not manufacturing approval. U2 remains `REVIEW_ONLY_NOT_APPROVED`; U19 remains without a footprint.
+
+## 2026-11-08 — CI #14: KiCad-native footprint load passed
+
+- Workflow: [run #14](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42512318776).
+- Workflow head commit: `0650ba92548c6e18fb2438deef7dfb7a3dcea29d`.
+- Job `validate-review-schematics`: completed / success.
+- Confirmed successful steps: verified-symbol pin-map regression; static review-footprint geometry/CSV guard; KiCad 10 installation and version; **KiCad `pcbnew` API load of the custom U2 footprint**; baseline/migrated schematic ERC and netlist exports; artifact upload.
+- The native load test reported that KiCad loaded exactly pads 1–32 and that pad centres/sizes matched the review CSV within 0.001 mm.
+- Artifact: `evse-symbol-migration-kicad10-7`, ID `13629449480`, 17,786 bytes, expires 2026-12-08.
+- SHA-256: `af2533d9e270b77a7671956fdfeb2bb32985b67e75bb45e1413ff24fe352aa9e`.
+
+**Correction to the previous entry:** the KiCad-native load check is no longer pending; CI #14 confirms it passed. The check proves parser/API compatibility and agreement between the loaded footprint and the review CSV only. It does not independently validate the coordinate transcription against TI's drawing, perform a graphical 1:1 footprint-editor inspection, establish board-level clearances, or approve fabrication. U2 remains `REVIEW_ONLY_NOT_APPROVED`; U19 remains without a generated footprint.
+
+The same CI run re-confirmed the unresolved schematic comparison: baseline ERC 353 messages (300 errors, 53 warnings); migrated ERC 436 messages (383 errors, 53 warnings), a regression of 83 errors. This workflow is a successful validation/evidence pipeline, **not** an electrical-design pass.
