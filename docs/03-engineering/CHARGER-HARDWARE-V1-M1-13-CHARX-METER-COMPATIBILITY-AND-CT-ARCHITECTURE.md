@@ -10,13 +10,14 @@
 M1.13 adds two important manufacturer evidence findings:
 
 1. Phoenix Contact's CHARX load-management guidance explicitly requires a measuring device at each charging point (reference F) so the SEC-3xxx server can calculate and distribute the load against the protected load circuit. The guide also distinguishes a separate upstream/grid-infeed meter (reference M). This reinforces **one independently attributable meter per EVSE output** for the proposed architecture.
-2. A retrievable CHARX control modular user manual, Revision 04 / firmware 1.5.1 (2024-03-14), lists the meter models implemented in that firmware. It lists EEM-350 family, EEM-EM357 family, Carlo Gavazzi EM24/EM340/EM111, Inepro PRO380 and Iskra WM3M4(C), but **does not list EEM-XM375 or EEM-XM355**. The manual says the list may be extended in future software and directs the installer to inspect the actual charging-point configuration in the installed firmware.
+2. The current official CHARX help for firmware 1.9.1 explicitly lists **EEM-XM355 1674509** as a selectable energy-meter type in charging-point configuration. This upgrades XM355 from an unconfirmed interface candidate to a manufacturer-listed CHARX integration candidate for point measurement/current monitoring/load-management evaluation. The same current list does **not** include EEM-XM375 1674510.
+3. The separate current CHARX legal-metrology/OCMF page lists only ISKRA WM3M4C, EMH iML e-moc and Elektro BAUER BSM-WS36A-Y as compatible OCMF hub meters. Neither XM355 nor XM375 appears in that legal-metrology list. Thus XM355's MID product claim and CHARX point-meter profile do not establish signed OCMF billing compatibility.
 
 Therefore:
-- EEM-XM375 1674510 remains the strongest MID candidate on product data, but **CHARX compatibility is not confirmed**.
-- EEM-XM355 1674509 is a current MID CT meter with RS-485 Modbus and published downloads, but **CHARX compatibility is not confirmed** either.
-- A Modbus interface alone is not evidence that CHARX has a supported meter profile or that it will correctly use the meter for current monitoring/load management.
-- No production meter is selected.
+- EEM-XM355 1674509 is the leading **CHARX-configurable MID point-meter candidate** for further testing, not an approved billing meter.
+- EEM-XM375 1674510 remains a MID CT candidate at product level, but its point-meter support in CHARX firmware 1.9.1 is not listed; do not assume its Modbus/TCP interface is enough.
+- Neither XM355 nor XM375 is currently evidenced as a CHARX legal-metrology/OCMF compatible meter.
+- No production meter or legally compliant billing chain is selected.
 
 ## 2. Evidence sources and version boundaries
 
@@ -63,9 +64,9 @@ Relevant section 4.7, “Connecting the energy measuring device”:
 - It says the supported list may be extended in future software releases and that the installed firmware's actual list is visible in charging-point configuration.
 - The manual says to connect a meter when using current monitoring (overcurrent/out-of-balance) or load management.
 
-**Version limitation:** Revision 04 / firmware 1.5.1 is older than the current CHARX help/manual baseline recorded in M1.11 (Revision 06 / firmware 1.9.1). The extracted list is valid evidence for that older firmware only. It is not proof that firmware 1.9.1 lacks XM-series support. It is also not proof that support was added. The current installed firmware list and written Phoenix confirmation remain mandatory.
+**Version limitation:** Revision 04 / firmware 1.5.1 is older than the current Revision 06 / firmware 1.9.1 baseline. Its omission of XM-series meters is historical only. The current 1.9.1 configuration page resolves this for XM355 (listed) and XM375 (not listed).
 
-### 2.3 EEM-XM375 1674510 product evidence
+### 2.4 EEM-XM375 1674510 product evidence
 
 Official product page:  
 https://www.phoenixcontact.com/en-pc/products/measuring-device-eem-xm375-1674510
@@ -83,9 +84,9 @@ Confirmed product-page properties:
 - Product page exposes CT accessory families and connection-diagram images.
 - The page's downloads query returned an error during this review; the EEM-XMxxx manual and exact MID certificate were not obtained as files.
 
-**Compatibility finding:** the product's Modbus/TCP interface is not listed as a supported CHARX point-meter profile in the extracted Revision 04 manual. The current help's reference to Ethernet ETH0 for measuring devices does not, by itself, identify XM375 as an implemented model. Treat integration as **unconfirmed** until Phoenix identifies the supported firmware, profile, network port/topology, register map and configuration entry.
+**Compatibility finding:** EEM-XM375 is not named in the current firmware 1.9.1 selectable meter list. Its Modbus/TCP interface alone does not establish a CHARX point-meter profile. Treat point-meter integration as **not evidenced / not selectable in published current list** unless Phoenix confirms otherwise in writing.
 
-### 2.4 EEM-XM355 1674509 product evidence
+### 2.5 EEM-XM355 1674509 product evidence
 
 Official product page:  
 https://www.phoenixcontact.com/en-pc/products/measuring-device-eem-xm355-1674509
@@ -100,14 +101,32 @@ Confirmed product-page properties:
 - Manufacturer-stated calibration validity: 8 years.
 - Product page exposes English manual UM EN EEM-XMxxx, product ID 111667, revision 03, plus register-table archive and EU declaration of conformity.
 
-**Compatibility finding:** RS-485 matches the physical interface type of the CHARX “Meter” connector, but the model is not named in the Revision 04 implemented meter list. Interface similarity does not prove protocol/profile support. Do not connect it as an assumed drop-in replacement for EEM-EM357 or EM340.
+**Compatibility finding:** the current firmware 1.9.1 charging-point configuration explicitly lists EEM-XM355 1674509 as a selectable meter type. This is manufacturer evidence of a supported profile for point-meter configuration. It is not yet bench validation of four-point operation, MID billing, signed OCMF output or Portuguese legal suitability. The controller's Meter connector is RS-485; confirm the exact baud rate, address, parity and register settings against the XMxxx manual and WBM selection.
 
-### 2.5 EEM-MA370-R 2907980
+### 2.6 EEM-MA370-R 2907980
 
 Official product page:  
 https://www.phoenixcontact.com/en-pc/products/measuring-instrument-eem-ma370-r-2907980
 
 The product page confirms Modbus/RTU over RS-485 and Modbus/TCP over Ethernet, with CT 1 A/5 A inputs. MID approval was not evidenced in the reviewed product data. Retain as an operational telemetry candidate only; it is not a billing-meter candidate on current evidence.
+
+
+
+### 2.7 Current CHARX legal-metrology / OCMF compatibility
+
+Official Phoenix Contact page:  
+https://www.phoenixcontact.com/charx-help/CHARX_control_modular_product_family/Legal_metrology.htm
+
+The current help explains that, in legal-metrology operation, the SEC-3xxx forwards signed OCMF packets from the energy meter to the backend via OCPP. The meter signs the packet after a charging process; the controller forwards it unchanged. The page says the legal-metrology-relevant functions are in the meter, backend (according to the type-examination certificate) and optional transparency-software verification.
+
+The current compatible OCMF meter table lists only:
+- ISKRA WM3M4C, version 2.05, OCMF 1.0.
+- EMH iML e-moc, version 1.09, OCMF 1.4.1, with specified Modbus settings.
+- Elektro BAUER BSM-WS36A-Y, version V60, OCMF 1.4.0, with specified internal switching and IR probe requirements.
+
+**Neither EEM-XM355 nor EEM-XM375 appears in the current OCMF compatible-meter table.** A MID product-page claim and a selectable CHARX energy-meter profile are not equivalent to OCMF signing support. The XM355 must therefore be treated as a point measurement/load-management candidate only until Phoenix confirms a legal-metrology-capable model/firmware and provides the relevant type-examination/certificate evidence.
+
+The page also states that OCMF transmission is automatic when a compatible meter is connected/configured; only OCPP release mode provides OCMF records. Continuous charging release mode does not provide downloadable OCMF records and the supplied energy is not considered billable from a legal-metrology perspective. Offline transactions are temporarily stored on the controller, limited to 100 charging processes, after which older records are deleted. This is a material constraint for any future offline billing design; it must be reflected in product requirements and backend/operator recovery procedures.
 
 ## 3. CT architecture for one 22 kW output
 
@@ -173,8 +192,9 @@ No mains energisation or vehicle charging is authorised by this plan. A qualifie
 | Separate optional grid-infeed meter role | CONFIRMED by current manufacturer help |
 | XM375 MID product-page claim and CT 1 A/5 A interface | CONFIRMED at product-page level |
 | XM355 MID product-page claim and RS-485 interface | CONFIRMED at product-page level |
-| XM375 support in CHARX firmware 1.9.1 | OPEN — written confirmation required |
-| XM355 support in CHARX firmware 1.9.1 | OPEN — written confirmation required |
+| XM375 selectable point-meter profile in CHARX firmware 1.9.1 | NOT LISTED — written exception/roadmap confirmation required |
+| XM355 selectable point-meter profile in CHARX firmware 1.9.1 | CONFIRMED IN CURRENT CONFIGURATION HELP; bench validation open |
+| XM355/XM375 compatible signed OCMF legal-metrology profile | NOT LISTED in current OCMF table |
 | Exact XMxxx manual, CT wiring and MID certificate scope for XM375 | OPEN — downloads retrieval failed |
 | CT model/ratio/burden/sealing for 32 A output | OPEN |
 | Per-output register attribution and OCPP/transaction persistence | OPEN |
@@ -183,9 +203,9 @@ No mains energisation or vehicle charging is authorised by this plan. A qualifie
 
 ## 8. Next actions
 
-1. Obtain from Phoenix Contact the current firmware 1.9.1 supported-meter list and written XM375/XM355 compatibility confirmation.
-2. Obtain the exact EEM-XMxxx manual and MID certificate for item 1674510, plus selected CT datasheets and certificate scope.
-3. Compare a supported legacy/direct or CT meter option against the XM series; favour proven CHARX integration where the commercial metrology requirements are met.
+1. Ask Phoenix Contact whether XM355 is supported for the required four-point SEC-1000/SEC-3xxx topology and whether any XM-series model/firmware supports signed OCMF legal-metrology output.
+2. Obtain the exact EEM-XMxxx manual and MID certificate scope for item 1674509 and item 1674510, plus selected CT datasheets.
+3. Compare XM355's proven selectable point-meter profile against the OCMF-capable EMH/BAUER alternatives and lifecycle/procurement status of Iskra WM3M4C; do not procure a discontinued device.
 4. Only after compatibility evidence, define per-output meter wiring, CT ratio, shorting terminals, sealing, Modbus addressing and test procedure.
 5. Obtain Portuguese metrology/legal review before any billing or MID-compliance claim.
 
