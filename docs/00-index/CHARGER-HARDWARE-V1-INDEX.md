@@ -105,3 +105,11 @@ M1.13 confirms from current Phoenix Contact firmware 1.9.1 help that EEM-XM355 1
 M1.14 evaluates the meters listed by current CHARX legal-metrology/OCMF help. EMH iML e-moc is the leading prototype candidate: CHARX lists firmware 1.09 / OCMF 1.4.1, and EMH publishes MID/national approval, bidirectional direct measurement, 0.1–5(40) A, RS-485 Modbus/OCMF and charging-process signatures. The 40 A rating may cover the 32 A reference output but requires thermal/protection verification. BAUER BSM-WS36A-Y remains on hold because the retrieved manual is for a different H01 variant and cannot be used as its specification. Portuguese legal/fiscal suitability, exact certificates, four-output OCMF operation and offline retention controls remain open. No production meter or billing workflow is approved.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-14-OCMF-METER-ALTERNATIVES-REVIEW.md`
+
+
+
+### M1.15 — Portugal metrology, AFIR and billing boundary
+
+M1.15 maps Portugal's Decree-Law 29/2022 legal-metrology framework and identifies IPQ as the National Metrology Institution under Article 13. It separates MID product conformity, Portuguese legal metrology, CHARX/OCMF integration and the commercial charging/payment service. For the 22 kW public AC point (below 50 kW), AFIR Article 5 requires ad-hoc access, transparent disclosure of price components in the order kWh, minute, session and other components, and permits secure internet-connected payment such as a specific QR-code route for points below 50 kW. Payment remains separate from the local safety controller. EMH iML e-moc remains the leading OCMF prototype candidate; EEM-XM355 remains a point-meter candidate without evidenced OCMF support. Portuguese billing approval, certificate scope, four-point validation and offline transaction recovery remain open. No production meter or billing claim is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-15-PORTUGAL-METROLOGY-AFIR-AND-BILLING-BOUNDARY.md`
