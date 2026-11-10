@@ -72,3 +72,17 @@ Workflow [#17](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42
 Artifact: evse-symbol-migration-kicad10-7, ID 13761195036, 17,784 bytes, expires 2026-12-10. SHA-256: af0c882993c9e20acd74e2cc83459cbad50abd6bfca93aa50e6ce6e5217311e0.
 
 This repeat run confirms the review footprint remains parseable by KiCad 10 and internally consistent with its coordinate CSV. It does not validate the manufacturer's drawing independently, perform graphical 1:1 inspection, or approve fabrication. U2 remains review-only/not approved; U19 remains without a footprint.
+
+
+## 2026-11-10 — U19 HV pad-centre reconstruction (review-only)
+
+A coordinate transcription has been added at `TMCS1123A3AQDVGR-DVG0010A-HV-PAD-CENTRES-REVIEW.csv`. It derives nominal pad centres from TI drawing 4226847/C:
+- HV row-centre separation: 9.75 mm → X = ±4.875 mm.
+- Eight signal pads: 7 × 1.27 mm pitch, symmetric → Y = ±0.635, ±1.905, ±3.175, ±4.445 mm.
+- Two current pads: 5.08 mm centre spacing, symmetric → Y = ±2.540 mm.
+- HV metal dimensions: current pads 1.65 × 4.41 mm; signal pads 1.65 × 0.60 mm.
+- Derived metal gap between rows: 9.75 − 1.65 = 8.10 mm, matching TI's explicit 8.1 mm label.
+
+The CSV axes are defined relative to the centre of the pattern: X negative is the current-input side, X positive is the signal side; Y positive points toward the upper edge of TI's drawing. The pad-number sequence follows TI's package top view (1 then 2 on the left, 3 at the bottom of the signal row through 10 at the top). A KiCad footprint orientation transform must be documented and visually checked; do not assume the CSV axes match KiCad's screen axes.
+
+**Status: coordinate transcription REVIEW ONLY; no U19 footprint generated or assigned.** This is a mathematical reconstruction of TI's example drawing, not manufacturer CAD or physical sample validation. The 8.1 mm component pad gap does not establish finished-board insulation compliance. Full PCB creepage/clearance assessment remains mandatory.
