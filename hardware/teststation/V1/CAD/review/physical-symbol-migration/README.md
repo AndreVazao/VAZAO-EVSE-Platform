@@ -71,3 +71,12 @@ Workflow [#14](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42
 Artifact: `evse-symbol-migration-kicad10-7`, ID `13629449480`, SHA-256 `af2533d9e270b77a7671956fdfeb2bb32985b67e75bb45e1413ff24fe352aa9e`.
 
 This confirms KiCad parser/API compatibility and CSV consistency only. It does not independently prove TI drawing transcription, graphical 1:1 appearance, board-level insulation, or manufacturability. The CI also reconfirmed ERC 353 messages / 300 errors / 53 warnings on baseline versus 436 / 383 / 53 on migrated (+83 errors). The candidate remains review-only and unapproved; U19 has no footprint. No production master, legacy baseline, PCB, or wiring was changed.
+
+
+## 2026-11-10 — TI package drawing re-check
+
+The official TI drawings were visually rechecked. U2's PBS land-pattern drawing 4212229/A explicitly dimensions the opposing pad-row centre lines at 6.20 mm in both axes, supporting the review candidate's ±3.10 mm row centres; the drawing also specifies 0.50 mm pitch and 1.60 × 0.30 mm pads. The TI mechanical top view confirms pin 1 at the lower-left and the numbering progression around the package. This is stronger drawing interpretation evidence, not fabrication approval or independent CAD/physical-sample validation.
+
+For U19, the live TI source is now SBOSA24D Rev. D (revised May 2026). Its DVG0010A outline and land-pattern pages show an asymmetric arrangement (pins 1–2 on one side, pins 3–10 on the other), not a conventional 5+5 SOIC-10. The HV/isolation example is the only viable candidate for further review because TI states 8.1 mm clearance/creepage versus 7.3 mm for IPC nominal, while the datasheet specifies at least 8 mm external clearance/creepage. No U19 footprint or pad coordinates have been generated; the dimension callouts still require a rigorous coordinate reconstruction and PCB-level insulation review.
+
+Sources and detailed limitations are recorded in M2.9-K-U2-U19-PACKAGE-FOOTPRINT-EVIDENCE-REGISTER.md.
