@@ -62,3 +62,12 @@ A dedicated `footprints/` directory now holds an isolated U2 candidate footprint
 The U2 ADS131M06IPBSR PBS TQFP-32 review-only footprint candidate, coordinate CSV and static validator were added in commit `9868785dda6340ccf575cc6d15010311ee13eebb`. Workflow [#8](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42473979552) completed successfully. Its static footprint guard and KiCad 10 schematic export steps passed. Artifact: `evse-symbol-migration-kicad10-7`, ID `13614214105`, SHA-256 `536fb5aab8ac3b8197c73cc68ccf03fcb5058973580f3bc4bc97adb11fff067d`.
 
 Important limitation: CI did not open or render the custom footprint in the KiCad footprint editor and does not prove the coordinate interpretation against independent manufacturer CAD. Candidate remains **REVIEW ONLY / NOT APPROVED**. U19 has no footprint. No schematic assignment, PCB edit, fabrication or mains energization is authorized.
+
+
+## 2026-11-08 — CI #14: KiCad-native footprint load confirmed
+
+Workflow [#14](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42512318776) completed successfully. In addition to the static geometry/CSV guard and schematic exports, the workflow loaded the U2 review-only footprint through KiCad 10's `pcbnew` API. The test found exactly pads 1–32 and confirmed pad centres/sizes matched the review CSV within 0.001 mm.
+
+Artifact: `evse-symbol-migration-kicad10-7`, ID `13629449480`, SHA-256 `af2533d9e270b77a7671956fdfeb2bb32985b67e75bb45e1413ff24fe352aa9e`.
+
+This confirms KiCad parser/API compatibility and CSV consistency only. It does not independently prove TI drawing transcription, graphical 1:1 appearance, board-level insulation, or manufacturability. The CI also reconfirmed ERC 353 messages / 300 errors / 53 warnings on baseline versus 436 / 383 / 53 on migrated (+83 errors). The candidate remains review-only and unapproved; U19 has no footprint. No production master, legacy baseline, PCB, or wiring was changed.
