@@ -89,3 +89,11 @@ M1.11 identifies the official CHARX UM EN Revision 06 / firmware 1.9.1 manual an
 M1.12 identifies Phoenix Contact EEM-XM375 1674510 as the strongest current MID candidate found: three-phase, CT 1 A/5 A, Modbus/TCP Ethernet, bidirectional, MID 2014/32/EU and manufacturer-stated class C EN 50470-3. It remains a candidate only: CT chain, certificate scope, CHARX profile, per-output transaction attribution and Portuguese billing suitability are open. Corrected lifecycle: EEM-EM355 2908578 is marked no longer in product range and its manufacturer-listed replacement is EEM-XM355 1674509; do not procure 2908578 for new design. EEM-MA370-R 2907980 supports Modbus RTU/TCP but MID was not evidenced on its reviewed page. No production meter is selected.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-12-MID-METER-CANDIDATE-AND-LIFECYCLE-REVIEW.md`
+
+
+
+### M1.13 — CHARX meter compatibility and CT architecture
+
+M1.13 confirms from current Phoenix Contact CHARX load-management help that each charging point requires its own attributable meter (F); an optional grid-infeed meter (M) is a separate role. A retrievable CHARX manual Revision 04 / firmware 1.5.1 lists implemented point-meter models but not EEM-XM375 or EEM-XM355. Because that manual predates the Revision 06 / firmware 1.9.1 baseline, this is not proof that current firmware lacks support; current firmware compatibility must be confirmed in writing. XM375 remains the lead MID CT candidate and XM355 a MID RS-485 candidate, neither CHARX-approved. M1.13 defines functional CT/per-output architecture, safety constraints for CT secondaries, manufacturer questions and a bench validation plan. No meter, CT, wiring or billing workflow is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-13-CHARX-METER-COMPATIBILITY-AND-CT-ARCHITECTURE.md`
