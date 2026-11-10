@@ -97,3 +97,11 @@ M1.12 identifies Phoenix Contact EEM-XM375 1674510 as the strongest current MID 
 M1.13 confirms from current Phoenix Contact firmware 1.9.1 help that EEM-XM355 1674509 is a selectable CHARX point-meter profile; EEM-XM375 1674510 is not listed. Current load-management guidance requires a separately attributable meter per charging point plus an optional distinct grid-infeed meter. Crucially, the separate legal-metrology/OCMF compatibility table lists only ISKRA WM3M4C, EMH iML e-moc and BAUER BSM-WS36A-Y; neither XM355 nor XM375 is listed there. XM355 is therefore a strong integrated MID point-meter candidate for bench evaluation, but not an evidenced OCMF billing meter. M1.13 defines CT/per-output architecture, CT-secondary safety, supplier questions and bench validation. No production meter, CT, wiring or billing workflow is approved.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-13-CHARX-METER-COMPATIBILITY-AND-CT-ARCHITECTURE.md`
+
+
+
+### M1.14 — OCMF meter alternatives review
+
+M1.14 evaluates the meters listed by current CHARX legal-metrology/OCMF help. EMH iML e-moc is the leading prototype candidate: CHARX lists firmware 1.09 / OCMF 1.4.1, and EMH publishes MID/national approval, bidirectional direct measurement, 0.1–5(40) A, RS-485 Modbus/OCMF and charging-process signatures. The 40 A rating may cover the 32 A reference output but requires thermal/protection verification. BAUER BSM-WS36A-Y remains on hold because the retrieved manual is for a different H01 variant and cannot be used as its specification. Portuguese legal/fiscal suitability, exact certificates, four-output OCMF operation and offline retention controls remain open. No production meter or billing workflow is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-14-OCMF-METER-ALTERNATIVES-REVIEW.md`
