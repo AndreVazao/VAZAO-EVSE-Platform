@@ -113,3 +113,10 @@ M1.14 evaluates the meters listed by current CHARX legal-metrology/OCMF help. EM
 M1.15 maps Portugal's Decree-Law 29/2022 legal-metrology framework and identifies IPQ as the National Metrology Institution under Article 13. It separates MID product conformity, Portuguese legal metrology, CHARX/OCMF integration and the commercial charging/payment service. For the 22 kW public AC point (below 50 kW), AFIR Article 5 requires ad-hoc access, transparent disclosure of price components in the order kWh, minute, session and other components, and permits secure internet-connected payment such as a specific QR-code route for points below 50 kW. Payment remains separate from the local safety controller. EMH iML e-moc remains the leading OCMF prototype candidate; EEM-XM355 remains a point-meter candidate without evidenced OCMF support. Portuguese billing approval, certificate scope, four-point validation and offline transaction recovery remain open. No production meter or billing claim is approved.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-15-PORTUGAL-METROLOGY-AFIR-AND-BILLING-BOUNDARY.md`
+
+
+### M1.16 — meter architecture and bench acceptance
+
+M1.16 establishes a two-track prototype decision: EMH iML e-moc first for OCMF/legal-metrology bench evaluation (exact CHARX-listed firmware 1.09 / OCMF 1.4.1), with EEM-XM355 retained as a selectable point-meter/load-management alternative but not an evidenced OCMF meter. It defines one uniquely attributable meter per output plus a separate optional grid-infeed meter, staged bench acceptance from document review through four-point/offline testing, CT-secondary safety, fault responses, minimum transaction records and release gates. No production meter, wiring schedule, billing approval or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-16-METER-ARCHITECTURE-AND-BENCH-ACCEPTANCE.md`
