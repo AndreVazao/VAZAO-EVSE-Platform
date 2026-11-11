@@ -15,7 +15,7 @@ LIB = ROOT / "VAZAO_EVSE_Review.pretty"
 def fail(message: str) -> None:
     raise SystemExit("FAIL " + message)
 
-def check(name: str, csv_name: str, number_field: str, expected_numbers: set[str]) -> None:
+def check(name: str, csv_name: str, number_field: str, expected_numbers: set[str], *, invert_y: bool = False) -> None:
     fp = pcbnew.FootprintLoad(str(LIB), name)
     if fp is None:
         fail(f"KiCad could not load {name}.kicad_mod")
@@ -45,6 +45,8 @@ def check(name: str, csv_name: str, number_field: str, expected_numbers: set[str
         else:
             keys = ("x_mm", "y_mm", "pad_x_mm", "pad_y_mm")
         expected = tuple(float(row[key]) for key in keys)
+        if invert_y:
+            expected = (expected[0], -expected[1], expected[2], expected[3])
         if any(abs(a-b) > 0.001 for a,b in zip(actual, expected)):
             fail(f"{name} pad {number}: KiCad/CSV mismatch {actual} != {expected}")
     print(f"PASS KiCad pcbnew loaded {name}: {len(pads)} pads; centres/sizes match review CSV within 0.001 mm.")
@@ -57,6 +59,7 @@ check(
 check(
     "TMCS1123A3AQDVGR_DVG0010A_HV_SOIC-10",
     "TMCS1123A3AQDVGR-DVG0010A-HV-PAD-CENTRES-REVIEW.csv",
-    "pad_number", {str(n) for n in range(1,11)}
+    "pad_number", {str(n) for n in range(1,11)}, invert_y=True
 )
-print("LIMITATION: KiCad parsing and CSV consistency only; no independent TI drawing verification, PCB insulation assessment, or fabrication approval.")
+print("U19 transform applied: X_KiCad = X_TI; Y_KiCad = -Y_TI (TI drawing Y points up; KiCad local Y points down).")
+print("LIMITATION: KiCad parsing and transformed CSV consistency only; no independent TI drawing verification, visual inspection, PCB insulation assessment, or fabrication approval.")
