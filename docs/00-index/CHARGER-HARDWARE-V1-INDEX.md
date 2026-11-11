@@ -120,3 +120,9 @@ M1.15 maps Portugal's Decree-Law 29/2022 legal-metrology framework and identifie
 M1.16 establishes a two-track prototype decision: EMH iML e-moc first for OCMF/legal-metrology bench evaluation (exact CHARX-listed firmware 1.09 / OCMF 1.4.1), with EEM-XM355 retained as a selectable point-meter/load-management alternative but not an evidenced OCMF meter. It defines one uniquely attributable meter per output plus a separate optional grid-infeed meter, staged bench acceptance from document review through four-point/offline testing, CT-secondary safety, fault responses, minimum transaction records and release gates. No production meter, wiring schedule, billing approval or energisation release.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-16-METER-ARCHITECTURE-AND-BENCH-ACCEPTANCE.md`
+
+### M1.17 — supplier RFI and evidence request
+
+M1.17 consolidates the unresolved manufacturer and deployment questions into a controlled, not-yet-sent RFI package for Phoenix Contact and EMH, plus separate Portugal legal-metrology and operator/fiscal review requests. It asks for exact four-point CHARX topology, simultaneous EMH/OCMF compatibility, terminal-level RS-485 details, offline persistence/recovery, cluster fault containment, complete power/peripheral budget, exact MID/legal-metrology certificate scope, 32 A continuous thermal suitability, OCMF signature/key/retention behaviour and lifecycle/commercial evidence. A response register and design-freeze acceptance criteria make unsupported answers remain OPEN. This document has not been sent; no supplier response, approval, quotation, certification, production selection or energisation is implied.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-17-SUPPLIER-RFI-AND-EVIDENCE-REQUEST.md`
