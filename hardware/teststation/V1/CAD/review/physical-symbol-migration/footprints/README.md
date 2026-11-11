@@ -86,3 +86,20 @@ A coordinate transcription has been added at `TMCS1123A3AQDVGR-DVG0010A-HV-PAD-C
 The CSV axes are defined relative to the centre of the pattern: X negative is the current-input side, X positive is the signal side; Y positive points toward the upper edge of TI's drawing. The pad-number sequence follows TI's package top view (1 then 2 on the left, 3 at the bottom of the signal row through 10 at the top). A KiCad footprint orientation transform must be documented and visually checked; do not assume the CSV axes match KiCad's screen axes.
 
 **Status: coordinate transcription REVIEW ONLY; no U19 footprint generated or assigned.** This is a mathematical reconstruction of TI's example drawing, not manufacturer CAD or physical sample validation. The 8.1 mm component pad gap does not establish finished-board insulation compliance. Full PCB creepage/clearance assessment remains mandatory.
+
+## 2026-11-11 correction — U19 candidate footprint created; CI #24/#25 passed
+
+The earlier statement above that no U19 footprint had been generated is superseded. A review-only candidate now exists:
+
+`VAZAO_EVSE_Review.pretty/TMCS1123A3AQDVGR_DVG0010A_HV_SOIC-10.kicad_mod`
+
+It was generated from the U19 review coordinate CSV and is explicitly marked `REVIEW ONLY — NOT FOR FABRICATION`. It has the asymmetric 2+8 pad arrangement and is not assigned to any schematic or PCB.
+
+The updated KiCad 10 native validator loads **both U2 and U19**, checks exact pad-number sets, and compares pad centres and sizes against their respective review CSVs within 0.001 mm. CI runs #24 and #25 passed, including the native `pcbnew` load step and baseline/migrated schematic exports:
+
+- [CI #24](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42869290910), commit `f822f43cc64cf3b6ad2085739756e6b5b98d63df`; artifact ID `13788278851`, SHA-256 `89393ba1906e40ba387a08a81c53cfb950f3700753b905117588148356f2fda4`.
+- [CI #25](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/42869328727), commit `636ba7f9df8247327ea4effd045006b78551c2e6`; artifact ID `13788043116`, SHA-256 `3214f8272846aca8ea293571a2f2906079d5c03a433f13599b3d60276517414b`.
+
+These tests establish KiCad parser/API compatibility and internal CSV consistency only. They do not independently validate the coordinate transcription against TI's drawing, confirm pin orientation in a graphical 1:1 KiCad inspection, compare with manufacturer CAD/physical samples, or establish finished-board insulation compliance. The CSV axis convention and its transformation into KiCad's displayed orientation still require visual verification.
+
+Both U2 and U19 remain `REVIEW_ONLY_NOT_APPROVED`. The 83-error ERC regression remains unresolved. The production master, legacy baseline and production PCB remain untouched. No fabrication, PCB release or mains energization is authorized.
