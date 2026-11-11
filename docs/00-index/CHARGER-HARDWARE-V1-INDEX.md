@@ -126,3 +126,9 @@ M1.16 establishes a two-track prototype decision: EMH iML e-moc first for OCMF/l
 M1.17 consolidates the unresolved manufacturer and deployment questions into a controlled, not-yet-sent RFI package for Phoenix Contact and EMH, plus separate Portugal legal-metrology and operator/fiscal review requests. It asks for exact four-point CHARX topology, simultaneous EMH/OCMF compatibility, terminal-level RS-485 details, offline persistence/recovery, cluster fault containment, complete power/peripheral budget, exact MID/legal-metrology certificate scope, 32 A continuous thermal suitability, OCMF signature/key/retention behaviour and lifecycle/commercial evidence. A response register and design-freeze acceptance criteria make unsupported answers remain OPEN. This document has not been sent; no supplier response, approval, quotation, certification, production selection or energisation is implied.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-17-SUPPLIER-RFI-AND-EVIDENCE-REQUEST.md`
+
+### M1.18 — independent technical validation matrix
+
+M1.18 separates manufacturer evidence, design evidence, bench-test evidence and competent approval. It defines requirement-level validation rows for controller/quad topology, local EVSE safety, switching, metering/MID/OCMF, RS-485, offline persistence, cybersecurity, power, thermal/mechanical design, payment, fiscal and privacy workflows. It establishes controlled test stages, evidence-packet requirements, severity/stop rules and independent release gates. All tests remain NOT STARTED unless later supported by retained records; no physical test is claimed. The matrix does not authorise mains energisation, fabrication, installation, billing or commercial deployment.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-18-INDEPENDENT-VALIDATION-MATRIX.md`
