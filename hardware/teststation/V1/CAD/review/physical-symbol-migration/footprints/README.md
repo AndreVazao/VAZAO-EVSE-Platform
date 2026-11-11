@@ -9,7 +9,7 @@
 | U2 — ADS131M06IPBSR, PBS TQFP-32 | `VAZAO_EVSE_Review.pretty/ADS131M06IPBSR_PBS_TQFP-32_5x5mm_P0.5mm.kicad_mod` | CI #24/#25 passed | REVIEW ONLY |
 | U19 — TMCS1123A3AQDVGR, DVG0010A HV | `VAZAO_EVSE_Review.pretty/TMCS1123A3AQDVGR_DVG0010A_HV_SOIC-10.kicad_mod` | CI #24/#25 passed before the axis-transform correction; rerun required | REVIEW ONLY |
 
-The native-load test previously compared KiCad coordinates directly with the drawing-oriented CSV. That was insufficient for U19 because the CSV defines Y positive toward the top of the TI drawing, while KiCad footprint-local Y positive points down the screen. The U19 candidate and native validator are being corrected to apply the explicit transform **X_KiCad = X_TI; Y_KiCad = −Y_TI**. The next CI run must pass before the corrected candidate can be considered internally validated.
+The native-load test previously compared KiCad coordinates directly with the drawing-oriented CSV. That was insufficient for U19 because the CSV defines Y positive toward the top of the TI drawing, while KiCad footprint-local Y positive points down the screen. The U19 candidate and native validator have been corrected to apply the explicit transform **X_KiCad = X_TI; Y_KiCad = −Y_TI**. The corrected candidate is awaiting a fresh CI run before it can be considered internally validated.
 
 ## U2 — ADS131M06IPBSR, TI PBS TQFP-32
 
