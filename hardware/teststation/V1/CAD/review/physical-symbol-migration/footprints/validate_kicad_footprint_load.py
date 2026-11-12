@@ -49,6 +49,20 @@ def check(name: str, csv_name: str, number_field: str, expected_numbers: set[str
             expected = (expected[0], -expected[1], expected[2], expected[3])
         if any(abs(a-b) > 0.001 for a,b in zip(actual, expected)):
             fail(f"{name} pad {number}: KiCad/CSV mismatch {actual} != {expected}")
+    if name.startswith("TMCS1123A3AQDVGR"):
+        # TI top-view orientation: pin 1 is above pin 2 on the left/current row;
+        # pin 3 is below pin 10 on the right/signal row. KiCad local +Y points down.
+        if not (pads["1"][1] < pads["2"][1]):
+            fail("U19 orientation: KiCad pin 1 must be above pin 2")
+        if not (pads["3"][1] > pads["10"][1]):
+            fail("U19 orientation: KiCad pin 3 must be below pin 10")
+        if not (pads["1"][0] < pads["3"][0]):
+            fail("U19 orientation: current-input row must be left of signal row")
+        if abs((pads["3"][0] - pads["1"][0]) - 9.75) > 0.001:
+            fail("U19 orientation: row-centre separation must be 9.75 mm")
+        if abs((pads["3"][1] - pads["10"][1]) - 8.89) > 0.001:
+            fail("U19 orientation: signal-row vertical span must be 8.89 mm")
+        print("PASS U19 top-view orientation: pin 1 above 2; pin 3 below 10; current row left of signal row.")
     print(f"PASS KiCad pcbnew loaded {name}: {len(pads)} pads; centres/sizes match review CSV within 0.001 mm.")
 
 check(
