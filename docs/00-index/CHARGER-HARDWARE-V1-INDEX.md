@@ -139,3 +139,10 @@ M1.18 separates manufacturer evidence, design evidence, bench-test evidence and 
 M1.19 establishes a conceptual functional electrical architecture for Single, Dual, Quad and Wallbox variants, centred on a repeatable output cell with its own local EVSE safety/control, CP/PP, switching/feedback, protective inputs and uniquely attributable metering where required. It separates mains distribution, controller/backplane, auxiliary 12 V, contactor-coil and safety domains; defines grid/load allocation boundaries, optional commercial/communications modules, interface ownership, fault states, common-cause dependencies, required calculations and ten release gates. CHARX shared-cluster and 6 A backplane limitations remain explicit. This is a conceptual baseline only: no terminal schedule, component freeze, protection rating, cable sizing, production design or energisation is released.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-19-MODULAR-ELECTRICAL-ARCHITECTURE-AND-INTERFACE-BOUNDARIES.md`
+
+
+### M1.20 — physical panel zoning and modular assembly
+
+M1.20 translates the M1.19 functional architecture into a conceptual physical layout for Single, Dual, Quad and Wallbox variants. Defines twelve functional zones, conceptual panel arrangements, repeated output-cell assemblies, shared infrastructure, segregation and cable-routing principles, thermal/EMC/environmental review, service access, optional-module blanking, variant assembly matrix, mechanical data needed before dimensioned CAD and ten physical-design release gates. No enclosure dimensions, component coordinates, drilling, terminal layout, wire routing, clearances or production assembly instructions are released.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-20-PHYSICAL-PANEL-ZONING-AND-MODULAR-ASSEMBLY.md`
