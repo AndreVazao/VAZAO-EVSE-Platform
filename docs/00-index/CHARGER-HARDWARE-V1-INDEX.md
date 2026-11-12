@@ -132,3 +132,10 @@ M1.17 consolidates the unresolved manufacturer and deployment questions into a c
 M1.18 separates manufacturer evidence, design evidence, bench-test evidence and competent approval. It defines requirement-level validation rows for controller/quad topology, local EVSE safety, switching, metering/MID/OCMF, RS-485, offline persistence, cybersecurity, power, thermal/mechanical design, payment, fiscal and privacy workflows. It establishes controlled test stages, evidence-packet requirements, severity/stop rules and independent release gates. All tests remain NOT STARTED unless later supported by retained records; no physical test is claimed. The matrix does not authorise mains energisation, fabrication, installation, billing or commercial deployment.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-18-INDEPENDENT-VALIDATION-MATRIX.md`
+
+
+### M1.19 — modular electrical architecture and interface boundaries
+
+M1.19 establishes a conceptual functional electrical architecture for Single, Dual, Quad and Wallbox variants, centred on a repeatable output cell with its own local EVSE safety/control, CP/PP, switching/feedback, protective inputs and uniquely attributable metering where required. It separates mains distribution, controller/backplane, auxiliary 12 V, contactor-coil and safety domains; defines grid/load allocation boundaries, optional commercial/communications modules, interface ownership, fault states, common-cause dependencies, required calculations and ten release gates. CHARX shared-cluster and 6 A backplane limitations remain explicit. This is a conceptual baseline only: no terminal schedule, component freeze, protection rating, cable sizing, production design or energisation is released.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-19-MODULAR-ELECTRICAL-ARCHITECTURE-AND-INTERFACE-BOUNDARIES.md`
