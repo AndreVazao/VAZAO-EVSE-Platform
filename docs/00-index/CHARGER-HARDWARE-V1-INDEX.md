@@ -167,3 +167,11 @@ M1.22 establishes the controlled transition from conceptual architecture to dime
 M1.23 defines a native-source-first CAD workflow, provisional FreeCAD evaluation (not asserted installed or tested), STEP/DXF exchange rules, repository source-tree proposal, naming/units/datums/revision control, parametric variant decomposition, optional-module configurations, manufacturer-model provenance, validation checks, Git/large-file policy, a controlled non-electrical pilot and ten C1–C10 release gates. The actual workstation CAD inventory and native-format pilot have NOT been performed or verified. No product dimensions, component placement, clearances, manufacturing geometry or fabrication release are created. Dimensioned CAD remains blocked pending M1.21 E1–E10, M1.22 D1–D10 and M1.23 C1–C10 evidence.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-23-NATIVE-CAD-ARCHITECTURE-AND-MODEL-CONTROL.md`
+
+
+### M1.24 — CAD workstation inventory and pilot preparation
+
+Prepared a read-only Windows PowerShell inventory utility at `tools/cad/Invoke-VazaoCadInventory.ps1` and an execution/acceptance procedure at `docs/03-engineering/CHARGER-HARDWARE-V1-M1-24-CAD-WORKSTATION-INVENTORY-PILOT-PREP.md`. The utility gathers OS/host details, installed-app registry records and known CAD executable evidence, then emits timestamped JSON/Markdown reports. It does not install, launch or modify applications and does not validate CAD operation or file-format compatibility. Workstation is OFFLINE; script NOT EXECUTED; W1–W10 remain OPEN. Review generated reports for sensitive workstation/software data before committing. No CAD product geometry or fabrication release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-24-CAD-WORKSTATION-INVENTORY-PILOT-PREP.md`
+- `tools/cad/Invoke-VazaoCadInventory.ps1`
