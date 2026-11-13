@@ -14,6 +14,7 @@ on:
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-VARIANT-RANGE-COMPARISON.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_variant_range.py'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_a1_afe_study.py'
   push:
     branches:
       - main
@@ -60,6 +61,10 @@ jobs:
       - name: Validate TMCS1123 RMS-to-peak and ADC range comparison
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_variant_range.py
+
+      - name: Validate A1 to ADS131M06 analogue front-end study arithmetic
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_a1_afe_study.py
 
       # The library format version 20231120 requires a KiCad 8+ parser; use stable KiCad 10 in CI.
       - name: Install KiCad 10 CLI for native parser validation
