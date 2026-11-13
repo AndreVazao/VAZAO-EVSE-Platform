@@ -102,3 +102,6 @@ A deeper review of the existing M2.3 32 A RMS requirement against the TI TMCS112
 The earlier interface evidence note also incorrectly said A3 has no zero-current reference; corrected: all A-family devices use 2.5 V VREF. Pin 5 is a precision reference output, not a current return.
 
 Detailed calculation and comparison of A3/A2/A1/B1, including ADS131M06 ±1.2 V PGA=1 differential FSR, is in `M2.9-K-CURRENT-CHANNEL-RANGE-AUDIT-2026-11-13.md`. A1 (5 V) and B1 (3.3 V) are candidates only. No BOM, schematic, matrix destination or wiring was changed.
+
+
+The interface evidence note received a follow-up correction in commit `fe7b19c8c59b06206f3ada18358b77b3fe30e0e6`: all A-family variants, including A3, use a 2.5 V zero-current reference. The older sentence claiming otherwise was removed. The range mismatch remains: A3's linear peak range is insufficient for 32 A_RMS sinusoidal measurement.
