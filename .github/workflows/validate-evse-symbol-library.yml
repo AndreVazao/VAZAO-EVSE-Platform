@@ -8,6 +8,8 @@ on:
     paths:
       - '.github/workflows/validate-evse-symbol-library.yml'
       - 'hardware/teststation/V1/CAD/review/physical-symbol-migration/**'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-U2-U19-PIN-TO-NET-INTENT-REVIEW.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py'
   push:
     branches:
       - main
@@ -15,6 +17,8 @@ on:
       - '.github/workflows/validate-evse-symbol-library.yml'
       - 'hardware/teststation/V1/CAD/symbols/VAZAO-EVSE-Verified-Components.kicad_sym'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-U2-U19-PIN-TO-NET-INTENT-REVIEW.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/audit_master_netlist_connectivity.py'
       - 'hardware/teststation/V1/CAD/verification/scripts/summarize_master_erc.py'
@@ -35,6 +39,10 @@ jobs:
       - name: Run static pin-map regression checks
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_verified_symbol_library.py
+
+      - name: Validate unapproved U2/U19 pin-to-net intent review matrix
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py
 
       # The library format version 20231120 requires a KiCad 8+ parser; use stable KiCad 10 in CI.
       - name: Install KiCad 10 CLI for native parser validation
