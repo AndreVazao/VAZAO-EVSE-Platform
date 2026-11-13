@@ -11,8 +11,8 @@ import csv
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
-MATRIX = ROOT / "netlist" / "M2.9-K-U2-U19-PIN-TO-NET-INTENT-REVIEW.csv"
+VERIFICATION = Path(__file__).resolve().parents[1]
+MATRIX = VERIFICATION / "netlist" / "M2.9-K-U2-U19-PIN-TO-NET-INTENT-REVIEW.csv"
 
 EXPECTED = {
     "U2": {
