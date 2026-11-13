@@ -1,7 +1,8 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Branch:** `feat/charger-hardware-v1`  
+**Baseline branch:** `main`  
+**Active engineering branch:** `feat/charger-hardware-v1-component-selection`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
 ## Purpose
@@ -35,6 +36,18 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/02-architecture/CHARGER-HARDWARE-V1-CONTROL-COMMUNICATIONS.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-WIRING-SCHEDULE.md`
 - `docs/03-engineering/CHARGER-HARDWARE-V1-INTERNAL-ASSEMBLY.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-BENDER-CC613-INTERFACE-REVIEW-M1-4B.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-MODULAR-CONTROLLER-ARCHITECTURE-REVIEW-M1-5.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-MODULAR-MANUAL-INTERFACE-EXTRACTION-M1-5A.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-QUAD-MODULAR-ARCHITECTURE-M1-6.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-MODULE-COMPATIBILITY-AND-INTERFACES-M1-7.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-TOPOLOGY-AND-CONNECTOR-REGISTER-M1-8.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-QUAD-METERING-FAULT-CONTAINMENT-POWER-BUDGET-M1-9.md`
+- `docs/03-engineering/CHARGER-HARDWARE-V1-CHARX-COMPONENT-LIFECYCLE-AND-PERIPHERAL-REVIEW-M1-10.md`
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
@@ -47,7 +60,118 @@ This is an engineering/documentation baseline, **not a construction certificate 
 
 - [Functional electrical architecture](../../hardware/charger/V1/CAD/diagrams/VAZAO-EVSE-V1-ELECTRICAL-ARCHITECTURE.svg)
 - [Internal panel layout](../../hardware/charger/V1/CAD/diagrams/VAZAO-EVSE-V1-INTERNAL-PANEL-LAYOUT.svg)
+- [Provisional component zoning — M1.3](../../hardware/charger/V1/CAD/diagrams/VAZAO-EVSE-V1-PROVISIONAL-COMPONENT-ZONING-M1-3.svg)
 
 ## Current engineering baseline
 
-The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, and records the preliminary BOM. The drawings are conceptual engineering artefacts and are not authorisation for mains energisation.
+M1.6 now defines mandatory modular product architecture: a safe charging core per output plus physically prepared, optional RFID, communications, HMI, payment and service modules. It decomposes the quad pedestal into four repeatable output cells and shared services, and records fault-containment and release gates. Exact controller count, bus topology, per-output meter wiring and failure isolation remain unverified and are explicitly deferred to M1.7. The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, records the preliminary BOM, and adds the M1.3 controller-interface review matrix and the M1.4A/M1.4B manufacturer-interface evidence reviews. Phoenix terminal-level documentation remains incomplete; Bender CC613 is marked discontinued by its manufacturer and is blocked for procurement. The new component-zoning drawing is provisional and not a dimensioned mounting plate or wiring instruction. These drawings are not authorisation for mains energisation.
+
+
+### M1.9 — metering, RFID failure and cluster fault containment
+
+M1.9 records Phoenix Contact evidence for per-charging-point energy measurement and load management, the explicit RFID-reader-absent error condition, and the shared SEC-3xxx/SEC-1000 backplane/server dependencies. The quad assembly is therefore described as four locally controlled outputs in a shared cluster—not as four fully autonomous units—until server, client and bus fault-injection tests pass. The 6 A backplane limit remains a hard constraint; no PSU or branch protection rating is selected. Exact meter SKU, terminal schedule, 12 V load budget and fault recovery remain open. This is not a released wiring or energisation design.
+
+
+### M1.10 — component lifecycle and peripheral candidates
+
+M1.10 adds manufacturer data for the CHARX RFID/NFC-PCB (1391227), EV-RCM-6DC-WAT (1309697), accessory cable 1360462 and 12 V STEP3 supply 1170953. It identifies the previously shortlisted ISKRA WM3M4C meter 1429603 as no longer in the Phoenix Contact product range and blocks new procurement. The 2.5 A PSU is explicitly not approved for the quad cluster. Current meter replacement/CHARX compatibility, exact terminal-level pinout, approved cluster feed and complete power budget remain open. No BOM or wiring release is made.
+
+
+### M1.11 — wiring evidence, meter lifecycle and 12 V power-budget closure
+
+M1.11 identifies the official CHARX UM EN Revision 06 / firmware 1.9.1 manual and supported controller variants, while keeping the connector register functional rather than terminal-numbered because the complete wiring figures and exact terminal schedule were not extractable from the accessible manual landing page. It confirms EEM-MA370-R 2907980 as a Modbus RTU/TCP investigation candidate only; MID certification, direct/CT topology, CHARX integration and billing suitability remain unverified. EEM-MA370 2907983 is a distinct Modbus/TCP CT-input model and is not a drop-in replacement. The 12 V budget is formalised into separate controller/backplane, auxiliary, contactor-coil and safety domains; the 6 A nominal backplane limit remains hard, and no PSU is selected. The 1/2/4-output load schedules, terminal-level wiring, meter selection and SELV fault-injection remain open. No production BOM, wiring or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-11-WIRING-METER-POWER-BUDGET-CLOSURE.md`
+
+
+### M1.12 — MID meter candidate and lifecycle review
+
+M1.12 identifies Phoenix Contact EEM-XM375 1674510 as the strongest current MID candidate found: three-phase, CT 1 A/5 A, Modbus/TCP Ethernet, bidirectional, MID 2014/32/EU and manufacturer-stated class C EN 50470-3. It remains a candidate only: CT chain, certificate scope, CHARX profile, per-output transaction attribution and Portuguese billing suitability are open. Corrected lifecycle: EEM-EM355 2908578 is marked no longer in product range and its manufacturer-listed replacement is EEM-XM355 1674509; do not procure 2908578 for new design. EEM-MA370-R 2907980 supports Modbus RTU/TCP but MID was not evidenced on its reviewed page. No production meter is selected.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-12-MID-METER-CANDIDATE-AND-LIFECYCLE-REVIEW.md`
+
+
+
+### M1.13 — CHARX meter compatibility and CT architecture
+
+M1.13 confirms from current Phoenix Contact firmware 1.9.1 help that EEM-XM355 1674509 is a selectable CHARX point-meter profile; EEM-XM375 1674510 is not listed. Current load-management guidance requires a separately attributable meter per charging point plus an optional distinct grid-infeed meter. Crucially, the separate legal-metrology/OCMF compatibility table lists only ISKRA WM3M4C, EMH iML e-moc and BAUER BSM-WS36A-Y; neither XM355 nor XM375 is listed there. XM355 is therefore a strong integrated MID point-meter candidate for bench evaluation, but not an evidenced OCMF billing meter. M1.13 defines CT/per-output architecture, CT-secondary safety, supplier questions and bench validation. No production meter, CT, wiring or billing workflow is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-13-CHARX-METER-COMPATIBILITY-AND-CT-ARCHITECTURE.md`
+
+
+
+### M1.14 — OCMF meter alternatives review
+
+M1.14 evaluates the meters listed by current CHARX legal-metrology/OCMF help. EMH iML e-moc is the leading prototype candidate: CHARX lists firmware 1.09 / OCMF 1.4.1, and EMH publishes MID/national approval, bidirectional direct measurement, 0.1–5(40) A, RS-485 Modbus/OCMF and charging-process signatures. The 40 A rating may cover the 32 A reference output but requires thermal/protection verification. BAUER BSM-WS36A-Y remains on hold because the retrieved manual is for a different H01 variant and cannot be used as its specification. Portuguese legal/fiscal suitability, exact certificates, four-output OCMF operation and offline retention controls remain open. No production meter or billing workflow is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-14-OCMF-METER-ALTERNATIVES-REVIEW.md`
+
+
+
+### M1.15 — Portugal metrology, AFIR and billing boundary
+
+M1.15 maps Portugal's Decree-Law 29/2022 legal-metrology framework and identifies IPQ as the National Metrology Institution under Article 13. It separates MID product conformity, Portuguese legal metrology, CHARX/OCMF integration and the commercial charging/payment service. For the 22 kW public AC point (below 50 kW), AFIR Article 5 requires ad-hoc access, transparent disclosure of price components in the order kWh, minute, session and other components, and permits secure internet-connected payment such as a specific QR-code route for points below 50 kW. Payment remains separate from the local safety controller. EMH iML e-moc remains the leading OCMF prototype candidate; EEM-XM355 remains a point-meter candidate without evidenced OCMF support. Portuguese billing approval, certificate scope, four-point validation and offline transaction recovery remain open. No production meter or billing claim is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-15-PORTUGAL-METROLOGY-AFIR-AND-BILLING-BOUNDARY.md`
+
+
+### M1.16 — meter architecture and bench acceptance
+
+M1.16 establishes a two-track prototype decision: EMH iML e-moc first for OCMF/legal-metrology bench evaluation (exact CHARX-listed firmware 1.09 / OCMF 1.4.1), with EEM-XM355 retained as a selectable point-meter/load-management alternative but not an evidenced OCMF meter. It defines one uniquely attributable meter per output plus a separate optional grid-infeed meter, staged bench acceptance from document review through four-point/offline testing, CT-secondary safety, fault responses, minimum transaction records and release gates. No production meter, wiring schedule, billing approval or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-16-METER-ARCHITECTURE-AND-BENCH-ACCEPTANCE.md`
+
+### M1.17 — supplier RFI and evidence request
+
+M1.17 consolidates the unresolved manufacturer and deployment questions into a controlled, not-yet-sent RFI package for Phoenix Contact and EMH, plus separate Portugal legal-metrology and operator/fiscal review requests. It asks for exact four-point CHARX topology, simultaneous EMH/OCMF compatibility, terminal-level RS-485 details, offline persistence/recovery, cluster fault containment, complete power/peripheral budget, exact MID/legal-metrology certificate scope, 32 A continuous thermal suitability, OCMF signature/key/retention behaviour and lifecycle/commercial evidence. A response register and design-freeze acceptance criteria make unsupported answers remain OPEN. This document has not been sent; no supplier response, approval, quotation, certification, production selection or energisation is implied.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-17-SUPPLIER-RFI-AND-EVIDENCE-REQUEST.md`
+
+### M1.18 — independent technical validation matrix
+
+M1.18 separates manufacturer evidence, design evidence, bench-test evidence and competent approval. It defines requirement-level validation rows for controller/quad topology, local EVSE safety, switching, metering/MID/OCMF, RS-485, offline persistence, cybersecurity, power, thermal/mechanical design, payment, fiscal and privacy workflows. It establishes controlled test stages, evidence-packet requirements, severity/stop rules and independent release gates. All tests remain NOT STARTED unless later supported by retained records; no physical test is claimed. The matrix does not authorise mains energisation, fabrication, installation, billing or commercial deployment.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-18-INDEPENDENT-VALIDATION-MATRIX.md`
+
+
+### M1.19 — modular electrical architecture and interface boundaries
+
+M1.19 establishes a conceptual functional electrical architecture for Single, Dual, Quad and Wallbox variants, centred on a repeatable output cell with its own local EVSE safety/control, CP/PP, switching/feedback, protective inputs and uniquely attributable metering where required. It separates mains distribution, controller/backplane, auxiliary 12 V, contactor-coil and safety domains; defines grid/load allocation boundaries, optional commercial/communications modules, interface ownership, fault states, common-cause dependencies, required calculations and ten release gates. CHARX shared-cluster and 6 A backplane limitations remain explicit. This is a conceptual baseline only: no terminal schedule, component freeze, protection rating, cable sizing, production design or energisation is released.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-19-MODULAR-ELECTRICAL-ARCHITECTURE-AND-INTERFACE-BOUNDARIES.md`
+
+
+### M1.20 — physical panel zoning and modular assembly
+
+M1.20 translates the M1.19 functional architecture into a conceptual physical layout for Single, Dual, Quad and Wallbox variants. Defines twelve functional zones, conceptual panel arrangements, repeated output-cell assemblies, shared infrastructure, segregation and cable-routing principles, thermal/EMC/environmental review, service access, optional-module blanking, variant assembly matrix, mechanical data needed before dimensioned CAD and ten physical-design release gates. No enclosure dimensions, component coordinates, drilling, terminal layout, wire routing, clearances or production assembly instructions are released.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-20-PHYSICAL-PANEL-ZONING-AND-MODULAR-ASSEMBLY.md`
+
+
+### M1.21 — enclosure engineering, thermal and environmental requirements
+
+M1.21 establishes the conceptual enclosure-engineering framework for Wallbox, single/dual/quad pedestal, cross-shaped quad pedestal and future MultiStation variants. It defines deployment contexts, translates M1.20 physical zones into enclosure requirements, sets out the thermal-loss and cooling assessment method, environmental/material/condensation considerations, wall and pedestal structural inputs, cross-quad geometry risks, security/serviceability requirements, a variant matrix, proposed verification stages, risk register, CAD-entry data and ten release gates. No enclosure dimensions, material, IP/IK rating, cooling solution, structural design, thermal result or fabrication release is selected. Tests remain NOT STARTED; no mains energisation, fabrication or installation is authorised.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-21-ENCLOSURE-ENGINEERING-THERMAL-AND-ENVIRONMENTAL-REQUIREMENTS.md`
+
+
+### M1.22 — dimensioning, capacity and CAD input matrix
+
+M1.22 establishes the controlled transition from conceptual architecture to dimensioned mechanical CAD. It defines source-controlled component envelopes, usable-space accounting, per-variant capacity requirements, zone placement schedules, cable-routing and service envelopes, wallbox/pedestal/cross-quad mechanical interfaces, optional-module configurations, native CAD deliverable structure, design-review checklist, required inputs and ten CAD release gates. No dimensions, coordinates, clearances, cable radii, structural loads, component SKUs or manufacturing drawings are invented or frozen. Conceptual CAD only; dimensioned CAD/fabrication remains blocked pending D1–D10 evidence.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-22-DIMENSIONING-CAPACITY-AND-CAD-INPUT-MATRIX.md`
+
+
+### M1.23 — native CAD architecture and model control
+
+M1.23 defines a native-source-first CAD workflow, provisional FreeCAD evaluation (not asserted installed or tested), STEP/DXF exchange rules, repository source-tree proposal, naming/units/datums/revision control, parametric variant decomposition, optional-module configurations, manufacturer-model provenance, validation checks, Git/large-file policy, a controlled non-electrical pilot and ten C1–C10 release gates. The actual workstation CAD inventory and native-format pilot have NOT been performed or verified. No product dimensions, component placement, clearances, manufacturing geometry or fabrication release are created. Dimensioned CAD remains blocked pending M1.21 E1–E10, M1.22 D1–D10 and M1.23 C1–C10 evidence.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-23-NATIVE-CAD-ARCHITECTURE-AND-MODEL-CONTROL.md`
+
+
+### M1.24 — CAD workstation inventory and pilot preparation
+
+Prepared a read-only Windows PowerShell inventory utility at `tools/cad/Invoke-VazaoCadInventory.ps1` and an execution/acceptance procedure at `docs/03-engineering/CHARGER-HARDWARE-V1-M1-24-CAD-WORKSTATION-INVENTORY-PILOT-PREP.md`. The utility gathers OS/host details, installed-app registry records and known CAD executable evidence, then emits timestamped JSON/Markdown reports. It does not install, launch or modify applications and does not validate CAD operation or file-format compatibility. Workstation is OFFLINE; script NOT EXECUTED; W1–W10 remain OPEN. Review generated reports for sensitive workstation/software data before committing. No CAD product geometry or fabrication release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-24-CAD-WORKSTATION-INVENTORY-PILOT-PREP.md`
+- `tools/cad/Invoke-VazaoCadInventory.ps1`
