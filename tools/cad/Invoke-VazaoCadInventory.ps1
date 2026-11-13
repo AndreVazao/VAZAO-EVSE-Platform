@@ -52,7 +52,7 @@ function Get-KnownPathEvidence {
     $programFilesX86 = (Get-Item -LiteralPath "Env:ProgramFiles(x86)" -ErrorAction SilentlyContinue).Value
     $roots = @(
         $env:ProgramFiles, $programFilesX86,
-        "$env:LOCALAPPDATA\Programs", "$env:LOCALAPPDATA"
+        "$env:LOCALAPPDATA\Programs"
     ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique
     $patterns = @(
         "FreeCAD.exe", "FreeCADCmd.exe", "FreeCADGUI.exe", "acad.exe",
