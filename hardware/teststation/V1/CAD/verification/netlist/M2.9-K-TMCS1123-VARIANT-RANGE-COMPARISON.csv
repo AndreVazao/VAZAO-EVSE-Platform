@@ -1,6 +1,6 @@
-variant,orderable_part,supply_v,sensitivity_v_per_a,zero_current_v,linear_min_a,linear_max_a,bom_selected,expected_32arms_sensor_linear,expected_40arms_sensor_linear,expected_32arms_adc_pga1_diff
-A3,TMCS1123A3AQDVGR,5.0,0.075,2.5,-32.0,32.0,false,false,false,false
-A3,TMCS1123A3AQDVGR,3.3,0.075,2.5,-32.0,9.3,false,false,false,false
-A2,TMCS1123A2AQDVGR,5.0,0.050,2.5,-48.0,48.0,false,true,false,false
-A1,TMCS1123A1AQDVGR,5.0,0.025,2.5,-96.0,96.0,false,true,true,true
-B1,TMCS1123B1AQDVGR,3.3,0.025,1.65,-62.0,62.0,false,true,true,true
+variant,orderable_part,supply_v,sensitivity_v_per_a,zero_current_v,linear_min_a,linear_max_a,bom_selected,expected_32arms_sensor_linear,expected_40arms_sensor_linear,expected_32arms_adc_pga1_diff,expected_48arms_sensor_linear,expected_70a_peak_sensor_linear
+A3,TMCS1123A3AQDVGR,5.0,0.075,2.5,-32.0,32.0,false,false,false,false,false,false
+A3,TMCS1123A3AQDVGR,3.3,0.075,2.5,-32.0,9.3,false,false,false,false,false,false
+A2,TMCS1123A2AQDVGR,5.0,0.050,2.5,-48.0,48.0,false,true,false,false,false,false
+A1,TMCS1123A1AQDVGR,5.0,0.025,2.5,-96.0,96.0,false,true,true,true,true,true
+B1,TMCS1123B1AQDVGR,3.3,0.025,1.65,-62.0,62.0,false,true,true,true,false,false
