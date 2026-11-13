@@ -10,6 +10,8 @@ on:
       - 'hardware/teststation/V1/CAD/review/physical-symbol-migration/**'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-U2-U19-PIN-TO-NET-INTENT-REVIEW.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-ALL-CHANNELS-MIGRATION-IMPACT.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py'
   push:
     branches:
       - main
@@ -44,6 +46,10 @@ jobs:
       - name: Validate unapproved U2/U19 pin-to-net intent review matrix
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py
+
+      - name: Validate all six TMCS1123 migration pin impacts
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py
 
       # The library format version 20231120 requires a KiCad 8+ parser; use stable KiCad 10 in CI.
       - name: Install KiCad 10 CLI for native parser validation
