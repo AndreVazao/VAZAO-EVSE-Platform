@@ -153,3 +153,10 @@ M1.20 translates the M1.19 functional architecture into a conceptual physical la
 M1.21 establishes the conceptual enclosure-engineering framework for Wallbox, single/dual/quad pedestal, cross-shaped quad pedestal and future MultiStation variants. It defines deployment contexts, translates M1.20 physical zones into enclosure requirements, sets out the thermal-loss and cooling assessment method, environmental/material/condensation considerations, wall and pedestal structural inputs, cross-quad geometry risks, security/serviceability requirements, a variant matrix, proposed verification stages, risk register, CAD-entry data and ten release gates. No enclosure dimensions, material, IP/IK rating, cooling solution, structural design, thermal result or fabrication release is selected. Tests remain NOT STARTED; no mains energisation, fabrication or installation is authorised.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-21-ENCLOSURE-ENGINEERING-THERMAL-AND-ENVIRONMENTAL-REQUIREMENTS.md`
+
+
+### M1.22 — dimensioning, capacity and CAD input matrix
+
+M1.22 establishes the controlled transition from conceptual architecture to dimensioned mechanical CAD. It defines source-controlled component envelopes, usable-space accounting, per-variant capacity requirements, zone placement schedules, cable-routing and service envelopes, wallbox/pedestal/cross-quad mechanical interfaces, optional-module configurations, native CAD deliverable structure, design-review checklist, required inputs and ten CAD release gates. No dimensions, coordinates, clearances, cable radii, structural loads, component SKUs or manufacturing drawings are invented or frozen. Conceptual CAD only; dimensioned CAD/fabrication remains blocked pending D1–D10 evidence.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-22-DIMENSIONING-CAPACITY-AND-CAD-INPUT-MATRIX.md`
