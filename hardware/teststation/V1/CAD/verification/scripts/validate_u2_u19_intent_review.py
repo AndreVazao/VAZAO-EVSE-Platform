@@ -33,6 +33,12 @@ REQUIRED_COLUMNS = {
 }
 ALLOWED_STATUS = {"NOT_APPROVED", "TBD", "BLOCKED_SUSPICIOUS_BASELINE"}
 EXPECTED_OBSERVED = {
+    ("U2", "3"): ("unconnected", "unconnected"),
+    ("U2", "4"): ("unconnected", "unconnected"),
+    ("U2", "5"): ("unconnected", "unconnected"),
+    ("U2", "6"): ("unconnected", "unconnected"),
+    ("U2", "7"): ("not present in legacy symbol", "unconnected"),
+    ("U2", "8"): ("not present in legacy symbol", "unconnected"),
     ("U2", "17"): ("Net-(U19-GND)", "unconnected"),
     ("U2", "19"): ("Net-(U19-VS)", "unconnected"),
     ("U2", "20"): ("Net-(U19-IN-)", "unconnected"),
