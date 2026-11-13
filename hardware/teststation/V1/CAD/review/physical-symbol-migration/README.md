@@ -93,3 +93,12 @@ Key conclusions:
 - No destination net was approved and no schematic wire/label was changed.
 
 The documentation-only commit `d9304b0ec6c79f2381efdec17309873e6cabcd9f` was verified by fetching the file back from the review branch. The production master and immutable legacy baseline remain untouched. PR #7 remains Draft and unmerged.
+
+
+## 2026-11-13 — Critical current sensor range mismatch found
+
+A deeper review of the existing M2.3 32 A RMS requirement against the TI TMCS1123 datasheet found that the selected A3 (75 mV/A) has only ±32 A linear instantaneous range at 5 V and −32 A to +9.3 A at 3.3 V. A 32 A RMS sine wave reaches 45.25 A peak. The old M2.5 statement that 80 A_RMS family capability makes 32 A comfortably measurable conflated thermal current capability with analog linear range and is invalid for A3.
+
+The earlier interface evidence note also incorrectly said A3 has no zero-current reference; corrected: all A-family devices use 2.5 V VREF. Pin 5 is a precision reference output, not a current return.
+
+Detailed calculation and comparison of A3/A2/A1/B1, including ADS131M06 ±1.2 V PGA=1 differential FSR, is in `M2.9-K-CURRENT-CHANNEL-RANGE-AUDIT-2026-11-13.md`. A1 (5 V) and B1 (3.3 V) are candidates only. No BOM, schematic, matrix destination or wiring was changed.
