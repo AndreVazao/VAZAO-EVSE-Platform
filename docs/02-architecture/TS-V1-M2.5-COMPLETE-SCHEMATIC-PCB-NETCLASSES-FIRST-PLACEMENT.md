@@ -795,3 +795,14 @@ TI AMC1311 documentation confirms the 2 V high-impedance input and the 3.0–5.5
 Phoenix Contact lists item 2904621 as a 24 V DC / 10 A QUINT4 supply with 240 W nominal output and short-circuit protection. citeturn0search1turn0search3
 
 All prototype values remain subject to final electrical safety, EMC, thermal, insulation, short-circuit and certification review.
+
+
+---
+
+## 2026-11-13 correction — current sensor linear range versus 32 A RMS
+
+The original Section 6 statement that the TMCS1123 family 80 A_RMS capability makes the 32 A target comfortably measurable is incomplete and must not be used as a variant-selection conclusion. The 80 A_RMS figure is a thermal/current-path capability; each sensitivity variant has a separate analog linear measurement range. The BOM's A3 variant has ±32 A instantaneous range at 5 V and −32 A to +9.3 A at 3.3 V. A 32 A_RMS sinusoid reaches 45.25 A peak, so A3 does not meet the documented 32 A_RMS linear measurement requirement.
+
+The previously stated 75 mV/A output at 32 A RMS also ignored the peak value. Do not release the 47 Ω / 4.7 nF network as a complete interface: its placement, differential/common-mode response, ADC PGA input loading, anti-alias performance and phase error remain unverified.
+
+See `hardware/teststation/V1/CAD/review/physical-symbol-migration/M2.9-K-CURRENT-CHANNEL-RANGE-AUDIT-2026-11-13.md` for the manufacturer-backed calculation and A1/B1 comparison. A1 at 5 V and B1 at 3.3 V are candidates only. No component substitution or schematic connection is authorized by this correction.
