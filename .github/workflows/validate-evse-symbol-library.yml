@@ -12,6 +12,8 @@ on:
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-ALL-CHANNELS-MIGRATION-IMPACT.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-VARIANT-RANGE-COMPARISON.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_variant_range.py'
   push:
     branches:
       - main
@@ -24,6 +26,8 @@ on:
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_u2_u19_intent_review.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-ALL-CHANNELS-MIGRATION-IMPACT.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py'
+      - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-TMCS1123-VARIANT-RANGE-COMPARISON.csv'
+      - 'hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_variant_range.py'
       - 'hardware/teststation/V1/CAD/verification/netlist/M2.9-K-SYMBOL-TO-FOOTPRINT-PAD-AUDIT.csv'
       - 'hardware/teststation/V1/CAD/verification/scripts/audit_master_netlist_connectivity.py'
       - 'hardware/teststation/V1/CAD/verification/scripts/summarize_master_erc.py'
@@ -52,6 +56,10 @@ jobs:
       - name: Validate all six TMCS1123 migration pin impacts
         run: |
           python3 hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_migration_impact.py
+
+      - name: Validate TMCS1123 RMS-to-peak and ADC range comparison
+        run: |
+          python3 hardware/teststation/V1/CAD/verification/scripts/validate_tmcs1123_variant_range.py
 
       # The library format version 20231120 requires a KiCad 8+ parser; use stable KiCad 10 in CI.
       - name: Install KiCad 10 CLI for native parser validation
