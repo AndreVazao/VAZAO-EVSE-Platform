@@ -111,3 +111,12 @@ The range audit was extended in commit `9f31b973f94b7ea866392ddd95c5fdb4185d2df9
 - B1 at 3.3 V gives 0.519–2.781 V VOUT at 32 A_RMS sine, with ±1.131 V differential; at 40 A_RMS it gives 0.236–3.064 V but ±1.414 V differential, requiring attenuation.
 - A1 at 5 V gives 1.369–3.631 V VOUT at 32 A_RMS and 1.086–3.914 V at 40 A_RMS; direct connection to a 3.3 V ADS131M06 violates the recommended individual AIN voltage ceiling.
 - B1 is currently the closer 3.3 V architecture candidate, A1 has more peak range but needs level management. Neither is approved; waveform crest factor, peak/fault envelope and thermal conditions remain undefined.
+
+
+## 2026-11-13 — range guard and complete CI evidence
+
+The dedicated range arithmetic guard and all prior static checks completed successfully in verified-symbol workflow [run #43435832249](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/43435832249), on commit `26596924773ae6a8f9db0cd0a2cee149d5f2b953`. The physical migration workflow [run #43435832184](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/43435832184) also completed successfully on that same code head, including KiCad 10 native footprint load and baseline/migrated schematic exports.
+
+Subsequent commits through `3d2cb8a3db52b0712d6c97f4a4792f485de5df8a` are documentation-only (including the A3 reference correction and ADS131M06 common-mode calculations). New exact-head PR workflow reruns were started; at the time of this update they were still in progress. No additional code, CSV, validator or workflow logic changed after `2659692`.
+
+PR #7 remains Draft/open/unmerged. The current evidence does not approve a sensor substitution or any schematic connectivity.
