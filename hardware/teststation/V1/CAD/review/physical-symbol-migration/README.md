@@ -105,3 +105,9 @@ Detailed calculation and comparison of A3/A2/A1/B1, including ADS131M06 ±1.2 V 
 
 
 The interface evidence note received a follow-up correction in commit `fe7b19c8c59b06206f3ada18358b77b3fe30e0e6`: all A-family variants, including A3, use a 2.5 V zero-current reference. The older sentence claiming otherwise was removed. The range mismatch remains: A3's linear peak range is insufficient for 32 A_RMS sinusoidal measurement.
+
+
+The range audit was extended in commit `9f31b973f94b7ea866392ddd95c5fdb4185d2df9` with ADS131M06 per-pin voltage/common-mode screening:
+- B1 at 3.3 V gives 0.519–2.781 V VOUT at 32 A_RMS sine, with ±1.131 V differential; at 40 A_RMS it gives 0.236–3.064 V but ±1.414 V differential, requiring attenuation.
+- A1 at 5 V gives 1.369–3.631 V VOUT at 32 A_RMS and 1.086–3.914 V at 40 A_RMS; direct connection to a 3.3 V ADS131M06 violates the recommended individual AIN voltage ceiling.
+- B1 is currently the closer 3.3 V architecture candidate, A1 has more peak range but needs level management. Neither is approved; waveform crest factor, peak/fault envelope and thermal conditions remain undefined.
