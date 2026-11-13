@@ -146,3 +146,10 @@ M1.19 establishes a conceptual functional electrical architecture for Single, Du
 M1.20 translates the M1.19 functional architecture into a conceptual physical layout for Single, Dual, Quad and Wallbox variants. Defines twelve functional zones, conceptual panel arrangements, repeated output-cell assemblies, shared infrastructure, segregation and cable-routing principles, thermal/EMC/environmental review, service access, optional-module blanking, variant assembly matrix, mechanical data needed before dimensioned CAD and ten physical-design release gates. No enclosure dimensions, component coordinates, drilling, terminal layout, wire routing, clearances or production assembly instructions are released.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-20-PHYSICAL-PANEL-ZONING-AND-MODULAR-ASSEMBLY.md`
+
+
+### M1.21 — enclosure engineering, thermal and environmental requirements
+
+M1.21 establishes the conceptual enclosure-engineering framework for Wallbox, single/dual/quad pedestal, cross-shaped quad pedestal and future MultiStation variants. It defines deployment contexts, translates M1.20 physical zones into enclosure requirements, sets out the thermal-loss and cooling assessment method, environmental/material/condensation considerations, wall and pedestal structural inputs, cross-quad geometry risks, security/serviceability requirements, a variant matrix, proposed verification stages, risk register, CAD-entry data and ten release gates. No enclosure dimensions, material, IP/IK rating, cooling solution, structural design, thermal result or fabrication release is selected. Tests remain NOT STARTED; no mains energisation, fabrication or installation is authorised.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-21-ENCLOSURE-ENGINEERING-THERMAL-AND-ENVIRONMENTAL-REQUIREMENTS.md`
