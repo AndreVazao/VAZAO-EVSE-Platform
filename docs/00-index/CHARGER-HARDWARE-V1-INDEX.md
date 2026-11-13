@@ -160,3 +160,10 @@ M1.21 establishes the conceptual enclosure-engineering framework for Wallbox, si
 M1.22 establishes the controlled transition from conceptual architecture to dimensioned mechanical CAD. It defines source-controlled component envelopes, usable-space accounting, per-variant capacity requirements, zone placement schedules, cable-routing and service envelopes, wallbox/pedestal/cross-quad mechanical interfaces, optional-module configurations, native CAD deliverable structure, design-review checklist, required inputs and ten CAD release gates. No dimensions, coordinates, clearances, cable radii, structural loads, component SKUs or manufacturing drawings are invented or frozen. Conceptual CAD only; dimensioned CAD/fabrication remains blocked pending D1–D10 evidence.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-22-DIMENSIONING-CAPACITY-AND-CAD-INPUT-MATRIX.md`
+
+
+### M1.23 — native CAD architecture and model control
+
+M1.23 defines a native-source-first CAD workflow, provisional FreeCAD evaluation (not asserted installed or tested), STEP/DXF exchange rules, repository source-tree proposal, naming/units/datums/revision control, parametric variant decomposition, optional-module configurations, manufacturer-model provenance, validation checks, Git/large-file policy, a controlled non-electrical pilot and ten C1–C10 release gates. The actual workstation CAD inventory and native-format pilot have NOT been performed or verified. No product dimensions, component placement, clearances, manufacturing geometry or fabrication release are created. Dimensioned CAD remains blocked pending M1.21 E1–E10, M1.22 D1–D10 and M1.23 C1–C10 evidence.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-23-NATIVE-CAD-ARCHITECTURE-AND-MODEL-CONTROL.md`
