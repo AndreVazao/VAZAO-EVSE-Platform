@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Regression guard for TMCS1123 peak range vs the TestStation RMS requirement.
+"""Regression guard for TMCS1123 peak range vs TestStation provisional envelope.
 
-This guard validates arithmetic and documented variant data only. It does not
-select a BOM part, approve the analog front end, or establish thermal safety.
+Validates arithmetic and declared comparison data only. It does not select a
+BOM part, approve the analogue front end, or establish thermal safety.
 """
 from __future__ import annotations
 
@@ -16,13 +16,15 @@ CSV_PATH = ROOT / "netlist" / "M2.9-K-TMCS1123-VARIANT-RANGE-COMPARISON.csv"
 ADC_PGA1_FSR_V = 1.2
 NOMINAL_RMS_A = 32.0
 OVERLOAD_RMS_A = 40.0
+TRANSIENT_RMS_A = 48.0
+TARGET_PEAK_A = 70.0
 
 EXPECTED = {
-    ("A3", 5.0): (False, False, False),
-    ("A3", 3.3): (False, False, False),
-    ("A2", 5.0): (True, False, False),
-    ("A1", 5.0): (True, True, True),
-    ("B1", 3.3): (True, True, True),
+    ("A3", 5.0): (False, False, False, False, False),
+    ("A3", 3.3): (False, False, False, False, False),
+    ("A2", 5.0): (True, False, False, False, False),
+    ("A1", 5.0): (True, True, True, True, True),
+    ("B1", 3.3): (True, True, True, False, False),
 }
 
 
@@ -51,6 +53,7 @@ def main() -> int:
 
     nominal_peak = NOMINAL_RMS_A * math.sqrt(2.0)
     overload_peak = OVERLOAD_RMS_A * math.sqrt(2.0)
+    transient_peak = TRANSIENT_RMS_A * math.sqrt(2.0)
     failures = []
 
     for row in rows:
@@ -68,19 +71,23 @@ def main() -> int:
             continue
         seen.add(key)
 
-        nominal_sensor = fits_peak(nominal_peak, low, high)
-        overload_sensor = fits_peak(overload_peak, low, high)
-        nominal_adc = sensitivity * nominal_peak <= ADC_PGA1_FSR_V
-
+        actual = (
+            fits_peak(nominal_peak, low, high),
+            fits_peak(overload_peak, low, high),
+            sensitivity * nominal_peak <= ADC_PGA1_FSR_V,
+            fits_peak(transient_peak, low, high),
+            fits_peak(TARGET_PEAK_A, low, high),
+        )
         declared = (
             as_bool(row["expected_32arms_sensor_linear"]),
             as_bool(row["expected_40arms_sensor_linear"]),
             as_bool(row["expected_32arms_adc_pga1_diff"]),
+            as_bool(row["expected_48arms_sensor_linear"]),
+            as_bool(row["expected_70a_peak_sensor_linear"]),
         )
-        actual = (nominal_sensor, overload_sensor, nominal_adc)
+
         if actual != EXPECTED[key] or actual != declared:
             failures.append(f"{key}: expected {EXPECTED[key]}, CSV {declared}, calculated {actual}")
-
         if selected:
             failures.append(f"{key}: candidate comparison must not select a BOM variant")
         if not (0.0 < vref < supply):
@@ -88,25 +95,27 @@ def main() -> int:
 
         print(
             f"{variant:>2} @ {supply:>3.1f} V | "
-            f"32 A RMS peak={nominal_peak:5.2f} A | "
-            f"sensor={ 'PASS' if nominal_sensor else 'FAIL'} | "
-            f"40 A RMS sensor={ 'PASS' if overload_sensor else 'FAIL'} | "
-            f"ADC PGA1 differential-only={ 'PASS' if nominal_adc else 'FAIL'}"
+            f"32 Arms sensor={'PASS' if actual[0] else 'FAIL'} | "
+            f"40 Arms sensor={'PASS' if actual[1] else 'FAIL'} | "
+            f"48 Arms sensor={'PASS' if actual[3] else 'FAIL'} | "
+            f"±70 A peak sensor={'PASS' if actual[4] else 'FAIL'} | "
+            f"32 Arms ADC differential-only={'PASS' if actual[2] else 'FAIL'}"
         )
 
     if seen != set(EXPECTED):
         failures.append(f"missing rows: {sorted(set(EXPECTED) - seen)}")
 
     print(f"\nADC PGA=1 differential FSR used for screening: ±{ADC_PGA1_FSR_V:.1f} V")
-    print("NOTE: ADC PASS is differential-magnitude screening only; common-mode, absolute maximum, attenuation, filtering and thermal SOA remain unverified.")
-    print("NOTE: 40 A RMS is a preliminary +25% overload scenario, not an approved system fault requirement.")
+    print("NOTE: ADC PASS is differential-magnitude screening only; common-mode, absolute maximum, scaling, filtering and source impedance remain unverified.")
+    print("NOTE: 40 Arms/10 s and 48 Arms/1 s are provisional analysis scenarios, not approved thermal or fault-current ratings.")
+    print("NOTE: sensor linear-range PASS does not establish thermal SOA, conductor/PCB safety, or overload duration capability.")
 
     if failures:
         for failure in failures:
             print(f"ERROR: {failure}", file=sys.stderr)
         return 1
 
-    print("PASS: variant range arithmetic matches the review evidence; no BOM variant is selected.")
+    print("PASS: variant range arithmetic matches the provisional envelope; no BOM variant is selected.")
     return 0
 
 
