@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Arithmetic guard for the provisional TMCS1123A1 -> ADS131M06 AFE study.
+"""Arithmetic guard for the provisional TMCS1123A1 -> THP210 -> ADS131M06 AFE study.
 
-This validates transfer arithmetic only. It does not model analogue stability,
-noise, thermal SOA, common-mode limits of an unselected amplifier, or safety.
+This validates transfer arithmetic and basic DC common-mode screening only. It
+does not model FDA loop stability, input-pin differential voltage, power-off
+fault currents, noise, thermal SOA, ADC settling, or electrical safety.
 """
 from __future__ import annotations
 
@@ -15,7 +16,7 @@ SENSOR_ZERO_V = 2.5
 SENSOR_LINEAR_PEAK_A = 96.0
 ADC_AVDD_V = 3.3
 ADC_PGA1_FSR_V = 1.2
-ADC_OUTPUT_COMMON_MODE_V = 1.65
+ADC_OUTPUT_COMMON_MODE_V = 2.25
 MAX_NOMINAL_ATTENUATION = 0.50
 
 
@@ -41,6 +42,14 @@ def main() -> int:
         raise SystemExit("FAIL: differential signal exceeds PGA=1 FSR")
     if not (0.0 < adc_pin_low < adc_pin_high < ADC_AVDD_V):
         raise SystemExit("FAIL: ideal ADC pin voltages outside 0..AVDD")
+
+    # THP210 at 5 V: specified input common-mode range is 1 V to 4 V.
+    sensor_pair_cm_low = (sensor_low + SENSOR_ZERO_V) / 2.0
+    sensor_pair_cm_high = (sensor_high + SENSOR_ZERO_V) / 2.0
+    if not (1.0 < sensor_pair_cm_low <= sensor_pair_cm_high < 4.0):
+        raise SystemExit("FAIL: TMCS VOUT/VREF pair common-mode outside THP210 5 V screening range")
+    if not (1.0 < ADC_OUTPUT_COMMON_MODE_V < 4.0):
+        raise SystemExit("FAIL: THP210 VOCM study target outside 1..4 V screening range")
     if differential_margin <= 0.0:
         raise SystemExit("FAIL: no differential headroom")
 
@@ -49,9 +58,10 @@ def main() -> int:
     print(f"Sensor differential sensitivity-only high-side screen: ±{screened_sensor_delta:.4f} V")
     print(f"AFE nominal attenuation target: {MAX_NOMINAL_ATTENUATION:.3f}")
     print(f"ADC differential screened magnitude: ±{adc_diff:.4f} V")
+    print(f"TMCS pair common-mode screening: {sensor_pair_cm_low:.4f}..{sensor_pair_cm_high:.4f} V (THP210 1..4 V)")
     print(f"Ideal ADC pins around {ADC_OUTPUT_COMMON_MODE_V:.3f} V CM: {adc_pin_low:.4f}..{adc_pin_high:.4f} V")
     print(f"Remaining differential headroom to nominal ±{ADC_PGA1_FSR_V:.2f} V FSR: {differential_margin:.4f} V")
-    print("PASS: arithmetic screening only; amplifier, filter, ADC timing, tolerances and safety remain unverified.")
+    print("PASS: DC arithmetic/common-mode screening only; THP210 loop, input-pin differential, power sequencing, filter, ADC timing, tolerances and safety remain unverified.")
     return 0
 
 
