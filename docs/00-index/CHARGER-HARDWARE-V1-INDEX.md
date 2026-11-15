@@ -182,3 +182,13 @@ M1.25 defines a traceable record for every component envelope admitted into mech
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-25-CAD-MODEL-PROVENANCE-AND-DIMENSIONAL-EVIDENCE.md`
 - `schemas/cad/component-envelope-record.schema.json`
+
+### M1.26 — CAD evidence validator and CI
+
+M1.26 adds an offline Python validator for M1.25 component-envelope records, unit tests and a GitHub Actions workflow. Checks include JSON Schema Draft 2020-12 validation, duplicate identities/source IDs, dimension-to-source references, repository-contained evidence/model paths, SHA-256 file verification, and additional release-state rules (second-person review and A/B/C/D evidence; unverified third-party models cannot be promoted). The tool does not fetch URLs, open CAD geometry or prove source authenticity/dimensional accuracy. Unit tests cover valid provisional data, missing/mismatched source references, review gates, unverified third-party rejection, hash mismatch and path traversal. CI execution is PENDING; tests are not yet claimed passed. No real component record is populated or approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-26-CAD-EVIDENCE-VALIDATOR-AND-CI.md`
+- `tools/cad/validate_component_envelopes.py`
+- `tests/cad/test_validate_component_envelopes.py`
+- `requirements-cad-validation.txt`
+- `.github/workflows/cad-envelope-validation.yml`
