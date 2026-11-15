@@ -121,7 +121,7 @@ A future validator should reject or flag:
 - dimensions with no source reference or evidence class;
 - stale review after a SKU/revision/accessory change.
 
-This milestone does not claim that such a validator has been implemented or run. The JSON Schema validates record shape; it cannot prove that a URL is authentic, a file hash matches the actual file, or a dimension is correct. Those checks require a separate evidence-aware validator and human review.
+This milestone does not claim that such a validator has been implemented or run. The JSON Schema validates record shape; it cannot prove that a URL is authentic, a file hash matches the actual file, or a dimension is correct. Those checks require external source review and human review; M1.26 adds local structural, reference and file-integrity checks but does not authenticate remote sources.
 
 ## 9. Relationship to existing gates
 
@@ -145,7 +145,7 @@ Until exact component records are populated and reviewed, enclosure sizing, comp
 | P5 | Model units/orientation and drawing comparison recorded | OPEN |
 | P6 | Independent second-person review demonstrated | OPEN |
 | P7 | Repository/licensing and large-file handling approved | OPEN |
-| P8 | Validator implemented and negative cases tested | OPEN |
+| P8 | Validator implemented; negative-case execution confirmed in CI | PENDING (M1.26 CI not yet observed) |
 | P9 | AndreOS Memory checkpoint updated | OPEN until verified |
 | P10 | PR summary and evidence links verified | OPEN until verified |
 
