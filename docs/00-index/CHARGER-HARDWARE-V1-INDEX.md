@@ -175,3 +175,10 @@ Prepared a read-only Windows PowerShell inventory utility at `tools/cad/Invoke-V
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-24-CAD-WORKSTATION-INVENTORY-PILOT-PREP.md`
 - `tools/cad/Invoke-VazaoCadInventory.ps1`
+
+### M1.25 — CAD model provenance and dimensional evidence control
+
+M1.25 defines a traceable record for every component envelope admitted into mechanical CAD. It classifies source authority (manufacturer drawing, manufacturer CAD, datasheet, verified physical measurement, derived engineering value and unverified visual/third-party material), requires exact SKU/variant/revision identity, source retrieval metadata and hashes, explicit millimetre dimensions and datums, model format/hash/units/orientation, installation-envelope exclusions and review scope. Adds a JSON Schema at `schemas/cad/component-envelope-record.schema.json`. The schema validates record structure only; it does not authenticate sources or prove dimensions. No component record is populated or approved, no CAD geometry is created, and P1–P10 remain OPEN pending schema validation, real manufacturer evidence, independent review and a future validator.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-25-CAD-MODEL-PROVENANCE-AND-DIMENSIONAL-EVIDENCE.md`
+- `schemas/cad/component-envelope-record.schema.json`
