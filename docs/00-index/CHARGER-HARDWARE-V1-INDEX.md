@@ -192,3 +192,10 @@ M1.26 adds an offline Python validator for M1.25 component-envelope records, uni
 - `tests/cad/test_validate_component_envelopes.py`
 - `requirements-cad-validation.txt`
 - `.github/workflows/cad-envelope-validation.yml`
+
+
+### M1.27 — component candidate and evidence register
+
+M1.27 creates a controlled register bridging the preliminary BOM to evidence-backed component dossiers. It records the known CHARX controller candidates, controller alternatives and lifecycle exclusions, point-meter and OCMF prototype paths, RCM/RFID/auxiliary-power/accessory candidates, and the still-unselected protection, contactor, Type 2, enclosure, HMI and communications classes. Each entry separates known project evidence from unresolved identity, lifecycle, ratings, terminal, compatibility, metrology, mechanical and supply-chain gates. The register is explicitly not a production BOM or purchasing approval; it creates no component-envelope JSON records and no numeric dimensions. M1.26 CI execution remains pending/unobserved; no tests, bench work, supplier contact, CAD pilot or compliance approval are claimed.
+
+- `docs/04-bom/CHARGER-HARDWARE-V1-M1-27-COMPONENT-EVIDENCE-REGISTER.md`
