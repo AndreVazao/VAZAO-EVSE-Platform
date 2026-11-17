@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 ## M1.26 — CAD evidence validator and continuous integration
 
-**Status:** IMPLEMENTED IN REPOSITORY; AUTOMATED EXECUTION PENDING GITHUB ACTIONS RESULT  
+**Status:** IMPLEMENTED; GITHUB ACTIONS VALIDATION PASSED (RUN 44028175510)  
 **Branch:** `feat/charger-hardware-v1-component-selection`  
 **Depends on:** M1.25 provenance record and JSON Schema  
 **Scope:** validate record structure and local evidence integrity without inventing or approving component data.
@@ -67,7 +67,7 @@ The unit suite covers:
 - stored evidence SHA-256 mismatch;
 - path traversal outside the repository root.
 
-These tests have been committed, but their execution is **PENDING** until the GitHub Actions run is observed. Do not report them as passed before the run completes successfully.
+These seven tests were executed by GitHub Actions run 44028175510 and completed successfully. The JSON Schema check and the unit-test step both report success. This confirms the CI tooling checks, not the correctness of any real component dimensions or manufacturer evidence.
 
 ## 6. Known limits / next hardening
 
@@ -84,11 +84,11 @@ These tests have been committed, but their execution is **PENDING** until the Gi
 |---|---|---|
 | V1 | Validator and tests committed | COMPLETE |
 | V2 | CI workflow committed | COMPLETE |
-| V3 | JSON Schema check in GitHub Actions | PENDING |
-| V4 | Unit suite in GitHub Actions | PENDING |
+| V3 | JSON Schema check in GitHub Actions | PASS — run 44028175510 |
+| V4 | Unit suite in GitHub Actions | PASS — 7 tests, run 44028175510 |
 | V5 | Real manufacturer-backed component record | OPEN |
 | V6 | Actual stored source/model hash verification against controlled files | OPEN |
 | V7 | Independent review of a populated record | OPEN |
 | V8 | CAD-native geometry verification on workstation | OPEN (M1.24 W-gates) |
 
-**Current result:** validator, unit tests and CI workflow are committed. Automated execution has not yet been observed. No physical component data, approved envelope, product CAD or manufacturing release is claimed. PR remains Draft.
+**Current result:** validator, unit tests and CI workflow are committed; GitHub Actions run [44028175510](https://github.com/AndreVazao/VAZAO-EVSE-Platform/actions/runs/44028175510) completed successfully. The JSON Schema validation and all seven unit tests passed. This is a tooling/fixture result only: no real component record is populated or approved, no CAD geometry is validated, and no manufacturing release is claimed. PR remains Draft.
