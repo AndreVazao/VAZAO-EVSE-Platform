@@ -199,3 +199,11 @@ M1.26 adds an offline Python validator for M1.25 component-envelope records, uni
 M1.27 creates a controlled register bridging the preliminary BOM to evidence-backed component dossiers. It records the known CHARX controller candidates, controller alternatives and lifecycle exclusions, point-meter and OCMF prototype paths, RCM/RFID/auxiliary-power/accessory candidates, and the still-unselected protection, contactor, Type 2, enclosure, HMI and communications classes. Each entry separates known project evidence from unresolved identity, lifecycle, ratings, terminal, compatibility, metrology, mechanical and supply-chain gates. The register is explicitly not a production BOM or purchasing approval; it creates no component-envelope JSON records and no numeric dimensions. M1.26 CI execution remains pending/unobserved; no tests, bench work, supplier contact, CAD pilot or compliance approval are claimed.
 
 - `docs/04-bom/CHARGER-HARDWARE-V1-M1-27-COMPONENT-EVIDENCE-REGISTER.md`
+
+
+### M1.28 — CHARX controller manufacturer evidence audit
+
+M1.28 revalidates the Phoenix Contact CHARX control modular family against current manufacturer product pages, ordering data, interface overview and UM EN CHARX SEC Revision 06 / firmware 1.9.1 index. It resolves exact order numbers: SEC-1000 1139034, SEC-3000 1139022, SEC-3050 1139018, SEC-3100 1139012 and SEC-3150 1138965. It confirms up to 11 SEC-1000 modules per SEC-3xxx and the 6 A nominal backplane limit, while keeping the four-point current budget and fault containment OPEN. It records the different SEC-1000 and SEC-3xxx contactor terminal arrangements, interface groups, published electrical values, variant-specific LTE/ISO 15118 functions and SEC-1000 stand-alone authorisation/Event Actions nuance. Desk review only: no physical sample, terminal wiring approval, power-budget closure, bench test, production selection or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-28-CHARX-CONTROLLER-MANUFACTURER-EVIDENCE-AUDIT.md`
+- M1.27 register amended with exact controller order numbers and M1.28 cross-reference.
