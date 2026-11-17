@@ -98,3 +98,16 @@ The controller, metering and peripheral shortlist is sufficiently structured for
 5. Send the controlled supplier RFI only after the project owner authorises external contact.
 
 **Release statement:** no production component is selected or approved by M1.27. No purchasing, mains energisation, fabrication, installation, billing approval or commercial deployment is authorised. Physical, thermal, environmental, structural and bench tests remain NOT STARTED unless separately evidenced.
+
+
+## M1.28 source-audit amendment — CHARX exact order numbers
+
+The 2026-11-17 primary-source audit in `docs/03-engineering/CHARGER-HARDWARE-V1-M1-28-CHARX-CONTROLLER-MANUFACTURER-EVIDENCE-AUDIT.md` resolves the previously incomplete controller identity:
+
+- CHARX SEC-1000 local output-controller study candidate: **1139034**.
+- CHARX SEC-3000 cluster/server study candidate: **1139022**.
+- CHARX SEC-3050 ISO/IEC 15118 variant: **1139018**.
+- CHARX SEC-3100 cellular 4G/2G variant: **1139012**.
+- CHARX SEC-3150 cellular + ISO/IEC 15118 variant: **1138965**.
+
+The SEC-1000 and SEC-3xxx contactor terminal arrangements differ and must not be treated as interchangeable. Manufacturer documentation states a maximum of 11 SEC-1000 modules per SEC-3xxx and a 6 A nominal backplane current limit; the proposed four-point configuration still requires a complete worst-case current budget and fault-injection evidence. These exact product identities are now source-backed at desk-review level, but remain study candidates, not approved components. See M1.28 for manufacturer source URLs, interfaces, electrical values and open gates.
