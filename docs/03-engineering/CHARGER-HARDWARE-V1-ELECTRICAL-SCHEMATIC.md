@@ -124,3 +124,8 @@ Reference unmanaged currents for 22 kW / 32 A three-phase outputs are 32 A per p
 ### External common-trunk distribution
 
 For site installations where branching occurs upstream of the charger, represent the site main switchboard feeding a common trunk to an external local distribution/branch enclosure. From that enclosure, each EVSE output or charger unit receives a separately protected outgoing branch feeder. This external distribution board is distinct from the EVSE's internal main distribution block. The single-line diagram must identify the exact branch point, common trunk protection/isolation, branch protective devices, outgoing cable IDs, route lengths, neutral/PE arrangement and load-management measurement boundary. Cable sections and voltage drop are calculated separately for the common trunk and each branch, with total voltage drop checked to each EV connection. See M1.29.
+
+
+### Load-management fail-safe boundary (M1.32)
+
+The local load manager may allocate per-phase current limits but is not a replacement for any output's local EVSE safety chain or electrical protective devices. The one-line diagram and control schematic must identify site/feeder measurement points, local manager, communications/watchdog path, per-output limit interface and the physical enforcement boundary. Meter stale/loss, phase-map fault, manager hang/power loss, internal bus loss, output non-response and restart must each map to an approved bounded mode or SAFE_STOP. CPMS/WAN loss must not disable local feeder-limit enforcement. A feeder reduction based on dynamic management remains prohibited until the exact system's fallback envelope, response/overshoot, phase allocation and fault-injection tests are demonstrated and independently reviewed. See M1.32.
