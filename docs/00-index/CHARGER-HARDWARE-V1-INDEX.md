@@ -228,3 +228,10 @@ M1.30 converts M1.29's feeder topology options into a per-circuit calculation an
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-30-CABLE-SIZING-CALCULATION-MATRIX.md`
 - `schemas/electrical/cable-sizing-record.schema.json`
+
+
+### M1.31 — distribution architecture and product capacity matrix
+
+M1.31 links Wallbox single/dual, pedestal single/dual/quad, cross-shaped quad and MultiStation to the M1.29 feeder options and M1.30 circuit-sizing records. It separates per-output nameplate rating, installed aggregate rating, locally enforced aggregate maximum, site available capacity and instantaneous allocation. It defines phase-by-phase capacity constraints, topology applicability per product, load-manager measurement/enforcement/fail-safe evidence and ten release gates. The 32 A / 400 V three-phase figures remain a reference-only scenario, not universal product ratings. No site capacity, output rating, feeder, cable section, protective device or production design is approved.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-31-DISTRIBUTION-ARCHITECTURE-AND-PRODUCT-CAPACITY-MATRIX.md`
