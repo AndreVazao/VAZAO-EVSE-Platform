@@ -217,3 +217,6 @@ M1.29 adds an explicit electrical-installation interface requirement for dual an
 - BOM update: `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - CAD inputs: `docs/03-engineering/CHARGER-HARDWARE-V1-M1-22-DIMENSIONING-CAPACITY-AND-CAD-INPUT-MATRIX.md`
 - Functional schematic update: `docs/03-engineering/CHARGER-HARDWARE-V1-ELECTRICAL-SCHEMATIC.md`
+
+
+**M1.29 clarification — external trunk branching:** the feeder topology set also explicitly includes one common trunk from the site main board to an external local distribution/branch enclosure, then four separately protected branch feeders to the EVSE units/outputs. This is distinct from splitting the common feeder on the charger’s internal busbar. The external branch point location, trunk/branch route lengths, protection coordination, neutral/PE and voltage-drop sum must be recorded. BOM and M1.22 CAD inputs now include the external distribution enclosure, common trunk and outgoing branch circuits.
