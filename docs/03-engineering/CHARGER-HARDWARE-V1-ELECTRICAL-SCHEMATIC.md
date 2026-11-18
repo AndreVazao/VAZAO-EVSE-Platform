@@ -102,3 +102,20 @@ A critical fault shall force a safe state independent of CPMS availability.
 ## 7. Reference standards
 
 The design baseline shall be reviewed against the applicable current editions of IEC 61851-1, IEC 62196-1/-2 and IEC 60364-7-722. IEC currently lists IEC 61851-1:2017/COR1:2023, IEC 62196-1:2025 and IEC 62196-2:2025 as relevant current publications.
+
+
+## 8. Multi-output feeder variants (M1.29)
+
+The single-output functional diagram above is the repeatable output-cell reference. Dual/quad products shall additionally support these installation interfaces:
+
+**Independent feeder option:** one separately identified incoming circuit per output, with its upstream protection/isolation and dedicated route.
+
+**Common feeder option:** one aggregate incoming feeder to a main isolator/protection and rated distribution block/busbar, followed by separately protected output branches. Internal branch conductors are sized independently from the common incoming feeder.
+
+**Hybrid option:** two or more independently protected feeder groups supplying defined output subsets.
+
+**Managed common feeder:** a common feeder with a local load manager enforcing a configured maximum current per phase at the feeder boundary. The maximum demand reduction may only be used in the feeder design when the load control is installed, secured, monitored and proven to fail safely. Cloud connectivity is not a protective load limit.
+
+In every topology, each output retains its local EVSE safety function and required individual protective architecture. A shared feeder or master controller does not replace per-output overcurrent/RCD/DC-fault protection or local safe-state control. The physical location of protective devices (upstream board or inside the EVSE) must be explicit and comply with the applicable installation/product requirements.
+
+Reference unmanaged currents for 22 kW / 32 A three-phase outputs are 32 A per phase for one output, 64 A per phase for two outputs, and 128 A per phase for four outputs. These are planning values only; no cable section, breaker, busbar or terminal rating is selected. Cable sizing must include corrected ampacity, voltage drop, short-circuit withstand, disconnection, PE/neutral, phase balance, harmonics, grouping, ambient and actual installation method. See `docs/03-engineering/CHARGER-HARDWARE-V1-M1-29-MULTI-OUTPUT-FEEDER-TOPOLOGIES-AND-CABLE-SIZING.md`.
