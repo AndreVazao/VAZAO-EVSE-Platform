@@ -262,3 +262,12 @@ M1.22 does not release:
 - native manufacturing CAD, fabrication drawings or assembly instructions.
 
 **Status: CAD-READINESS FRAMEWORK / OPEN.** Conceptual CAD may continue for communication and review, but must be visibly marked non-manufacturing. Dimensioned CAD and fabrication release remain blocked until the relevant D1–D10 gates close. No physical fit, thermal, environmental or structural test is claimed. No mains energisation, fabrication, installation, billing or commercial deployment is authorised by this milestone.
+
+
+## M1.29 — Incoming feeder and cable-entry envelopes
+
+The mechanical model must now support four incoming-power configurations: one independent feeder per output, one common feeder with internal distribution, hybrid feeder groups, and a common feeder with controlled maximum demand. For dual and quad variants, CAD input must include separate envelopes for the largest approved incoming cable, gland/entry plate, strain relief, lug/terminal, approach path, minimum bend radius and service removal. Model both the multiple-small-feeder entry case and the single-large-feeder entry case; do not assume one is mechanically interchangeable with the other.
+
+Main distribution terminals/busbar and output branch terminals must be separate component envelopes. Include protective-device operating access, main isolation handle, branch isolation, neutral and PE bars, cable segregation, thermal dissipation and safe maintenance access. Exact cable diameters, bend radii and terminal dimensions must come from the selected cable/accessory manufacturers and the approved electrical calculation. No dimensions or cable sections are created by M1.29.
+
+The cable route from installation origin to EV connection must be included in the voltage-drop and installation-method calculation; CAD only validates physical routing and fit, not electrical adequacy. See `docs/03-engineering/CHARGER-HARDWARE-V1-M1-29-MULTI-OUTPUT-FEEDER-TOPOLOGIES-AND-CABLE-SIZING.md`.
