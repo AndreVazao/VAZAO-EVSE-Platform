@@ -271,3 +271,8 @@ The mechanical model must now support four incoming-power configurations: one in
 Main distribution terminals/busbar and output branch terminals must be separate component envelopes. Include protective-device operating access, main isolation handle, branch isolation, neutral and PE bars, cable segregation, thermal dissipation and safe maintenance access. Exact cable diameters, bend radii and terminal dimensions must come from the selected cable/accessory manufacturers and the approved electrical calculation. No dimensions or cable sections are created by M1.29.
 
 The cable route from installation origin to EV connection must be included in the voltage-drop and installation-method calculation; CAD only validates physical routing and fit, not electrical adequacy. See `docs/03-engineering/CHARGER-HARDWARE-V1-M1-29-MULTI-OUTPUT-FEEDER-TOPOLOGIES-AND-CABLE-SIZING.md`.
+
+
+### External distribution and common-trunk CAD inputs (M1.29)
+
+For site designs where a common trunk branches before reaching the EVSE, the site CAD package must model the external local distribution/branch enclosure, trunk route, branch route lengths, protective-device access, busbar/terminal envelopes, neutral/PE bars, cable bend radii, environmental exposure and maintenance clearances. The charger CAD package models only the equipment-side branch entry and terminals. The voltage-drop record must sum the trunk and each specific branch path. Do not confuse a common feeder split inside the EVSE with a feeder split in an external site distribution board.
