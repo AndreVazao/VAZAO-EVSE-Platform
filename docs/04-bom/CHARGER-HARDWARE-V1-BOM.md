@@ -102,3 +102,6 @@ Cable sizing must be recorded separately for every incoming feeder and branch. T
 | CABLE-TRUNK | Common upstream trunk feeder from site board to external branch enclosure | 1 per feeder group | Cross-section pending aggregate demand and route calculation |
 | CABLE-OUT | Outgoing dedicated branch feeders from external enclosure to EVSE units/outputs | 1 per output/charger branch | Each branch calculated independently |
 | QF-BRANCH[n] | Branch protective/isolation device in external enclosure | 1 per branch where required | Engineering selection and coordination |
+
+
+M1.30 defines the required calculation record and evidence gates for every feeder/trunk/branch segment. Use `docs/03-engineering/CHARGER-HARDWARE-V1-M1-30-CABLE-SIZING-CALCULATION-MATRIX.md` and `schemas/electrical/cable-sizing-record.schema.json`. This does not select a cable section or release procurement.
