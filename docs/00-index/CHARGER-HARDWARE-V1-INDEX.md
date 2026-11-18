@@ -235,3 +235,10 @@ M1.30 converts M1.29's feeder topology options into a per-circuit calculation an
 M1.31 links Wallbox single/dual, pedestal single/dual/quad, cross-shaped quad and MultiStation to the M1.29 feeder options and M1.30 circuit-sizing records. It separates per-output nameplate rating, installed aggregate rating, locally enforced aggregate maximum, site available capacity and instantaneous allocation. It defines phase-by-phase capacity constraints, topology applicability per product, load-manager measurement/enforcement/fail-safe evidence and ten release gates. The 32 A / 400 V three-phase figures remain a reference-only scenario, not universal product ratings. No site capacity, output rating, feeder, cable section, protective device or production design is approved.
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-31-DISTRIBUTION-ARCHITECTURE-AND-PRODUCT-CAPACITY-MATRIX.md`
+
+
+### M1.32 — load management fail-safe and fault validation
+
+M1.32 defines control boundaries between site metering, local load manager, per-output EVSE controllers, power protection and CPMS/cloud. It specifies operating states (INIT, NORMAL, LIMITED, SAFE_STOP, MAINTENANCE), fault responses for stale/missing/implausible meter data, phase mapping errors, controller/watchdog/power/bus failures, output non-response, contactor feedback, CPMS/WAN loss, restart and configuration tampering. It defines per-phase allocation constraints, fallback design rules and a 14-case bench fault-injection plan. All tests remain NOT STARTED; no load-manager hardware, numeric response time, fallback current, feeder reduction or safety approval is selected.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-32-LOAD-MANAGEMENT-FAILSAFE-AND-FAULT-VALIDATION.md`
