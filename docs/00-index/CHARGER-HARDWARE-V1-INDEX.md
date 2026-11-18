@@ -220,3 +220,11 @@ M1.29 adds an explicit electrical-installation interface requirement for dual an
 
 
 **M1.29 clarification — external trunk branching:** the feeder topology set also explicitly includes one common trunk from the site main board to an external local distribution/branch enclosure, then four separately protected branch feeders to the EVSE units/outputs. This is distinct from splitting the common feeder on the charger’s internal busbar. The external branch point location, trunk/branch route lengths, protection coordination, neutral/PE and voltage-drop sum must be recorded. BOM and M1.22 CAD inputs now include the external distribution enclosure, common trunk and outgoing branch circuits.
+
+
+### M1.30 — cable sizing calculation matrix and record schema
+
+M1.30 converts M1.29's feeder topology options into a per-circuit calculation and evidence workflow. It requires separate records for independent feeders, common internal feeders and each output branch, external site trunks and each external branch, hybrid group feeders and managed common feeders. It defines the input set, corrected-ampacity and protective-coordination checks, segment-by-segment voltage-drop calculation, short-circuit/disconnection, neutral/PE, physical termination and independent review gates. Adds `schemas/electrical/cable-sizing-record.schema.json` as a machine-readable record contract. The schema validates structure only; it is not a sizing calculator or design approval. No real installation inputs, cable sections, protective-device ratings or cable products have been selected. All M30 gates remain OPEN/NOT STARTED; no procurement, installation or energisation release.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-30-CABLE-SIZING-CALCULATION-MATRIX.md`
+- `schemas/electrical/cable-sizing-record.schema.json`
