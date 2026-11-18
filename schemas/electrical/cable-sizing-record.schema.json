@@ -1,0 +1,564 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vazao-evse.example/schemas/electrical/cable-sizing-record.schema.json",
+  "title": "VAZAO EVSE cable sizing calculation record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "revision",
+    "status",
+    "topology",
+    "circuit_id",
+    "from",
+    "to",
+    "supply",
+    "design_current_a_per_phase",
+    "conductor",
+    "installation",
+    "route_length_m",
+    "voltage_drop_budget_percent",
+    "protective_device",
+    "ampacity_evidence",
+    "checks",
+    "review"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "study",
+        "calculated",
+        "review_pending",
+        "approved_for_design",
+        "rejected"
+      ]
+    },
+    "topology": {
+      "enum": [
+        "independent_feeder",
+        "common_internal_feeder",
+        "external_trunk",
+        "hybrid_group",
+        "managed_common_feeder",
+        "output_branch"
+      ]
+    },
+    "circuit_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "from": {
+      "type": "string",
+      "minLength": 1
+    },
+    "to": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_circuit_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supply": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_configuration",
+        "nominal_voltage_v",
+        "frequency_hz",
+        "phases_loaded",
+        "power_factor"
+      ],
+      "properties": {
+        "phase_configuration": {
+          "enum": [
+            "1P+N",
+            "3P",
+            "3P+N"
+          ]
+        },
+        "nominal_voltage_v": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "frequency_hz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "phases_loaded": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "power_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "harmonic_assessment": {
+          "type": "string"
+        }
+      }
+    },
+    "design_current_a_per_phase": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "maximum_enforced_demand_a_per_phase": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "conductor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material",
+        "insulation",
+        "cable_standard_or_type",
+        "core_count",
+        "loaded_conductors",
+        "candidate_section_mm2"
+      ],
+      "properties": {
+        "material": {
+          "enum": [
+            "copper",
+            "aluminium"
+          ]
+        },
+        "insulation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cable_standard_or_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "core_count": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "loaded_conductors": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "candidate_section_mm2": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "neutral_section_mm2": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "pe_section_mm2": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "installation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_method",
+        "environment",
+        "ambient_temperature_c",
+        "grouped_circuits",
+        "correction_factors"
+      ],
+      "properties": {
+        "reference_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ambient_temperature_c": {
+          "type": "number"
+        },
+        "soil_thermal_resistivity_k_m_w": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "grouped_circuits": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "correction_factors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "factor",
+              "value",
+              "source"
+            ],
+            "properties": {
+              "factor": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "route_length_m": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "voltage_drop_budget_percent": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 5
+    },
+    "voltage_drop_calculation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "resistance_ohm_per_km_at_operating_temperature": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "reactance_ohm_per_km": {
+          "type": "number",
+          "minimum": 0
+        },
+        "calculated_drop_v": {
+          "type": "number",
+          "minimum": 0
+        },
+        "calculated_drop_percent": {
+          "type": "number",
+          "minimum": 0
+        },
+        "upstream_drop_percent": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total_to_ev_point_percent": {
+          "type": "number",
+          "minimum": 0
+        },
+        "method_and_source": {
+          "type": "string"
+        }
+      }
+    },
+    "short_circuit": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "prospective_current_ka": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "clearing_time_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "k_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "withstand_check": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "earth_fault_loop_impedance_ohm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "disconnection_check": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        }
+      }
+    },
+    "protective_device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "device_reference",
+        "type",
+        "rated_current_a",
+        "breaking_capacity_ka",
+        "coordination_status"
+      ],
+      "properties": {
+        "device_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rated_current_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "breaking_capacity_ka": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "curve_or_setting": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coordination_status": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "manufacturer_and_datasheet": {
+          "type": "string"
+        }
+      }
+    },
+    "ampacity_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manufacturer_or_standard",
+        "document_revision",
+        "table_or_reference",
+        "base_ampacity_a",
+        "corrected_ampacity_a"
+      ],
+      "properties": {
+        "manufacturer_or_standard": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "table_or_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base_ampacity_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "corrected_ampacity_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "design_current_vs_protection_vs_ampacity",
+        "voltage_drop",
+        "short_circuit",
+        "automatic_disconnection",
+        "neutral",
+        "pe_and_bonding",
+        "terminal_and_gland",
+        "thermal_and_mechanical_fit",
+        "selectivity"
+      ],
+      "properties": {
+        "design_current_vs_protection_vs_ampacity": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "voltage_drop": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "short_circuit": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "automatic_disconnection": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "neutral": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "pe_and_bonding": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "terminal_and_gland": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "thermal_and_mechanical_fit": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "selectivity": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ampacity_result": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "design_current_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "protective_device_rating_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "corrected_ampacity_a": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "coordination_inequality": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prepared_by",
+        "prepared_date",
+        "independent_reviewer",
+        "review_date",
+        "competent_person_required"
+      ],
+      "properties": {
+        "prepared_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prepared_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "independent_reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "competent_person_required": {
+          "const": true
+        },
+        "approval_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "limitations": {
+      "type": "string"
+    }
+  }
+}
