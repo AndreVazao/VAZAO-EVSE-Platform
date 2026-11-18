@@ -207,3 +207,13 @@ M1.28 revalidates the Phoenix Contact CHARX control modular family against curre
 
 - `docs/03-engineering/CHARGER-HARDWARE-V1-M1-28-CHARX-CONTROLLER-MANUFACTURER-EVIDENCE-AUDIT.md`
 - M1.27 register amended with exact controller order numbers and M1.28 cross-reference.
+
+
+### M1.29 — multi-output feeder topologies and cable sizing
+
+M1.29 adds an explicit electrical-installation interface requirement for dual and quad chargers. It covers independent feeders (one per output), a common aggregate feeder with individually protected branches, hybrid feeder groups, and common feeder with a secured local load-management limit. It records unmanaged 22 kW / 32 A three-phase planning currents of 32 A/phase per output, 64 A/phase for dual and 128 A/phase for quad, without assigning cable sections. It defines the full cable-sizing input/check set: corrected ampacity, installation method, ambient/grouping, length and voltage drop, short-circuit/disconnection, protective coordination, phase balance/harmonics, neutral/PE, terminal and gland compatibility, bend radius and enclosure thermal fit. It incorporates the Portuguese CTE 64 / IEP Guia Técnico Edition 3 (2023) requirements and distinctions on simultaneity/load control, dedicated circuits and voltage drop. No cable size, breaker, RCD, busbar, terminal or installation wiring is released.
+
+- `docs/03-engineering/CHARGER-HARDWARE-V1-M1-29-MULTI-OUTPUT-FEEDER-TOPOLOGIES-AND-CABLE-SIZING.md`
+- BOM update: `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
+- CAD inputs: `docs/03-engineering/CHARGER-HARDWARE-V1-M1-22-DIMENSIONING-CAPACITY-AND-CAD-INPUT-MATRIX.md`
+- Functional schematic update: `docs/03-engineering/CHARGER-HARDWARE-V1-ELECTRICAL-SCHEMATIC.md`
