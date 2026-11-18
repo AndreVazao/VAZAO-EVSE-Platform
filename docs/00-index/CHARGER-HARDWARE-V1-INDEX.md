@@ -1,6 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
-**Status:** DRAFT / ENGINEERING BASELINE  
+**Status:** DRAFT / ENGINEERING BASELINE
+**Active recovery branch:** `recovery/charger-hardware-m1-1-2`  
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
