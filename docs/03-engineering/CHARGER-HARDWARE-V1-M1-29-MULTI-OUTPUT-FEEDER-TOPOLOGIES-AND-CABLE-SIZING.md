@@ -114,6 +114,39 @@ Requirements:
 
 For an unmanaged quad at 4 × 32 A three-phase, the common feeder's planning demand is 128 A per phase (about 88.68 kVA balanced). For an unmanaged dual at 2 × 32 A, it is 64 A per phase (about 44.34 kVA balanced). These figures do not select the cable cross-section or breaker.
 
+
+
+## 5A. Common upstream trunk with external branching (site distribution)
+
+The phrase “one main cable that then branches to four” also covers a distribution arrangement where the common trunk does **not** enter the charger cabinet. The main feeder may run from the site switchboard to an intermediate distribution board/branch enclosure near the charging equipment, then split into separately protected outgoing circuits to the four outputs or four individual charging units.
+
+Conceptual arrangement:
+
+```text
+SITE MAIN SWITCHBOARD
+  └── COMMON TRUNK FEEDER (aggregate permitted demand)
+        │
+        └── LOCAL DISTRIBUTION / BRANCH ENCLOSURE
+              ├── Branch circuit 1 + protection/isolation ──> Output / charger 1
+              ├── Branch circuit 2 + protection/isolation ──> Output / charger 2
+              ├── Branch circuit 3 + protection/isolation ──> Output / charger 3
+              └── Branch circuit 4 + protection/isolation ──> Output / charger 4
+```
+
+This is a distinct physical layout from a single feeder entering the quad charger and splitting on its internal busbar, even though the aggregate current calculation can be similar. It is also applicable to a row/cluster of separate single-output or dual-output units. The design record must identify exactly where the branch point is located: main switchboard, local QVE/sub-board, external junction/distribution enclosure, or inside the EVSE product.
+
+Requirements:
+- The common trunk is sized for the maximum aggregate demand permitted downstream, including all branch circuits and any other loads connected to that trunk.
+- The branch enclosure and its incoming/outgoing terminals, busbar, protective devices, isolation, short-circuit rating and environmental/IP requirements are selected for the installation location.
+- Each outgoing EV branch has its own defined protective boundary and dedicated circuit arrangement; branch cable sections are calculated separately from the trunk.
+- The common trunk and branch circuits must be coordinated for fault protection and selectivity. A fault on one branch should not unnecessarily disconnect unrelated branches where the protection design can provide discrimination.
+- The route length for voltage-drop calculations is split into trunk and each branch; total drop to each EV connection is the sum of the relevant upstream and branch segments.
+- If a load manager controls a group of branches, its measurement point and enforced limit must cover the complete common trunk boundary, including other loads where present.
+- Neutral and PE distribution, earthing arrangement, common RCD interactions, and any shared protective conductor arrangement must be designed explicitly. Never infer that a common trunk permits arbitrary shared neutrals.
+- The site CAD/layout and the charger product CAD must distinguish external distribution hardware from components supplied inside the EVSE.
+
+This topology is added to the mandatory comparison set for quad charger installations and MultiStation/park distribution. It does not reduce the required independent protection and local safety of each charging output.
+
 ## 6. Architecture C — common feeder with managed maximum demand
 
 A common feeder may be designed for a lower maximum demand than the arithmetic sum of all output ratings only if an approved load-control system guarantees that the feeder limit cannot be exceeded.
