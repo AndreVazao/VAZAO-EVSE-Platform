@@ -92,3 +92,13 @@ This BOM is an engineering candidate list, not a purchasing release. Manufacture
 | PE-BAR | Protective-earth bonding bar | 1 | Design and cross-section pending applicable rules |
 
 Cable sizing must be recorded separately for every incoming feeder and branch. The design package shall support independent feeders, a single common feeder with individually protected branches, hybrid feeder groups and common feeder with controlled maximum demand. No cable section, protective-device rating or terminal SKU is approved by this preliminary BOM. See `docs/03-engineering/CHARGER-HARDWARE-V1-M1-29-MULTI-OUTPUT-FEEDER-TOPOLOGIES-AND-CABLE-SIZING.md`.
+
+
+### External common-trunk distribution option (M1.29)
+
+| Ref | Item | Qty | Status |
+|---|---|---:|---|
+| DB-EXT | External local distribution/branch enclosure (site-installed, not necessarily part of charger supply) | By installation | Select to environment, fault level, IP/IK and protection architecture |
+| CABLE-TRUNK | Common upstream trunk feeder from site board to external branch enclosure | 1 per feeder group | Cross-section pending aggregate demand and route calculation |
+| CABLE-OUT | Outgoing dedicated branch feeders from external enclosure to EVSE units/outputs | 1 per output/charger branch | Each branch calculated independently |
+| QF-BRANCH[n] | Branch protective/isolation device in external enclosure | 1 per branch where required | Engineering selection and coordination |
