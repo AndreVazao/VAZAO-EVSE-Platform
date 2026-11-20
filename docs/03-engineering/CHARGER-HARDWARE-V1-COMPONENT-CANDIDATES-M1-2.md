@@ -13,7 +13,7 @@ The strongest current approach is to use a purpose-built EVSE charge controller 
 |---|---|---|---|
 | EVSE controller, single output | Phoenix Contact CHARX control modular SEC-1000 (1139034) + optional SEC-3000 family gateway | **Leading architecture candidate — evaluation only** | Manufacturer documents compact per-point controller class, class-3000 server/gateway and 48-point architecture. Exact configuration, local safety, bus and offline behaviour remain open. |
 | EVSE controller, legacy single output | Phoenix Contact CHARX control advanced EM-CP-PP-ETH, 2902802 | **Secondary / simpler one-point alternative** | One charging point, Type 2 Mode 3, Ethernet and RS-485; manual-level safety and terminal evidence remains incomplete. |
-| EVSE controller, multi-point / load management | Bender CC613 family | **Historical architecture reference — procurement blocked** | Manual D00381 documents IEC 61851 Mode 3, configurable master/slave, dynamic load management, external Type A RCD requirement with RDC-M, and OCPP 1.5/1.6. However, the manufacturer product page currently marks CC613 as discontinued. Do not procure or select it; request a supported successor and written lifecycle confirmation. |
+| EVSE controller, multi-point / load management | Bender CC613 family | **Historical architecture reference — lifecycle status unverified; procurement blocked** | Manual D00381 documents IEC 61851 Mode 3, configurable master/slave, dynamic load management, external Type A RCD requirement with RDC-M, and OCPP 1.5/1.6. The linked manufacturer product page did not provide verifiable CC613-specific discontinuation evidence during the 2026-11-20 review. Lifecycle status is therefore **unverified**. Do not procure or select it until Bender provides written lifecycle confirmation and, if applicable, identifies a supported successor. |
 | Energy meter, direct 3-phase | Carlo Gavazzi EM340DINAV23XS1PFB | **Candidate for per-output metering** | Manufacturer lists 5(65) A, 230/400 V, RS485 Modbus RTU and MID (Europe). Confirm exact MID certificate/variant and suitability for the intended Portuguese billing arrangement. |
 | Energy meter, Ethernet alternative | Carlo Gavazzi EM24DINAV23XE1PFA | **Alternative pending detailed review** | Manufacturer lists 10(65) A, 230/400 V, Modbus TCP/IP and MID. Verify exact order code, measurement configuration and certification documents before selection. |
 
@@ -25,7 +25,7 @@ No prices are frozen in this document. Manufacturer pages and distributor prices
 
 Official family page: https://www.phoenixcontact.com/pt-pt/produtos/controladores-de-carregamento-ac
 
-The manufacturer describes compact class-1000 per-point controllers and intelligent class-3000 controllers with server operation. Its published example connects one class-3000 controller and eleven class-1000 controllers into a 12-point cluster, with up to four such clusters / 48 points under the published system architecture. Current manual firmware 1.9.1 is available for SEC-3150, SEC-3100, SEC-3050, SEC-3000 and SEC-1000.
+The manufacturer describes compact class-1000 per-point controllers and intelligent class-3000 controllers with server operation. The exact supported cluster size and any system-wide point limit must be confirmed against the current manufacturer manual and the selected firmware before architecture freeze; this shortlist does not treat a headline point count as validated design capacity.
 
 **Evaluation:** this is the leading architecture candidate for the VAZÃO single/dual/quad roadmap, pending validation. Verify exact local safety, contactor monitoring, RCM/RCD integration, backplane current, cluster fault isolation, offline operation and exact bill of materials. The detailed M1.5/M1.5A evidence documents are not included in this recovery PR; they remain on the historical source branch and are scheduled for a later recovery block.
 
@@ -57,7 +57,7 @@ Manufacturer-published features include:
 - OCPP 1.5 and OCPP 1.6 support;
 - Ethernet and optional modem variants documented across the product family.
 
-**Evaluation:** retain only as historical technical reference for the Master/Slave and load-management architecture. Procurement is blocked because Bender currently marks CC613 discontinued. Request a supported successor, lifecycle statement and updated multi-point topology before choosing a Bender platform. Do not assume one CC613 controls four independent outputs.
+**Evaluation:** retain only as a historical technical reference for the Master/Slave and load-management architecture. Procurement remains blocked because current lifecycle status has not been verified. Request written confirmation from Bender, a supported successor if applicable, and an updated multi-point topology before choosing a Bender platform. Do not assume one CC613 controls four independent outputs.
 
 ## 3. Metering candidates
 
@@ -132,7 +132,7 @@ Before purchasing any candidate:
 ## 7. Sources
 
 1. Phoenix Contact — EM-CP-PP-ETH, order no. 2902802: https://www.phoenixcontact.com/pt-pt/produtos/ac-charging-controller-em-cp-pp-eth-2902802
-3. Bender — CC613 product page: https://www.bender.de/en/products/charge-controller/cc613-charge-controller/
+2. Phoenix Contact — CHARX control AC controller family: https://www.phoenixcontact.com/pt-pt/produtos/controladores-de-carregamento-ac\n3. Bender — CC613 product page: https://www.bender.de/en/products/charge-controller/cc613-charge-controller/
 4. Bender — CC613 operating manual: https://www.bender.es/fileadmin/content/Products/m/e/CC613_D00381_M_XXEN.pdf
 5. Carlo Gavazzi — EM340DINAV23XS1PFB: https://www.gavazziautomation.com/pt-pt/produto/EM340DINAV23XS1PFB
 6. Carlo Gavazzi — EM24DINAV23XE1PFA: https://www.gavazziautomation.com/en-gb/product/EM24DINAV23XE1PFA
