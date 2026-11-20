@@ -27,7 +27,7 @@ Official family page: https://www.phoenixcontact.com/pt-pt/produtos/controladore
 
 The manufacturer describes compact class-1000 per-point controllers and intelligent class-3000 controllers with server operation. Its published example connects one class-3000 controller and eleven class-1000 controllers into a 12-point cluster, with up to four such clusters / 48 points under the published system architecture. Current manual firmware 1.9.1 is available for SEC-3150, SEC-3100, SEC-3050, SEC-3000 and SEC-1000.
 
-**Evaluation:** this is now the leading architecture candidate for the VAZÃO single/dual/quad roadmap. It is not yet selected: verify exact local safety, contactor monitoring, RCM/RCD integration, backplane current, cluster fault isolation, offline operation and exact bill of materials. See [M1.5 architecture review](CHARGER-HARDWARE-V1-MODULAR-CONTROLLER-ARCHITECTURE-REVIEW-M1-5.md) and [M1.5A manual extraction](CHARGER-HARDWARE-V1-CHARX-MODULAR-MANUAL-INTERFACE-EXTRACTION-M1-5A.md).
+**Evaluation:** this is the leading architecture candidate for the VAZÃO single/dual/quad roadmap, pending validation. Verify exact local safety, contactor monitoring, RCM/RCD integration, backplane current, cluster fault isolation, offline operation and exact bill of materials. The detailed M1.5/M1.5A evidence documents are not included in this recovery PR; they remain on the historical source branch and are scheduled for a later recovery block.
 
 ### 2.2 Phoenix Contact CHARX control advanced — 2902802
 
