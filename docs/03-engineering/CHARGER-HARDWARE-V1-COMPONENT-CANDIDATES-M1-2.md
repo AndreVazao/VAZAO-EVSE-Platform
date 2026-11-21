@@ -132,11 +132,12 @@ Before purchasing any candidate:
 ## 7. Sources
 
 1. Phoenix Contact — EM-CP-PP-ETH, order no. 2902802: https://www.phoenixcontact.com/pt-pt/produtos/ac-charging-controller-em-cp-pp-eth-2902802
-2. Phoenix Contact — CHARX control AC controller family: https://www.phoenixcontact.com/pt-pt/produtos/controladores-de-carregamento-ac\n3. Bender — CC613 product page: https://www.bender.de/en/products/charge-controller/cc613-charge-controller/
+2. Phoenix Contact — CHARX control AC controller family: https://www.phoenixcontact.com/pt-pt/produtos/controladores-de-carregamento-ac
+3. Bender — CC613 product page: https://www.bender.de/en/products/charge-controller/cc613-charge-controller/
 4. Bender — CC613 operating manual: https://www.bender.es/fileadmin/content/Products/m/e/CC613_D00381_M_XXEN.pdf
 5. Carlo Gavazzi — EM340DINAV23XS1PFB: https://www.gavazziautomation.com/pt-pt/produto/EM340DINAV23XS1PFB
 6. Carlo Gavazzi — EM24DINAV23XE1PFA: https://www.gavazziautomation.com/en-gb/product/EM24DINAV23XE1PFA
 
 ## 8. Release status
 
-**M1.2 shortlist only. CHARX control modular is the leading architecture candidate for M1.5 evaluation. CC613 is procurement-blocked as discontinued and retained solely as a historical architecture reference.** This document supports supplier enquiry and detailed engineering evaluation. It is not a final BOM, wiring instruction, certification, installation approval or authorization to energize mains.
+**M1.2 shortlist only. CHARX control modular is the leading architecture candidate for M1.5 evaluation. CC613 lifecycle status remains unverified; procurement is blocked until Bender provides written lifecycle confirmation and identifies any applicable successor.** This document supports supplier enquiry and detailed engineering evaluation. It is not a final BOM, wiring instruction, certification, installation approval or authorization to energize mains.
