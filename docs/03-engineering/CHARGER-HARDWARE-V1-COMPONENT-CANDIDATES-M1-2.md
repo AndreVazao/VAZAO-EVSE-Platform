@@ -11,7 +11,7 @@ The strongest current approach is to use a purpose-built EVSE charge controller 
 
 | Function | Candidate | Current decision | Why / remaining gate |
 |---|---|---|---|
-| EVSE controller, single output | Phoenix Contact CHARX control modular SEC-1000 (1139034) + optional SEC-3000 family gateway | **Leading architecture candidate — evaluation only** | Manufacturer documents compact per-point controller class, class-3000 server/gateway and 48-point architecture. Exact configuration, local safety, bus and offline behaviour remain open. |
+| EVSE controller, single output | Phoenix Contact CHARX control modular SEC-1000 (1139034) + optional SEC-3000 family gateway | **Leading architecture candidate — evaluation only** | Manufacturer documents compact per-point controller class and class-3000 server/gateway. Exact supported cluster size, configuration, local safety, bus and offline behaviour remain open. |
 | EVSE controller, legacy single output | Phoenix Contact CHARX control advanced EM-CP-PP-ETH, 2902802 | **Secondary / simpler one-point alternative** | One charging point, Type 2 Mode 3, Ethernet and RS-485; manual-level safety and terminal evidence remains incomplete. |
 | EVSE controller, multi-point / load management | Bender CC613 family | **Historical architecture reference — lifecycle status unverified; procurement blocked** | Manual D00381 documents IEC 61851 Mode 3, configurable master/slave, dynamic load management, external Type A RCD requirement with RDC-M, and OCPP 1.5/1.6. The linked manufacturer product page did not provide verifiable CC613-specific discontinuation evidence during the 2026-11-20 review. Lifecycle status is therefore **unverified**. Do not procure or select it until Bender provides written lifecycle confirmation and, if applicable, identifies a supported successor. |
 | Energy meter, direct 3-phase | Carlo Gavazzi EM340DINAV23XS1PFB | **Candidate for per-output metering** | Manufacturer lists 5(65) A, 230/400 V, RS485 Modbus RTU and MID (Europe). Confirm exact MID certificate/variant and suitability for the intended Portuguese billing arrangement. |
@@ -112,7 +112,7 @@ Do not infer these values from 22 kW or 32 A alone.
 
 **Prototype A — single output:** evaluate one CHARX SEC-1000 local controller, with SEC-3000 only if required for gateway/server functions. Keep 2902802 as a simpler legacy alternative. Evaluate the EM340 Modbus RTU meter. The modular manual must determine contactor drive, monitoring, RCM and external protective-device interfaces.
 
-**Architecture B — dual/quad:** study the CC613 manual only as a historical Master/Slave reference; do not procure it while discontinued. Identify and validate a currently supported successor before selecting the multi-point controller architecture. Each charging point must retain the required local control and protection boundary.
+**Architecture B — dual/quad:** study the CC613 manual only as a historical Master/Slave reference; do not procure it while lifecycle status remains unverified. Identify and validate a currently supported successor before selecting the multi-point controller architecture. Each charging point must retain the required local control and protection boundary.
 
 **Important:** do not mix controller wiring assumptions between Phoenix Contact and Bender. Each candidate requires its own manufacturer-specific schematic and review.
 
