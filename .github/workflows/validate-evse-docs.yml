@@ -26,52 +26,69 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install CommonMark parser
+        run: |
+          python3 -m venv "$RUNNER_TEMP/markdown-link-checker-venv"
+          "$RUNNER_TEMP/markdown-link-checker-venv/bin/pip" install --disable-pip-version-check --no-input markdown-it-py==3.0.0
+
       - name: Validate relative links in changed Markdown files
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          PYTHON: ${{ runner.temp }}/markdown-link-checker-venv/bin/python
         run: |
-          python3 - <<'PY'
+          "$PYTHON" - <<'PY'
           import os
-          import re
           import subprocess
           import sys
           from pathlib import Path
           from urllib.parse import unquote, urlsplit
+
+          from markdown_it import MarkdownIt
 
           base = os.environ.get("BASE_SHA", "")
           if not base or set(base) == {"0"}:
               print("No usable base SHA supplied; refusing to report a false pass.", file=sys.stderr)
               sys.exit(2)
 
-          changed = subprocess.run(
-              ["git", "diff", "--name-only", "--diff-filter=ACMRT", f"{base}...HEAD"],
-              check=True, capture_output=True, text=True
-          ).stdout.splitlines()
+          result = subprocess.run(
+              ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", f"{base}...HEAD"],
+              check=True,
+              capture_output=True,
+          )
+          changed = [os.fsdecode(name) for name in result.stdout.split(b"\\0") if name]
           markdown = [Path(name) for name in changed if name.lower().endswith(".md")]
           if not markdown:
               print("No changed Markdown files in this event; nothing to validate.")
               sys.exit(0)
 
-          link_pattern = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
+          parser = MarkdownIt("commonmark")
           failures = []
           checked = 0
+          scanned = 0
 
           for source in markdown:
               if not source.is_file():
                   continue
-              text = source.read_text(encoding="utf-8")
-              for raw in link_pattern.findall(text):
-                  target = raw.strip().split(maxsplit=1)[0].strip("<>")
-                  parsed = urlsplit(target)
-                  if not target or parsed.scheme or target.startswith("//") or not parsed.path:
+              scanned += 1
+              document = source.read_text(encoding="utf-8")
+              for token in parser.parse(document):
+                  if token.type != "inline" or not token.children:
                       continue
-                  relative = unquote(parsed.path)
-                  resolved = (source.parent / relative).resolve()
-                  checked += 1
-                  if not resolved.exists():
-                      failures.append(f"{source}: broken local link: {target}")
+                  for child in token.children:
+                      if child.type != "link_open":
+                          continue
+                      target = child.attrGet("href")
+                      if not target:
+                          continue
+                      parsed = urlsplit(target)
+                      if parsed.scheme or target.startswith("//") or not parsed.path:
+                          continue
+                      resolved = (source.parent / unquote(parsed.path)).resolve()
+                      checked += 1
+                      if not resolved.exists():
+                          failures.append(f"{source}: broken local link: {target}")
 
-          print(f"Checked {checked} relative Markdown links across {len(markdown)} changed file(s).")
+          print(f"Checked {checked} relative Markdown links across {scanned} changed file(s).")
           if failures:
               print("\\n".join(failures), file=sys.stderr)
               sys.exit(1)
