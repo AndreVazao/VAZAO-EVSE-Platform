@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active recovery branch:** `recovery/charger-hardware-m1-1-2-mainline`  
+**Current recovery work (branch only; PR queued behind existing open PR):** `recovery/charger-hardware-m1-3-controller-interface`  
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -44,7 +44,9 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.1 — Component Selection Gate](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md)
 - [M1.2 — Evidence-backed Component Candidates](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md)
 
-Additional historical milestones remain on the preserved recovery source branch and will be ported in small, dependency-aware PRs after this PR is merged.
+M1.3 has been recovered to a new branch and is queued for PR creation after the repository's existing open PR is merged. Historical M1.4+ milestones remain on the preserved recovery source branch and will be ported in dependency-aware PRs.
+
+- [M1.3 — Controller Interface Review](../03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md) — recovered; evidence review still OPEN.
 
 ## Safety status
 
