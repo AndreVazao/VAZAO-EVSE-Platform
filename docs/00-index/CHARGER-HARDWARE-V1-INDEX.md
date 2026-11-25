@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active work branch:** `work/charger-hardware-m1-23-ac-feeder-topology`  
+**Active work branch:** `work/charger-hardware-m1-24-local-load-management`
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -45,7 +45,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.2 — Evidence-backed Component Candidates](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md)
 - [M1.3 — Controller Interface Review](../03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md) — recovered and merged; controller selection remains OPEN.
 - [M1.4A — Phoenix CHARX 2902802 Interface Review](../03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md) — merged; manufacturer-document review remains partial and not approved for wiring.
-- [M1.23 — AC Feeder Topology and Conductor Sizing Design Basis](../03-engineering/CHARGER-HARDWARE-V1-M1-23-AC-FEEDER-TOPOLOGY-AND-CONDUCTOR-SIZING.md) — new design-basis gate; no conductor cross-section is released.
+- [M1.23 — AC Feeder Topology and Conductor Sizing Design Basis](../03-engineering/CHARGER-HARDWARE-V1-M1-23-AC-FEEDER-TOPOLOGY-AND-CONDUCTOR-SIZING.md) — merged; independent and common dual/quad feeder alternatives defined, cable sections remain installation-calculation dependent.
+- [M1.24 — Local Load Management Interface and Fail-Safe Contract](../03-engineering/CHARGER-HARDWARE-V1-M1-24-LOCAL-LOAD-MANAGEMENT-INTERFACE.md) — new architecture gate; controller implementation and fieldbus compatibility remain unverified.
 
 ## Safety status
 

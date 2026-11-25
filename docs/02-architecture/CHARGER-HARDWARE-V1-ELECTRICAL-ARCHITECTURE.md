@@ -220,3 +220,18 @@ The charger shall expose a controlled service/test interface for:
 - diagnostic log extraction.
 
 The TestStation remains external to the normal charger safety chain.
+
+
+## 11. Local load-management boundary (M1.24)
+
+A local energy-management controller may allocate a site or charger feeder current budget across output channels. It is supervisory to each EVSE's local safety controller and must never replace per-output protection, CP/PP state control, contactor feedback or residual-current protection.
+
+The load manager shall:
+- measure the relevant upstream phase currents using a validated measurement path;
+- receive the approved aggregate feeder limit and per-output limits from a controlled configuration;
+- allocate current budgets to channels and communicate them over a validated local interface;
+- ensure each channel independently enforces its own permitted current;
+- remain operational without CPMS/cloud connectivity;
+- log allocation, limit changes, sensor faults, communication faults and fallback events.
+
+A generic architecture does not imply that Phoenix Contact CHARX 2902802 supports this master/cluster role. Its current M1.4A review explicitly leaves multi-point coordination unproven. Any selected controller must demonstrate the required local setpoint interface and failure behavior from its own manufacturer evidence.

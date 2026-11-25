@@ -87,3 +87,18 @@ The Master Controller communicates with each channel controller and applies the 
 ## 6. Commissioning checks
 
 Before energization, the approved test procedure shall verify continuity, PE integrity, insulation, protective-device operation, contactor operation, CP/PP state transitions, metering, emergency/fault behaviour and communication loss.
+
+
+## 7. Local load-management signal schedule — M1.24
+
+| ID | From | To | Function / required evidence |
+|---|---|---|---|
+| LM-001 | Common-feeder phase sensors / meter | Local energy manager | Measure each relevant phase current; verify accuracy, range, polarity and fault diagnostics |
+| LM-002 | Independent-feeder sensors / meters (where used) | Local energy manager | Measure per-feeder current where the installation design requires it |
+| LM-003 | Local energy manager | Output channel A controller | Send permitted current budget over a validated local interface |
+| LM-004 | Local energy manager | Output channel B controller | Send permitted current budget over a validated local interface |
+| LM-005 | Local energy manager | Output channels C/D controllers | Repeat for quad variant |
+| LM-006 | Output channel controllers | Local energy manager | Return accepted setpoint, actual current, state and fault status |
+| LM-007 | Local energy manager watchdog / fault logic | Channel controllers or local inhibit chain | Apply the documented fallback when measurement, control or communications are invalid |
+
+The schedule is functional only. No protocol, terminal, voltage level or device compatibility is assumed. Each selected controller must prove how a current limit is accepted, enforced and acknowledged. If the controller cannot provide this interface, a different controller or an independently validated local control layer is required.
