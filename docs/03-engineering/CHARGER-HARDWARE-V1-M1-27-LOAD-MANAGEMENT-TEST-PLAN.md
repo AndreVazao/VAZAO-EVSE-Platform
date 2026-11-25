@@ -32,7 +32,7 @@ The VAZÃO EVSE TestStation must support three service levels, with a traceable 
 - Preserve raw data, test scripts, firmware, configuration, calibration certificates, environmental conditions and reviewer approval.
 - This level is the evidence gate before relying on load management to reduce a common feeder design current.
 
-All levels produce a printable, exportable evidence report. A report must distinguish PASS, FAIL, NOT RUN and INCONCLUSIVE; absence of a test is never represented as a pass.
+All levels produce a printable, exportable evidence report. A report must use exactly these outcome states: `PASS`, `FAIL`, `INDETERMINATE`, `NOT RUN` and `BLOCKED`. `INDETERMINATE` means the evidence is insufficient, conflicting or unreliable to decide; `NOT RUN` means execution did not take place; `BLOCKED` means a prerequisite, safety gate or dependency prevented execution. Applicability is recorded separately from outcome: a test declared not applicable for a specific product/profile requires a reason and approval, and must never be relabelled as `PASS`. Absence of a test is never represented as a pass.
 
 ## 3. Test equipment and evidence prerequisites
 
@@ -90,14 +90,15 @@ Calibration status and uncertainty must be suitable for each acceptance toleranc
 ## 6. Acceptance gates
 
 A test campaign can pass only when:
-1. All safety-critical tests are PASS; no FAIL or INCONCLUSIVE remains.
-2. Measurement uncertainty and response time are inside approved budgets.
-3. The maximum permitted feeder current is never exceeded during normal or fault transitions.
-4. Local control continues without cloud/CPMS.
-5. Every channel enforces a local timeout/fallback independently.
-6. Reboot, configuration corruption and communication loss cannot restore a higher unapproved current limit.
-7. Raw evidence and printable reports are complete and reproducible.
-8. An independent reviewer approves the results and configuration.
+1. Every required and applicable safety-critical test is `PASS`.
+2. Every other required and applicable test is `PASS`; any `FAIL`, `INDETERMINATE`, `BLOCKED` or `NOT RUN` outcome prevents campaign acceptance until resolved and successfully retested. A non-applicable test must have a documented profile-specific rationale and reviewer approval; it is excluded from the campaign denominator, not converted to `PASS`.
+3. Measurement uncertainty and response time are inside approved budgets.
+4. The maximum permitted feeder current is never exceeded during normal or fault transitions.
+5. Local control continues without cloud/CPMS.
+6. Every channel enforces a local timeout/fallback independently.
+7. Reboot, configuration corruption and communication loss cannot restore a higher unapproved current limit.
+8. Raw evidence and printable reports are complete and reproducible.
+9. An independent reviewer approves the results and configuration.
 
 If any gate fails, the system cannot be used to justify a reduced common-feeder current. Use the full simultaneous-demand envelope from M1.23 until a corrected system is retested.
 
@@ -108,7 +109,7 @@ Each TestStation report must include:
 - product/serial IDs, hardware revisions, firmware and configuration hashes;
 - feeder topology and configured aggregate/per-output limits;
 - meter/CT model, phase mapping, calibration details and uncertainty;
-- test ID, stimulus, expected result, observed result and PASS/FAIL/NOT RUN/INCONCLUSIVE;
+- test ID, applicability decision and rationale, stimulus, expected result, observed result and exactly one outcome state: PASS/FAIL/INDETERMINATE/NOT RUN/BLOCKED;
 - raw time-series data and event timeline;
 - injected faults and recovery actions;
 - deviations, evidence links and corrective action references;
