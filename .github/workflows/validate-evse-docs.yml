@@ -57,7 +57,7 @@ jobs:
               check=True,
               capture_output=True,
           )
-          changed = [os.fsdecode(name) for name in result.stdout.split(b"\\0") if name]
+          changed = [os.fsdecode(name) for name in result.stdout.split(b"\0") if name]
           markdown = [Path(name) for name in changed if name.lower().endswith(".md")]
           if not markdown:
               print("No changed Markdown files in this event; nothing to validate.")
@@ -92,7 +92,7 @@ jobs:
 
           print(f"Checked {checked} relative Markdown links across {scanned} changed file(s).")
           if failures:
-              print("\\n".join(failures), file=sys.stderr)
+              print("\n".join(failures), file=sys.stderr)
               sys.exit(1)
           print("All checked relative Markdown links resolve.")
           PY
