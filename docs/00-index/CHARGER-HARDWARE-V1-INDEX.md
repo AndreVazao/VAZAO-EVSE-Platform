@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active recovery branch:** `recovery/charger-hardware-m1-1-2-mainline`  
+**Active recovery branch:** `recovery/charger-hardware-m1-3-controller-interface-followup`  
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -39,17 +39,17 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - `docs/04-bom/CHARGER-HARDWARE-V1-BOM.md`
 - `docs/05-decisions/ADR-001-AC-22KW-FIRST-PROTOTYPE.md`
 
-## Recovered milestones (current PR)
+## Recovered milestones
 
 - [M1.1 — Component Selection Gate](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md)
 - [M1.2 — Evidence-backed Component Candidates](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md)
+- [M1.3 — Controller Interface Review](../03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md) — recovered; evidence review remains OPEN.
 
-Additional historical milestones remain on the preserved recovery source branch and will be ported in small, dependency-aware PRs after this PR is merged.
+Historical M1.4+ milestones remain on the preserved recovery source branch and will be ported in dependency-aware PRs after this PR is merged.
 
 ## Safety status
 
 This is an engineering/documentation baseline, **not a construction certificate or installation drawing**. Any mains-connected prototype must be reviewed and tested by a suitably qualified electrical engineer, and the production design must be validated against the applicable EU/Portuguese requirements and EVSE standards before deployment.
-
 
 ## Engineering drawings
 
