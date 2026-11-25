@@ -51,7 +51,7 @@ The exact upstream protection is installation-specific and must be selected afte
 
 ### Power path
 
-`X1 -> QF1 -> residual-current/EV protection -> surge protection as required -> power distribution -> KM1 -> metering -> EV connector`
+`X1 -> QF1 -> residual-current/EV protection -> surge protection as required -> power distribution -> KM1 -> metering -> Type 2 output`
 
 PE is bonded to the metallic enclosure and routed to the EV connector according to the final certified design.
 
@@ -137,6 +137,71 @@ MASTER
 ```
 
 The Master performs allocation. Each channel retains its own local safety state.
+
+### 8.1 AC feeder topologies — mandatory design alternatives
+
+Dual-output and quad-output products shall support an explicit engineering comparison of two installation topologies. They are alternatives to be evaluated per installation, not interchangeable wiring instructions.
+
+**Topology A — independent incoming feeders**
+
+- Dual: one separately protected feeder for output A and one for output B.
+- Quad: one separately protected feeder for each of outputs A–D.
+- Each feeder is calculated for its own output's maximum configured current and installation conditions.
+- Each output has its own protective coordination and isolation provisions as required by the final design.
+- This arrangement improves circuit separation and can simplify selective isolation, but may increase upstream cable routes, installation labour and space.
+
+**Topology B — common incoming feeder with local distribution**
+
+- Dual: one common incoming feeder supplies a suitably rated distribution assembly, which branches to the two output channels.
+- Quad: one common incoming feeder supplies a suitably rated distribution assembly, which branches to four output channels.
+- The common feeder and upstream protection must be designed for the maximum permitted aggregate demand, including the actual load-management policy and its failure/default state.
+- Each branch from the distribution assembly to an output retains its own correctly coordinated protection and conductor sizing.
+- The common feeder is not sized by simply reusing the single-output cable section. It is calculated for the aggregate design current and installation conditions.
+
+### 8.2 Preliminary current envelope — not a cable-size table
+
+For a 400 V three-phase output configured at 32 A, the nominal apparent-power reference is approximately 22.2 kVA per output (power factor and actual vehicle demand affect active power).
+
+| Product | Independent-feeder envelope | Common-feeder aggregate envelope if all outputs can draw 32 A simultaneously |
+|---|---:|---:|
+| Single | 1 × 32 A | 32 A |
+| Dual | 2 × 32 A feeders | 64 A |
+| Quad | 4 × 32 A feeders | 128 A |
+
+The 64 A and 128 A values are arithmetic aggregate design envelopes, not recommended protective-device ratings or cable selections. If a validated load-management system imposes a lower site limit, the common-feeder design may use that lower limit only when the limit is enforced locally, its sensor/control failure behavior is defined, and the upstream protection remains independently adequate. A cloud-only limit is not acceptable as the sole basis for reducing feeder capacity.
+
+### 8.3 Conductor-sizing inputs and calculation gate
+
+No cross-section in mm² is approved by this architecture document. For each incoming feeder and each branch feeder, the engineering calculation must record:
+
+- design current and maximum simultaneous demand;
+- supply system, phase count, voltage and earthing arrangement;
+- cable conductor material, insulation type and rated temperature;
+- installation method/reference method and whether installed in conduit, trunking, buried, free air or thermally insulated construction;
+- ambient/soil temperature, grouping, spacing and thermal derating factors;
+- route length and allowable voltage drop;
+- prospective short-circuit current, disconnection time and adiabatic short-circuit withstand;
+- protective-device type, rated current, trip curve/settings and coordination;
+- neutral loading, harmonics and any required neutral sizing;
+- PE conductor sizing and fault-loop/protective-device requirements;
+- terminal, gland and connector accepted conductor ranges;
+- local Portuguese rules and applicable editions of the relevant IEC/HD installation standards.
+
+The calculation shall be performed separately for the **common trunk** and every **outgoing branch**. It shall verify current-carrying capacity after correction factors, voltage drop, short-circuit thermal withstand, automatic disconnection and protective-device coordination. The final chosen section must satisfy all applicable constraints; the most restrictive result governs.
+
+### 8.4 Required design outputs
+
+For each single, dual and quad variant, the CAD/electrical package shall include:
+
+1. single-line diagram for independent-feeder topology;
+2. single-line diagram for common-feeder topology;
+3. feeder and branch cable schedule with calculated cross-sections and lengths;
+4. protective-device schedule and coordination evidence;
+5. load-management maximum-current setting and failure/default behavior;
+6. terminal/distribution-block current and short-circuit ratings;
+7. installation assumptions and calculation report.
+
+Until those outputs are reviewed and approved, the cable section, breaker rating, terminal block and installation topology remain **TBD — NOT RELEASED**.
 
 ## 9. MultiStation
 

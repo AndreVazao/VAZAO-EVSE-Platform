@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active work branch:** `work/charger-hardware-m1-4a-charx-advanced-manual-audit`  
+**Active work branch:** `work/charger-hardware-m1-23-ac-feeder-topology`  
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -44,9 +44,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.1 — Component Selection Gate](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-SELECTION-GATE.md)
 - [M1.2 — Evidence-backed Component Candidates](../03-engineering/CHARGER-HARDWARE-V1-COMPONENT-CANDIDATES-M1-2.md)
 - [M1.3 — Controller Interface Review](../03-engineering/CHARGER-HARDWARE-V1-CONTROLLER-INTERFACE-REVIEW-M1-3.md) — recovered and merged; controller selection remains OPEN.
-- [M1.4A — Phoenix CHARX 2902802 Interface Review](../03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md) — recovered and refreshed with official product-page and manual C05 evidence; remains OPEN, not approved for wiring.
-
-M1.4A covers only the legacy CHARX control advanced 2902802. It must not be conflated with the newer CHARX control modular SEC-1000/SEC-3xxx family reviewed in later historical milestones. Later milestones will be ported in dependency-aware PRs.
+- [M1.4A — Phoenix CHARX 2902802 Interface Review](../03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md) — merged; manufacturer-document review remains partial and not approved for wiring.
+- [M1.23 — AC Feeder Topology and Conductor Sizing Design Basis](../03-engineering/CHARGER-HARDWARE-V1-M1-23-AC-FEEDER-TOPOLOGY-AND-CONDUCTOR-SIZING.md) — new design-basis gate; no conductor cross-section is released.
 
 ## Safety status
 
@@ -59,4 +58,4 @@ This is an engineering/documentation baseline, **not a construction certificate 
 
 ## Current engineering baseline
 
-The V1 baseline now separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, and records the preliminary BOM. The drawings are conceptual engineering artefacts and are not authorisation for mains energisation.
+The V1 baseline separates the local safety boundary from CPMS communications, defines the functional power/control architecture, establishes the internal panel zoning, and records the preliminary BOM. The drawings are conceptual engineering artefacts and are not authorisation for mains energisation.
