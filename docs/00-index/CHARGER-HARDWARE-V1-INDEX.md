@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active work branch:** `work/charger-hardware-m1-25-load-manager-candidates`
+**Active work branch:** `work/charger-hardware-m1-26-supplier-evidence-rfi`
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -47,7 +47,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.4A — Phoenix CHARX 2902802 Interface Review](../03-engineering/CHARGER-HARDWARE-V1-PHOENIX-CHARX-2902802-INTERFACE-REVIEW-M1-4A.md) — merged; manufacturer-document review remains partial and not approved for wiring.
 - [M1.23 — AC Feeder Topology and Conductor Sizing Design Basis](../03-engineering/CHARGER-HARDWARE-V1-M1-23-AC-FEEDER-TOPOLOGY-AND-CONDUCTOR-SIZING.md) — merged; independent and common dual/quad feeder alternatives defined, cable sections remain installation-calculation dependent.
 - [M1.24 — Local Load Management Interface and Fail-Safe Contract](../03-engineering/CHARGER-HARDWARE-V1-M1-24-LOCAL-LOAD-MANAGEMENT-INTERFACE.md) — merged; local measurement, allocation, acknowledgement and fail-safe requirements defined.
-- [M1.25 — Local Load Manager Candidate Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-25-LOCAL-LOAD-MANAGER-CANDIDATES.md) — new supplier-evidence gate; no candidate selected.
+- [M1.25 — Local Load Manager Candidate Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-25-LOCAL-LOAD-MANAGER-CANDIDATES.md) — merged; five manufacturer-described options compared, no candidate selected.
+- [M1.26 — Supplier Technical Evidence Request](../03-engineering/CHARGER-HARDWARE-V1-M1-26-SUPPLIER-TECHNICAL-EVIDENCE-REQUEST.md) — new internal RFI template; not sent to suppliers.
 
 ## Safety status
 
