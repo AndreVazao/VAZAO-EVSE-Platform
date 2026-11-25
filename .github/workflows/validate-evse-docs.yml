@@ -6,12 +6,14 @@ on:
       - main
     paths:
       - "docs/**/*.md"
+      - "hardware/teststation/**/*.md"
       - ".github/workflows/validate-evse-docs.yml"
   push:
     branches:
       - main
     paths:
       - "docs/**/*.md"
+      - "hardware/teststation/**/*.md"
       - ".github/workflows/validate-evse-docs.yml"
 
 permissions:
