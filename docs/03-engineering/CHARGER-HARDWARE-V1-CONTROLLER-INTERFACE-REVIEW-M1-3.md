@@ -18,7 +18,7 @@ The single-output prototype should be evaluated first against the Phoenix Contac
 |---|---|---|---|
 | Intended use | Manufacturer describes a one-point AC Mode 3 Type 2 controller | Manufacturer describes AC Mode 3 charge control | Both remain candidates |
 | Single-output prototype fit | Directly aligned to one charging point | Must confirm exact variant and deployment topology | Phoenix first for detailed single-point study |
-| Multi-point / Master-Slave | Do not assume this model provides a multi-point master | Manufacturer documents configurable Master/Slave and dynamic load management | CC613 is the current multi-point study candidate |
+| Multi-point / Master-Slave | Do not assume this model provides a multi-point master | Manufacturer documents configurable Master/Slave and dynamic load management | CC613 remains a historical multi-point architecture reference only; lifecycle is unverified and procurement is blocked |
 | CP / PP implementation | Obtain exact terminal diagram, supported states, limits and fault behaviour | Obtain exact terminal diagram, supported states, limits and fault behaviour | No CP/PP wiring can be inferred from product page |
 | Contactor control | Confirm output type, voltage/current ratings, suppression and whether an external driver is required | Confirm output type, voltage/current ratings, suppression and whether an external driver is required | Open — must match selected contactor coil |
 | Contactor feedback | Confirm dedicated input, electrical levels, diagnostics and welded-contact response | Confirm dedicated input, electrical levels, diagnostics and welded-contact response | Mandatory evidence before schematic freeze |
