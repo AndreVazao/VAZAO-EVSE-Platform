@@ -8,7 +8,7 @@
 
 ## 1. Decision at this gate
 
-No final controller choice is made in M1.3. The available product-family descriptions establish that both are credible EVSE-controller candidates, but they do not, by themselves, provide enough verified terminal-level information to release a schematic or mounting plate.
+No final controller choice is made in M1.3. Phoenix Contact CHARX 2902802 is the priority evidence-study candidate for the single-output prototype; Bender CC613 is retained strictly as a historical multi-point architecture reference, not as an active candidate. Available product-family descriptions do not provide enough verified terminal-level information to release a schematic or mounting plate.
 
 The single-output prototype should be evaluated first against the Phoenix Contact 2902802. Bender CC613 is retained only as a historical multi-point architecture reference: M1.2 records lifecycle status as unverified and procurement blocked pending written manufacturer confirmation and successor identification. This prioritisation is evidence gathering, not technical acceptance.
 
@@ -16,7 +16,7 @@ The single-output prototype should be evaluated first against the Phoenix Contac
 
 | Review item | Phoenix Contact CHARX 2902802 | Bender CC613 family | M1.3 disposition |
 |---|---|---|---|
-| Intended use | Manufacturer describes a one-point AC Mode 3 Type 2 controller | Manufacturer describes AC Mode 3 charge control | Both remain candidates |
+| Intended use | Manufacturer describes a one-point AC Mode 3 Type 2 controller | Historical family documentation describes AC Mode 3 charge control; exact variant/lifecycle unverified | Phoenix is the evidence-study candidate; CC613 is historical reference only and procurement-blocked |
 | Single-output prototype fit | Directly aligned to one charging point | Must confirm exact variant and deployment topology | Phoenix first for detailed single-point study |
 | Multi-point / Master-Slave | Do not assume this model provides a multi-point master | Manufacturer documents configurable Master/Slave and dynamic load management | CC613 remains a historical multi-point architecture reference only; lifecycle is unverified and procurement is blocked |
 | CP / PP implementation | Obtain exact terminal diagram, supported states, limits and fault behaviour | Obtain exact terminal diagram, supported states, limits and fault behaviour | No CP/PP wiring can be inferred from product page |
