@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active work branch:** `work/charger-hardware-m1-28-output-channel-architecture`
+**Active work branch:** `work/charger-hardware-m1-29-single-output-interface-traceability`
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -50,7 +50,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.25 — Local Load Manager Candidate Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-25-LOCAL-LOAD-MANAGER-CANDIDATES.md) — merged; five manufacturer-described options compared, no candidate selected.
 - [M1.26 — Supplier Technical Evidence Request](../03-engineering/CHARGER-HARDWARE-V1-M1-26-SUPPLIER-TECHNICAL-EVIDENCE-REQUEST.md) — merged internal RFI template; not sent to suppliers.
 - [M1.27 — Local Load Management Verification and TestStation Acceptance Plan](../03-engineering/CHARGER-HARDWARE-V1-M1-27-LOAD-MANAGEMENT-TEST-PLAN.md) — merged test-plan gate; no tests claimed executed.
-- [M1.28 — Repeatable Output Channel Architecture and Operating State Model](../03-engineering/CHARGER-HARDWARE-V1-M1-28-REPEATABLE-OUTPUT-CHANNEL-ARCHITECTURE.md) — new functional architecture baseline; no hardware selected or schematic released.
+- [M1.28 — Repeatable Output Channel Architecture and Operating State Model](../03-engineering/CHARGER-HARDWARE-V1-M1-28-REPEATABLE-OUTPUT-CHANNEL-ARCHITECTURE.md) — merged functional architecture baseline; no hardware selected or schematic released.
+- [M1.29 — Single-Output Prototype Requirements-to-Interface Traceability Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-29-SINGLE-OUTPUT-INTERFACE-TRACEABILITY.md) — new traceability baseline; no components selected or schematic released.
 
 ## Safety status
 
