@@ -60,6 +60,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.35 — Controller Catalog Claims Review](../03-engineering/CHARGER-HARDWARE-V1-M1-35-CONTROLLER-CATALOG-CLAIMS-REVIEW.md) — bounded interpretation of catalog values, non-assumptions and closure gates; controlled evidence OPEN.
 - [M1.36 — Controller Evidence Request Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-36-CONTROLLER-EVIDENCE-REQUEST-MATRIX.md) — manufacturer document requests, clarification questions and draft outreach; no contact made.
 - [M1.37 — Manual Retrieval and Verification Log](../03-engineering/CHARGER-HARDWARE-V1-M1-37-MANUAL-RETRIEVAL-VERIFICATION-LOG.md) — official source locations and controlled intake checklist; original manual binary, custody and SHA-256 remain OPEN.
+- [M1.38 — Official Manual Source Verification](../03-engineering/CHARGER-HARDWARE-V1-M1-38-OFFICIAL-MANUAL-SOURCE-VERIFICATION.md) — exact SEC-1000 manual filename and manufacturer-published checksum identified; local binary verification and Rev 06/Version 09 discrepancy remain OPEN.
 
 ## Safety status
 
