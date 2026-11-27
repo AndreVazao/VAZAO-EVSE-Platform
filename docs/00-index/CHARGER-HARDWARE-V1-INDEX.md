@@ -53,7 +53,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.28 — Repeatable Output Channel Architecture and Operating State Model](../03-engineering/CHARGER-HARDWARE-V1-M1-28-REPEATABLE-OUTPUT-CHANNEL-ARCHITECTURE.md) — merged functional architecture baseline; no hardware selected or schematic released.
 - [M1.29 — Single-Output Prototype Requirements-to-Interface Traceability Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-29-SINGLE-OUTPUT-INTERFACE-TRACEABILITY.md) — merged traceability baseline; no components selected or schematic released.
 - [M1.30 — EVSE Controller Evidence Review](../03-engineering/CHARGER-HARDWARE-V1-M1-30-EVSE-CONTROLLER-EVIDENCE-REVIEW.md) — merged catalog review; controller remains unselected, controlled PDFs not archived.
-- [M1.31 — Protection Architecture Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-31-PROTECTION-ARCHITECTURE-EVIDENCE-MATRIX.md) — merged protection boundaries and evidence gates; no device selection or schematic release.\n- [M1.32 — Contactor and Feedback Architecture](../03-engineering/CHARGER-HARDWARE-V1-M1-32-CONTACTOR-FEEDBACK-ARCHITECTURE.md) — switching requirements and feedback semantics; no actuator selected or tests run.
+- [M1.31 — Protection Architecture Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-31-PROTECTION-ARCHITECTURE-EVIDENCE-MATRIX.md) — merged protection boundaries and evidence gates; no device selection or schematic release.
+- [M1.32 — Contactor and Feedback Architecture](../03-engineering/CHARGER-HARDWARE-V1-M1-32-CONTACTOR-FEEDBACK-ARCHITECTURE.md) — switching requirements and feedback semantics; no actuator selected or tests run.
 
 ## Safety status
 
