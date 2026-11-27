@@ -52,7 +52,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.27 — Local Load Management Verification and TestStation Acceptance Plan](../03-engineering/CHARGER-HARDWARE-V1-M1-27-LOAD-MANAGEMENT-TEST-PLAN.md) — merged test-plan gate; no tests claimed executed.
 - [M1.28 — Repeatable Output Channel Architecture and Operating State Model](../03-engineering/CHARGER-HARDWARE-V1-M1-28-REPEATABLE-OUTPUT-CHANNEL-ARCHITECTURE.md) — merged functional architecture baseline; no hardware selected or schematic released.
 - [M1.29 — Single-Output Prototype Requirements-to-Interface Traceability Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-29-SINGLE-OUTPUT-INTERFACE-TRACEABILITY.md) — merged traceability baseline; no components selected or schematic released.
-- [M1.30 — EVSE Controller Evidence Review](../03-engineering/CHARGER-HARDWARE-V1-M1-30-EVSE-CONTROLLER-EVIDENCE-REVIEW.md) — merged catalog review; controller remains unselected, controlled PDFs not archived.\n- [M1.31 — Protection Architecture Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-31-PROTECTION-ARCHITECTURE-EVIDENCE-MATRIX.md) — safety/protection boundaries and evidence gates; no device selection or schematic release.
+- [M1.30 — EVSE Controller Evidence Review](../03-engineering/CHARGER-HARDWARE-V1-M1-30-EVSE-CONTROLLER-EVIDENCE-REVIEW.md) — merged catalog review; controller remains unselected, controlled PDFs not archived.
+- [M1.31 — Protection Architecture Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-31-PROTECTION-ARCHITECTURE-EVIDENCE-MATRIX.md) — safety/protection boundaries and evidence gates; no device selection or schematic release.
 
 ## Safety status
 
