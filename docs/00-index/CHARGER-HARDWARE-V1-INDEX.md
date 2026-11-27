@@ -55,7 +55,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.30 — EVSE Controller Evidence Review](../03-engineering/CHARGER-HARDWARE-V1-M1-30-EVSE-CONTROLLER-EVIDENCE-REVIEW.md) — merged catalog review; controller remains unselected, controlled PDFs not archived.
 - [M1.31 — Protection Architecture Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-31-PROTECTION-ARCHITECTURE-EVIDENCE-MATRIX.md) — merged protection boundaries and evidence gates; no device selection or schematic release.
 - [M1.32 — Contactor and Feedback Architecture](../03-engineering/CHARGER-HARDWARE-V1-M1-32-CONTACTOR-FEEDBACK-ARCHITECTURE.md) — merged switching requirements and feedback semantics; no actuator selected or tests run.
-- [M1.33 — Auxiliary Power Budget Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-33-AUXILIARY-POWER-BUDGET-EVIDENCE-MATRIX.md) — auxiliary load inventory and calculation/evidence gates; no PSU, rail or distribution selected.
+- [M1.33 — Auxiliary Power Budget Evidence Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-33-AUXILIARY-POWER-BUDGET-EVIDENCE-MATRIX.md) — auxiliary load inventory and calculation/evidence gates; no PSU, rail or distribution selected.\n- [M1.34 — Controlled Document Evidence Intake](../03-engineering/CHARGER-HARDWARE-V1-M1-34-CONTROLLED-DOCUMENT-EVIDENCE-INTAKE.md) — evidence classes, custody workflow, SEC-1000 source register and claims checklist; controlled manual custody still OPEN.
 
 ## Safety status
 
