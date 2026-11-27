@@ -59,6 +59,7 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.34 — Controlled Document Evidence Intake](../03-engineering/CHARGER-HARDWARE-V1-M1-34-CONTROLLED-DOCUMENT-EVIDENCE-INTAKE.md) — evidence classes, custody workflow, SEC-1000 source register and claims checklist; controlled manual custody still OPEN.
 - [M1.35 — Controller Catalog Claims Review](../03-engineering/CHARGER-HARDWARE-V1-M1-35-CONTROLLER-CATALOG-CLAIMS-REVIEW.md) — bounded interpretation of catalog values, non-assumptions and closure gates; controlled evidence OPEN.
 - [M1.36 — Controller Evidence Request Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-36-CONTROLLER-EVIDENCE-REQUEST-MATRIX.md) — manufacturer document requests, clarification questions and draft outreach; no contact made.
+- [M1.37 — Manual Retrieval and Verification Log](../03-engineering/CHARGER-HARDWARE-V1-M1-37-MANUAL-RETRIEVAL-VERIFICATION-LOG.md) — official source locations and controlled intake checklist; original manual binary, custody and SHA-256 remain OPEN.
 
 ## Safety status
 
