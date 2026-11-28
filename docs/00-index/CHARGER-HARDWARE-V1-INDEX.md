@@ -1,7 +1,7 @@
 # VAZÃO EVSE — Charger Hardware V1
 
 **Status:** DRAFT / ENGINEERING BASELINE  
-**Active work branch:** `work/charger-hardware-m1-33-auxiliary-power-budget`
+**Active work branch:** `work/charger-hardware-m1-40-output-cell-load-allocation-matrix`
 **Branch:** `feat/charger-hardware-v1`  
 **Scope:** AC EVSE modular, starting with single-output 22 kW Type 2 and designed for reuse in dual/quad/wallbox variants.
 
@@ -61,6 +61,8 @@ This document set defines the first hardware baseline of the VAZÃO EVSE charger
 - [M1.36 — Controller Evidence Request Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-36-CONTROLLER-EVIDENCE-REQUEST-MATRIX.md) — manufacturer document requests, clarification questions and draft outreach; no contact made.
 - [M1.37 — Manual Retrieval and Verification Log](../03-engineering/CHARGER-HARDWARE-V1-M1-37-MANUAL-RETRIEVAL-VERIFICATION-LOG.md) — official source locations and controlled intake checklist; original manual binary, custody and SHA-256 remain OPEN.
 - [M1.38 — Official Manual Source Verification](../03-engineering/CHARGER-HARDWARE-V1-M1-38-OFFICIAL-MANUAL-SOURCE-VERIFICATION.md) — exact SEC-1000 manual filename and manufacturer-published checksum identified; local binary verification and Rev 06/Version 09 discrepancy remain OPEN.
+- [M1.39 — Modular Auxiliary Distribution Architecture Review](../03-engineering/CHARGER-HARDWARE-V1-M1-39-MODULAR-AUXILIARY-DISTRIBUTION-ARCHITECTURE-REVIEW.md) — central, per-cell and hybrid auxiliary-domain alternatives documented; no PSU, rail or topology selected.
+- [M1.40 — Output Cell Load Allocation and Fault-Containment Matrix](../03-engineering/CHARGER-HARDWARE-V1-M1-40-OUTPUT-CELL-LOAD-ALLOCATION-AND-FAULT-CONTAINMENT-MATRIX.md) — AUX-01–AUX-16 mapped across Single/Dual/Quad/MultiStation; physical allocation remains OPEN and controller supply-range discrepancy is an explicit AP-01 hold point.
 
 ## Safety status
 
